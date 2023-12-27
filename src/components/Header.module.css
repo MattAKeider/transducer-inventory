@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #824070;
+  flex-wrap: wrap;
+}
+
+.title {
+  padding: 1rem;
+  color: #fff;
+}
+
+.navbar {
+  margin-right: 2rem;
+}
+
+.add_item {
+  padding: 0.50rem;
+  border: 1px #0505058e;
+  border-radius: 4px;
+  background-color: #0505058e;
+  color: #ffebcd;
+}
+
+.add_item:hover {
+  color: pink;
+}
