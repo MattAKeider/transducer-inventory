@@ -1,0 +1,20 @@
+.list_item {
+  padding: 1rem;
+  background-color: #a6518ff1;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #824070a6;
+  text-align: center;
+}
+
+.card_title {
+  color: #ffebcd;
+  font-weight: bold;
+}
+
+p {
+  font-size: 0.90rem;
+}
+
+p span {
+  font-weight: bold;
+}
