@@ -11,10 +11,10 @@
   font-weight: bold;
 }
 
-p {
+.list_item p {
   font-size: 0.90rem;
 }
 
-p span {
+.list_item span {
   font-weight: bold;
 }

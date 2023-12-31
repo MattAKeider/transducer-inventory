@@ -5,6 +5,7 @@ import styles from './Modal.module.css';
 
 export type ModalHandle = {
   open: () => void;
+  close: () => void;
 };
 
 type ModalProps = {
@@ -18,6 +19,9 @@ const Modal = forwardRef<ModalHandle, ModalProps>(({ children }, ref) => {
     open: () => {
       dialogRef.current.showModal();
     },
+    close: () => {
+      dialogRef.current.close();
+    }
   }));
 
   return createPortal(

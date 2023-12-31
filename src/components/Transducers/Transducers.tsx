@@ -4,6 +4,7 @@ import TransducerItem from '../TransducerItem/TransducerItem';
 import styles from './Transducers.module.css';
 import { TRANSDUCERS, Transducer } from '../../data/data';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
+import FullDetails from '../FullDetails/FullDetails';
 
 const Transducers = () => {
   const [transducers, setTransducers] = useState(TRANSDUCERS);
@@ -15,10 +16,14 @@ const Transducers = () => {
     dialog.current.open();
   };
 
+  const handleCloseModal = () => {
+    dialog.current.close();
+  };
+
   return (
     <>
       <Modal ref={dialog}>
-        {selectedTransducer && <h2>{selectedTransducer.name}</h2>}
+        {selectedTransducer && <FullDetails transducer={selectedTransducer} onCloseModal={handleCloseModal} />}
       </Modal>
       <ul className={styles.container}>
         {transducers.map((transducer: Transducer) => (

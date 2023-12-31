@@ -11,16 +11,16 @@ const TransducerItem = ({ transducerData, onClickTransducer }: TransducerItemPro
     <li className={styles.list_item} onClick={onClickTransducer}>
       <h2 className={styles.card_title}>{transducerData.name}</h2>
       <p>
-        <span>Location:</span> {transducerData.location}
+        <span>Location: </span>{transducerData.location}
       </p>
       <p>
-        <span>Room:</span> {transducerData.room}
+        <span>Room: </span>{transducerData.room}
       </p>
       <p>
-        <span>S #:</span> {transducerData.serialNumber}
+        <span>S #: </span>{transducerData.serialNumber}
       </p>
       <p>
-        <span>Control #:</span> {transducerData.controlNumber}
+        <span>Control #: </span>{transducerData.controlNumber}
       </p>
     </li>
   );
