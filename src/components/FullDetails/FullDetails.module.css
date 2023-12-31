@@ -1,0 +1,31 @@
+.full_details_container {
+  color: #fff;
+  margin: 2rem;
+}
+
+.full_details_container span {
+  color: #ffebcd;
+}
+
+.main_details p {
+  margin: 0.15rem 0rem;
+}
+
+.main_details span {
+  font-weight: bold;
+}
+
+.name {
+  color: #a6518ff1;
+  font-weight: bolder;
+}
+
+.state_field {
+  padding: 0.30rem 0.80rem 0.80rem 0.80rem;
+  margin: 0.25rem;
+}
+
+.legend {
+  color: #a6518ff1;
+  font-weight: bold;
+}

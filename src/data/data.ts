@@ -1,3 +1,9 @@
+export interface TransducerState {
+  condition: 'Working' | 'Broken' | 'Refurbished (Closed)';
+  stateChangedDate: Date;
+  isRefurbished: boolean;
+}
+
 export interface Transducer {
   name: string;
   location: 'CMC' | 'MIDTOWN' | 'RISMAN' | 'CROCKER' | 'STREETSBORO' | 'BETTY THE BUS';
@@ -8,11 +14,7 @@ export interface Transducer {
   controlNumber: string;
   dateReceived: Date;
   receivedState: string;
-  currentState: {
-    condition: 'Working' | 'Broken' | 'Refurbished';
-    stateChangedDate: Date;
-    isRefurbished: boolean;
-  }[];
+  currentState: TransducerState[];
 }
 
 export const TRANSDUCERS: Transducer[] = [
@@ -28,10 +30,20 @@ export const TRANSDUCERS: Transducer[] = [
     receivedState: 'New from GE',
     currentState: [
       {
+        condition: 'Refurbished (Closed)',
+        stateChangedDate: new Date('2023-11-17'),
+        isRefurbished: true,
+      },
+      {
+        condition: 'Broken',
+        stateChangedDate: new Date('2023-04-02'),
+        isRefurbished: false,
+      },
+      {
         condition: 'Working',
         stateChangedDate: new Date('2023-01-22'),
         isRefurbished: false,
-      },
+      }
     ],
   },
   {
