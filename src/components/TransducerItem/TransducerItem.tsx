@@ -3,11 +3,12 @@ import styles from './TransducerItem.module.css';
 
 type TransducerItemProps = {
   transducerData: Transducer;
+  onClickTransducer: (event: React.MouseEvent<HTMLLIElement>) => void;
 };
 
-const TransducerItem = ({ transducerData }: TransducerItemProps) => {
+const TransducerItem = ({ transducerData, onClickTransducer }: TransducerItemProps) => {
   return (
-    <li className={styles.list_item} key={transducerData.serialNumber}>
+    <li className={styles.list_item} onClick={onClickTransducer}>
       <h2 className={styles.card_title}>{transducerData.name}</h2>
       <p>
         <span>Location:</span> {transducerData.location}
