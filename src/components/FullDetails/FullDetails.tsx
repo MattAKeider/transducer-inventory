@@ -5,9 +5,10 @@ import styles from './FullDetails.module.css';
 
 type FullDetailsProps = {
   transducer: Transducer;
+  onCloseModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const FullDetails = ({ transducer }: FullDetailsProps) => {
+const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   return (
     <div className={styles.full_details_container}>
       <div className={styles.main_details}>
@@ -51,6 +52,9 @@ const FullDetails = ({ transducer }: FullDetailsProps) => {
           <Condition key={generateKey()} transducerState={state} />
         ))}
       </fieldset>
+      <div className={styles.button_container}>
+        <button className={styles.close_modal} onClick={onCloseModal}>Close</button>
+      </div>
     </div>
   );
 };

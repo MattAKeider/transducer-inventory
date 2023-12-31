@@ -29,3 +29,21 @@
   color: #a6518ff1;
   font-weight: bold;
 }
+
+.button_container {
+  display: flex;
+  justify-content: center;
+}
+
+.close_modal {
+  margin-top: 0.50rem;
+  padding: 0.50rem;
+  border: 1px #0505058e;
+  border-radius: 4px;
+  background-color: #0505058e;
+  color: #ffebcd;
+}
+
+.close_modal:hover {
+  color: pink;
+}

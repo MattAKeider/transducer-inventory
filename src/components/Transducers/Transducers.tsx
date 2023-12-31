@@ -16,10 +16,14 @@ const Transducers = () => {
     dialog.current.open();
   };
 
+  const handleCloseModal = () => {
+    dialog.current.close();
+  };
+
   return (
     <>
       <Modal ref={dialog}>
-        {selectedTransducer && <FullDetails transducer={selectedTransducer} />}
+        {selectedTransducer && <FullDetails transducer={selectedTransducer} onCloseModal={handleCloseModal} />}
       </Modal>
       <ul className={styles.container}>
         {transducers.map((transducer: Transducer) => (
