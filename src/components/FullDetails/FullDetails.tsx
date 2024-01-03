@@ -1,5 +1,5 @@
 import { Transducer, TransducerCondition } from '../../data/data';
-import { formatDate, generateKey } from '../../utils';
+import { formatDate, generateKey } from '../../utils/utils';
 import Condition from '../Condition/Condition';
 import styles from './FullDetails.module.css';
 
