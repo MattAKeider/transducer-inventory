@@ -1,9 +1,9 @@
-import { describe, test, expect, vi } from "vitest";
-import { screen, render } from "@testing-library/react";
+import { describe, test, expect, vi } from 'vitest';
+import { screen, render } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
-import FullDetails from "./FullDetails";
-import { Transducer } from "../../data/data";
+import FullDetails from './FullDetails';
+import { Transducer } from '../../data/data';
 
 const testData: Transducer = {
   name: 'D1-4',
