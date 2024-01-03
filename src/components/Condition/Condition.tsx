@@ -1,25 +1,25 @@
-import { TransducerState } from '../../data/data';
-import { formatDate } from '../../utils';
+import { TransducerCondition } from '../../data/data';
+import { formatDate } from '../../utils/utils';
 import styles from './Condition.module.css';
 
 type ConditionProps = {
-  transducerState: TransducerState;
+  transducerCondition: TransducerCondition;
 };
 
-const Condition = ({ transducerState }: ConditionProps) => {
+const Condition = ({ transducerCondition }: ConditionProps) => {
   return (
     <div className={styles.condition_container}>
-      <p>
+      <p data-testid="condition">
         <span>Condition: </span>
-        {transducerState.condition}
+        {transducerCondition.condition}
       </p>
-      <p>
+      <p data-testid="date">
         <span>Date Changed: </span>
-        {formatDate(transducerState.stateChangedDate)}
+        {formatDate(transducerCondition.conditionChangedDate)}
       </p>
-      <p>
+      <p data-testid="refurbished">
         <span>Refurbished: </span>
-        {transducerState.isRefurbished ? 'Yes' : 'No'}
+        {transducerCondition.isRefurbished ? 'Yes' : 'No'}
       </p>
       <hr />
     </div>

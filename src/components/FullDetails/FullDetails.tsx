@@ -1,5 +1,5 @@
-import { Transducer, TransducerState } from '../../data/data';
-import { formatDate, generateKey } from '../../utils';
+import { Transducer, TransducerCondition } from '../../data/data';
+import { formatDate, generateKey } from '../../utils/utils';
 import Condition from '../Condition/Condition';
 import styles from './FullDetails.module.css';
 
@@ -13,43 +13,43 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
     <div className={styles.full_details_container}>
       <div className={styles.main_details}>
         <h2 className={styles.name}>{transducer.name}</h2>
-        <p>
+        <p data-testid="location">
           <span>Location: </span>
           {transducer.location}
         </p>
-        <p>
+        <p data-testid="department">
           <span>Department: </span>
           {transducer.department}
         </p>
-        <p>
+        <p data-testid="room">
           <span>Room: </span>
           {transducer.room}
         </p>
-        <p>
+        <p data-testid="serial">
           <span>Serial Number: </span>
           {transducer.serialNumber}
         </p>
-        <p>
+        <p data-testid="internal">
           <span>Internal Identifier: </span>
           {transducer.internalIdentifier}
         </p>
-        <p>
+        <p data-testid="control">
           <span>Control Number: </span>
           {transducer.controlNumber}
         </p>
-        <p>
+        <p data-testid="dateReceived">
           <span>Date Received: </span>
           {formatDate(transducer.dateReceived)}
         </p>
-        <p>
-          <span>Received State: </span>
-          {transducer.receivedState}
+        <p data-testid="notes">
+          <span>Received Condition Note:</span>
+          <br/>{transducer.receivedConditionNote}
         </p>
       </div>
-      <fieldset className={styles.state_field}>
-        <legend className={styles.legend}>Current State:</legend>
-        {transducer.currentState.map((state: TransducerState) => (
-          <Condition key={generateKey()} transducerState={state} />
+      <fieldset className={styles.condition_field}>
+        <legend className={styles.legend}>Current Condition</legend>
+        {transducer.currentCondition.map((condition: TransducerCondition) => (
+          <Condition key={generateKey()} transducerCondition={condition} />
         ))}
       </fieldset>
       <div className={styles.button_container}>

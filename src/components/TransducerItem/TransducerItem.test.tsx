@@ -1,15 +1,43 @@
 import { render, screen } from '@testing-library/react';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
 
 import TransducerItem from './TransducerItem';
-import { TRANSDUCERS } from '../../data/data';
+import { Transducer } from '../../data/data';
 
-describe('TrasducerItem', () => {
-  const transducer = TRANSDUCERS[0];
+const testData: Transducer = {
+  name: 'D1-4',
+  location: 'CMC',
+  department: 'MFM',
+  room: '2',
+  serialNumber: 'F123300',
+  internalIdentifier: '7',
+  controlNumber: '00FB-12346',
+  dateReceived: new Date('2023-03-22'),
+  receivedConditionNote: 'New from GE',
+  currentCondition: [
+    {
+      condition: 'Working',
+      conditionChangedDate: new Date('2023-03-22'),
+      isRefurbished: false,
+    },
+  ]
+};
 
+describe('TransducerItem', () => {
   test('should contain correct name value', () => {
-    render(<TransducerItem transducerData={transducer} />);
-    const itemName = screen.getByText(transducer.name);
-    expect(itemName).toHaveTextContent(transducer.name);
+    render(<TransducerItem transducerData={testData} onClickTransducer={() => {}}/>);
+    const header = screen.getByText('D1-4');
+    expect(header).toHaveTextContent(testData.name);
+  });
+
+  test('should click on transducer item to open', async () => {
+    const handleOpen = vi.fn();
+
+    render(<TransducerItem transducerData={testData} onClickTransducer={handleOpen}/>);
+
+    await userEvent.click(screen.getByRole('listitem'));
+    
+    expect(handleOpen).toBeCalledTimes(1);
   });
 });

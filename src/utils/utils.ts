@@ -1,5 +1,6 @@
 export const formatDate = (date: Date) => {
-  let formattedDate = date.toLocaleString('default', {
+  let formattedDate = date.toLocaleString('en-US', {
+    timeZone: 'UTC',
     year: 'numeric',
     month: 'short',
     day: '2-digit'
@@ -9,5 +10,5 @@ export const formatDate = (date: Date) => {
 };
 
 export const generateKey = () => {
-  return Math.random() * 1000;
+  return Math.floor((Math.random() + 1) * 100000);
 };
