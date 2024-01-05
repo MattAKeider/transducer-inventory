@@ -7,7 +7,7 @@ import { TransducerCondition } from '../../data/data';
 const testData: TransducerCondition = {
   condition: 'Working',
   conditionChangedDate: new Date('2023-11-17'),
-  isRefurbished: false
+  outOfService: false
 };
 
 describe('Condition', () => {
@@ -23,16 +23,16 @@ describe('Condition', () => {
     expect(date).toHaveTextContent('Nov 17, 2023');
   });
 
-  test('should render "No" if transducer was refurbished', () => {
+  test('should render "No" if transducer is not "Out of Service"', () => {
     render(<Condition transducerCondition={testData}/>);
-    const refurbished = screen.getByTestId('refurbished');
-    expect(refurbished).toHaveTextContent('No');
+    const outOfService = screen.getByTestId('out-of-service');
+    expect(outOfService).toHaveTextContent('No');
   });
 
-  test('should render "Yes" if transducer was not refurbished', () => {
-    testData.isRefurbished = true;
+  test('should render "Yes" if transducer is "Out of Service"', () => {
+    testData.outOfService = true;
     render(<Condition transducerCondition={testData}/>);
-    const refurbished = screen.getByTestId('refurbished');
-    expect(refurbished).toHaveTextContent('Yes');
+    const outOfService = screen.getByTestId('out-of-service');
+    expect(outOfService).toHaveTextContent('Yes');
   });
 });

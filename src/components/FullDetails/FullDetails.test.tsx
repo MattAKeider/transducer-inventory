@@ -14,12 +14,12 @@ const testData: Transducer = {
   internalIdentifier: '7',
   controlNumber: '00FB-12346',
   dateReceived: new Date('2023-03-22'),
-  receivedConditionNote: 'New from GE',
+  notes: 'New from GE',
   currentCondition: [
     {
       condition: 'Working',
       conditionChangedDate: new Date('2023-03-22'),
-      isRefurbished: false,
+      outOfService: false,
     },
   ],
 };
@@ -35,11 +35,11 @@ describe('FullDetails', () => {
     expect(screen.getByTestId('serial')).toHaveTextContent(testData.serialNumber);
     expect(screen.getByTestId('internal')).toHaveTextContent(testData.internalIdentifier);
     expect(screen.getByTestId('control')).toHaveTextContent(testData.controlNumber);
-    expect(screen.getByTestId('dateReceived')).toHaveTextContent('Mar 22, 2023');
-    expect(screen.getByTestId('notes')).toHaveTextContent(testData.receivedConditionNote);
+    expect(screen.getByTestId('date-received')).toHaveTextContent('Mar 22, 2023');
+    expect(screen.getByTestId('notes')).toHaveTextContent(testData.notes);
     expect(screen.getByTestId('condition')).toHaveTextContent(testData.currentCondition[0].condition);
     expect(screen.getByTestId('date')).toHaveTextContent('Mar 22, 2023');
-    expect(screen.getByTestId('refurbished')).toHaveTextContent('No');
+    expect(screen.getByTestId('out-of-service')).toHaveTextContent('No');
   });
 
   test('should only contain one condition entry', () => {

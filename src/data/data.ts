@@ -1,7 +1,7 @@
 export interface TransducerCondition {
-  condition: 'Working' | 'Broken' | 'Refurbished (Closed)';
+  condition: 'New' | 'Working' | 'Refurbished' | 'Loaner' | 'Broken (Out of Service)';
   conditionChangedDate: Date;
-  isRefurbished: boolean;
+  outOfService: boolean;
 }
 
 export interface Transducer {
@@ -13,7 +13,7 @@ export interface Transducer {
   internalIdentifier: string;
   controlNumber: string;
   dateReceived: Date;
-  receivedConditionNote: string;
+  notes: string;
   currentCondition: TransducerCondition[];
 }
 
@@ -27,22 +27,22 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '1',
     controlNumber: '00FB-12345',
     dateReceived: new Date('2023-01-22'),
-    receivedConditionNote: 'New from GE',
+    notes: 'New from GE',
     currentCondition: [
       {
-        condition: 'Refurbished (Closed)',
+        condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-17'),
-        isRefurbished: true,
+        outOfService: true,
       },
       {
-        condition: 'Broken',
+        condition: 'Refurbished',
         conditionChangedDate: new Date('2023-04-02'),
-        isRefurbished: false,
+        outOfService: false,
       },
       {
         condition: 'Working',
         conditionChangedDate: new Date('2023-01-22'),
-        isRefurbished: false,
+        outOfService: false,
       }
     ],
   },
@@ -55,12 +55,12 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '7',
     controlNumber: '00FB-12346',
     dateReceived: new Date('2023-03-22'),
-    receivedConditionNote: 'New from GE',
+    notes: 'New from GE',
     currentCondition: [
       {
         condition: 'Working',
         conditionChangedDate: new Date('2023-03-22'),
-        isRefurbished: false,
+        outOfService: false,
       },
     ],
   },
@@ -73,12 +73,12 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '21',
     controlNumber: '00SD-34444',
     dateReceived: new Date('2021-05-02'),
-    receivedConditionNote: 'New from GE',
+    notes: 'New from GE',
     currentCondition: [
       {
-        condition: 'Broken',
+        condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-10-17'),
-        isRefurbished: false,
+        outOfService: true,
       },
     ],
   },
@@ -91,12 +91,12 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '3',
     controlNumber: '00WB-12045',
     dateReceived: new Date('2023-01-22'),
-    receivedConditionNote: 'New from GE',
+    notes: 'New from GE',
     currentCondition: [
       {
-        condition: 'Broken',
+        condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-20'),
-        isRefurbished: false,
+        outOfService: true,
       },
     ],
   },
@@ -109,12 +109,12 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '14',
     controlNumber: '00FB-13221',
     dateReceived: new Date('2020-03-15'),
-    receivedConditionNote: 'New from GE',
+    notes: 'New from GE',
     currentCondition: [
       {
         condition: 'Working',
         conditionChangedDate: new Date('2020-03-15'),
-        isRefurbished: false,
+        outOfService: false,
       },
     ],
   },
