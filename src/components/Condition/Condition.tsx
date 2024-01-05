@@ -10,16 +10,16 @@ const Condition = ({ transducerCondition }: ConditionProps) => {
   return (
     <div className={styles.condition_container}>
       <p data-testid="condition">
-        <span>Condition: </span>
+        <span>Condition:</span>
         {transducerCondition.condition}
       </p>
       <p data-testid="date">
-        <span>Date Changed: </span>
+        <span>Date Changed:</span>
         {formatDate(transducerCondition.conditionChangedDate)}
       </p>
-      <p data-testid="refurbished">
-        <span>Refurbished: </span>
-        {transducerCondition.isRefurbished ? 'Yes' : 'No'}
+      <p data-testid="out-of-service">
+        <span>Out of Service:</span>
+        {transducerCondition.outOfService ? 'Yes' : 'No'}
       </p>
       <hr />
     </div>

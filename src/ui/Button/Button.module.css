@@ -1,0 +1,11 @@
+.button {
+  padding: 0.65rem;
+  border: 1px #0505058e;
+  border-radius: 4px;
+  background-color: #0505058e;
+  color: #ffebcd;
+}
+
+.button:hover {
+  color: pink;
+}

@@ -13,6 +13,7 @@
 
 .main_details span {
   font-weight: bold;
+  margin-right: 0.40rem;
 }
 
 .name {
@@ -23,27 +24,16 @@
 .condition_field {
   padding: 0.30rem 0.80rem 0.80rem 0.80rem;
   margin: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 .legend {
+  padding: 0 0.30rem;
   color: #a6518ff1;
   font-weight: bold;
 }
 
 .button_container {
   display: flex;
-  justify-content: center;
-}
-
-.close_modal {
-  margin-top: 0.50rem;
-  padding: 0.50rem;
-  border: 1px #0505058e;
-  border-radius: 4px;
-  background-color: #0505058e;
-  color: #ffebcd;
-}
-
-.close_modal:hover {
-  color: pink;
+  justify-content: right;
 }
