@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 import styles from './TransducerForm.module.css';
 import Button from "../../ui/Button/Button";
@@ -6,7 +6,7 @@ import Button from "../../ui/Button/Button";
 const TransducerForm = () => {
   const [isOutOfService, setIsOutOfService] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     //event.currentTarget.reset();
   };
