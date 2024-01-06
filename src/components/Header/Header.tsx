@@ -12,10 +12,14 @@ const Header = () => {
     modalRef.current.open();
   };
 
+  const handleCloseAddTransducer = () => {
+    modalRef.current.close();
+  };
+
   return (
     <>
       <Modal ref={modalRef}>
-        {<NewTransducer />}
+        {<NewTransducer closeModal={handleCloseAddTransducer} />}
       </Modal>
       <header className={styles.header}>
         <div className={styles.container}>
