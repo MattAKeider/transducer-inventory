@@ -1,13 +1,17 @@
+export type Condition = 'New' | 'Working' | 'Refurbished' | 'Loaner' | 'Broken (Out of Service)';
+export type Location = 'CMC' | 'MIDTOWN' | 'RISMAN' | 'CROCKER' | 'STREETSBORO' | 'BETTY THE BUS';
+export type Department = 'MFM' | 'L&D' | 'TA' | 'TV' | 'IVF';
+
 export interface TransducerCondition {
-  condition: 'New' | 'Working' | 'Refurbished' | 'Loaner' | 'Broken (Out of Service)';
+  condition: Condition;
   conditionChangedDate: Date;
   outOfService: boolean;
 }
 
 export interface Transducer {
   name: string;
-  location: 'CMC' | 'MIDTOWN' | 'RISMAN' | 'CROCKER' | 'STREETSBORO' | 'BETTY THE BUS';
-  department: 'MFM' | 'L&D' | 'TA' | 'TV' | 'IVF';
+  location: Location;
+  department: Department;
   room: string;
   serialNumber: string;
   internalIdentifier: string;

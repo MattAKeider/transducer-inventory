@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 import styles from './TransducerForm.module.css';
 import Button from "../../ui/Button/Button";
+import { Transducer, Location, Department, Condition } from "../../data/data";
 
 interface FormState {
   name: string;
@@ -39,7 +40,27 @@ const TransducerForm = ({closeForm}: TransducerFormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const transducer: Transducer = {
+      name: formValues.name,
+      location: formValues.location as Location,
+      department: formValues.department as Department,
+      room: formValues.room,
+      serialNumber: formValues.serial,
+      internalIdentifier: formValues.internal,
+      controlNumber: formValues.control,
+      dateReceived: new Date(formValues.received),
+      notes: formValues.note,
+      currentCondition: [
+        {
+          condition: formValues.condition as Condition,
+          conditionChangedDate: new Date(),
+          outOfService: isOutOfService
+        }
+      ]
+    };
     
+    // Reset form
     setFormValues(initialState);
     setIsOutOfService(false);
   };
@@ -130,8 +151,8 @@ const TransducerForm = ({closeForm}: TransducerFormProps) => {
             </select>
           </p>
           <p className={styles.checkbox_field}>
-            <label htmlFor="toggle_service">
-              <input type="checkbox" name="toggle_service" checked={isOutOfService} onChange={handleCheckbox} id="toggle_service"/>
+            <label htmlFor="checkbox">
+              <input type="checkbox" name="checkbox" checked={isOutOfService} onChange={handleCheckbox} id="checkbox"/>
               Undo Out of Service
             </label>
           </p>
