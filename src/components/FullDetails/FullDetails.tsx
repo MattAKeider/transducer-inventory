@@ -1,12 +1,14 @@
+import { MouseEvent } from 'react';
+
 import { Transducer, TransducerCondition } from '../../data/data';
-import Button from '../../ui/Button/Button';
 import { formatDate, generateKey } from '../../utils/utils';
+import Button from '../../ui/Button/Button';
 import Condition from '../Condition/Condition';
 import styles from './FullDetails.module.css';
 
 type FullDetailsProps = {
   transducer: Transducer;
-  onCloseModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onCloseModal: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {

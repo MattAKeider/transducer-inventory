@@ -1,13 +1,16 @@
 import { useState, useRef } from 'react';
 
-import TransducerItem from '../TransducerItem/TransducerItem';
-import styles from './Transducers.module.css';
-import { TRANSDUCERS, Transducer } from '../../data/data';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
+import TransducerItem from '../TransducerItem/TransducerItem';
+import { Transducer } from '../../data/data';
 import FullDetails from '../FullDetails/FullDetails';
+import styles from './Transducers.module.css';
 
-const Transducers = () => {
-  const [transducers, setTransducers] = useState(TRANSDUCERS);
+type TransducersProps = {
+  transducers: Transducer[];
+};
+
+const Transducers = ({ transducers }: TransducersProps) => {
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const dialog = useRef<ModalHandle>();
 

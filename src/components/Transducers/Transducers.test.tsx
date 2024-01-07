@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { describe, test, expect, beforeEach } from 'vitest';
 
 import Transducers from './Transducers';
+import { TRANSDUCERS } from '../../data/data';
 
 describe('Transducers', () => {
   beforeEach(() => {
@@ -12,7 +13,7 @@ describe('Transducers', () => {
   });
 
   test('should render transducers', () => {
-    render(<Transducers />);
+    render(<Transducers transducers={TRANSDUCERS}/>);
     const list = document.querySelectorAll('li');
     expect(list.length).toBeGreaterThan(1);
   });

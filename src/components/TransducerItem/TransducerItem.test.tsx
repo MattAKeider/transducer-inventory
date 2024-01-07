@@ -14,12 +14,12 @@ const testData: Transducer = {
   internalIdentifier: '7',
   controlNumber: '00FB-12346',
   dateReceived: new Date('2023-03-22'),
-  receivedConditionNote: 'New from GE',
+  notes: 'New from GE',
   currentCondition: [
     {
       condition: 'Working',
       conditionChangedDate: new Date('2023-03-22'),
-      isRefurbished: false,
+      outOfService: false,
     },
   ]
 };
