@@ -1,11 +1,13 @@
+import { Transducer } from "../../data/data";
 import TransducerForm from "../TransducerForm/TransducerForm";
 
 type NewTransducerProps = {
-  closeModal: () => void;
+  onCloseModal: () => void;
+  onNewTransducer: (transducer: Transducer) => void;
 };
 
-const NewTransducer = ({closeModal}: NewTransducerProps) => {
-  return <TransducerForm closeForm={closeModal} />;
+const NewTransducer = ({onCloseModal, onNewTransducer}: NewTransducerProps) => {
+  return <TransducerForm onCloseForm={onCloseModal} onAddFormData={onNewTransducer} />;
 };
 
 export default NewTransducer;

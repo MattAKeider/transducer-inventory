@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import styles from './TransducerForm.module.css';
-import Button from "../../ui/Button/Button";
 import { Transducer, Location, Department, Condition } from "../../data/data";
+import Button from "../../ui/Button/Button";
+import styles from './TransducerForm.module.css';
 
 interface FormState {
   name: string;
@@ -18,7 +18,8 @@ interface FormState {
 };
 
 type TransducerFormProps = {
-  closeForm: () => void;
+  onCloseForm: () => void;
+  onAddFormData: (transducer: Transducer) => void;
 };
 
 const initialState: FormState = {
@@ -34,13 +35,14 @@ const initialState: FormState = {
   note: ''
 };
 
-const TransducerForm = ({closeForm}: TransducerFormProps) => {
+const TransducerForm = ({onCloseForm, onAddFormData}: TransducerFormProps) => {
   const [isOutOfService, setIsOutOfService] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<FormState>(initialState);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Create new transducer object from form data
     const transducer: Transducer = {
       name: formValues.name,
       location: formValues.location as Location,
@@ -59,16 +61,19 @@ const TransducerForm = ({closeForm}: TransducerFormProps) => {
         }
       ]
     };
+
+    onAddFormData(transducer);
     
     // Reset form
     setFormValues(initialState);
     setIsOutOfService(false);
+    onCloseForm();
   };
 
   const handleCancel = () => {
     setFormValues(initialState);
     setIsOutOfService(false);
-    closeForm();
+    onCloseForm();
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -82,7 +87,7 @@ const TransducerForm = ({closeForm}: TransducerFormProps) => {
     });
   };
 
-  const handleCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCheckbox = () => {
     setIsOutOfService((prevState) => !prevState);
   };
 
@@ -100,23 +105,23 @@ const TransducerForm = ({closeForm}: TransducerFormProps) => {
             <label htmlFor="location">Location:</label>
             <select name="location" id="location" value={formValues.location} onChange={handleChange} required>
               <option value="">Select</option>
-              <option value="cmc">CMC</option>
-              <option value="midtown">MIDTOWN</option>
-              <option value="risman">RISMAN</option>
-              <option value="crocker">CROCKER</option>
-              <option value="streetsboro">STREETSBORO</option>
-              <option value="betty_the_bus">BETTY THE BUS</option>
+              <option value="CMC">CMC</option>
+              <option value="MIDTOWN">MIDTOWN</option>
+              <option value="RISMAN">RISMAN</option>
+              <option value="CROCKER">CROCKER</option>
+              <option value="STREETSBORO">STREETSBORO</option>
+              <option value="BETTY THE BUS">BETTY THE BUS</option>
             </select>
           </p>
           <p className={styles.field}>
             <label htmlFor="department">Department:</label>
             <select name="department" id="department" value={formValues.department} onChange={handleChange} required>
               <option value="">Select</option>
-              <option value="mfm">MFM</option>
-              <option value="l&d">L&D</option>
-              <option value="ta">TA</option>
-              <option value="tv">TV</option>
-              <option value="ivf">IVF</option>
+              <option value="MFM">MFM</option>
+              <option value="L&D">L&D</option>
+              <option value="TA">TA</option>
+              <option value="TV">TV</option>
+              <option value="IVF">IVF</option>
             </select>
           </p>
           <p className={styles.field}>
@@ -143,17 +148,17 @@ const TransducerForm = ({closeForm}: TransducerFormProps) => {
             <label htmlFor="condition">Select Condition:</label>
             <select name="condition" id="condition" value={formValues.condition} onChange={handleChange} required>
               <option value="">Select</option>
-              <option value="new">New</option>
-              <option value="working">Working</option>
-              <option value="refurbished">Refurbished</option>
-              <option value="loaner">Loaner</option>
-              <option value="broken">Broken (Out of Service)</option>
+              <option value="New">New</option>
+              <option value="Working">Working</option>
+              <option value="Refurbished">Refurbished</option>
+              <option value="Loaner">Loaner</option>
+              <option value="Broken (Out of Service)">Broken (Out of Service)</option>
             </select>
           </p>
           <p className={styles.checkbox_field}>
             <label htmlFor="checkbox">
               <input type="checkbox" name="checkbox" checked={isOutOfService} onChange={handleCheckbox} id="checkbox"/>
-              Undo Out of Service
+              Out of Service
             </label>
           </p>
           <hr className={styles.line_break}/>
