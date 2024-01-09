@@ -44,6 +44,7 @@ const TransducerForm = ({onCloseForm, onAddFormData}: TransducerFormProps) => {
 
     // Create new transducer object from form data
     const transducer: Transducer = {
+      id: crypto.randomUUID(),
       name: formValues.name,
       location: formValues.location as Location,
       department: formValues.department as Department,

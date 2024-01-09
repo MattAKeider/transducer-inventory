@@ -9,6 +9,7 @@ export interface TransducerCondition {
 }
 
 export interface Transducer {
+  id: string;
   name: string;
   location: Location;
   department: Department;
@@ -23,6 +24,7 @@ export interface Transducer {
 
 export const TRANSDUCERS: Transducer[] = [
   {
+    id: crypto.randomUUID(),
     name: 'C1-5',
     location: 'MIDTOWN',
     department: 'MFM',
@@ -51,6 +53,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'D1-4',
     location: 'CMC',
     department: 'MFM',
@@ -69,6 +72,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'F23-45',
     location: 'MIDTOWN',
     department: 'IVF',
@@ -87,6 +91,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'Z1-4',
     location: 'CROCKER',
     department: 'TV',
@@ -105,6 +110,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'C1-1',
     location: 'RISMAN',
     department: 'MFM',

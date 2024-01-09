@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 
 import { Transducer, TransducerCondition } from '../../data/data';
-import { formatDate, generateKey } from '../../utils/utils';
+import { formatDate } from '../../utils/utils';
 import Button from '../../ui/Button/Button';
 import Condition from '../Condition/Condition';
 import styles from './FullDetails.module.css';
@@ -52,7 +52,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
       <fieldset className={styles.condition_field}>
         <legend className={styles.legend}>Condition log</legend>
         {transducer.currentCondition.map((condition: TransducerCondition) => (
-          <Condition key={generateKey()} transducerCondition={condition} />
+          <Condition key={transducer.id} transducerCondition={condition} />
         ))}
       </fieldset>
       <div className={styles.button_container}>

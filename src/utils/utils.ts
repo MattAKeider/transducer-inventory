@@ -8,7 +8,3 @@ export const formatDate = (date: Date) => {
 
   return formattedDate;
 };
-
-export const generateKey = () => {
-  return Math.floor((Math.random() + 1) * 100000);
-};
