@@ -1,5 +1,3 @@
-import { MouseEvent } from 'react';
-
 import { Transducer, TransducerCondition } from '../../data/data';
 import { formatDate } from '../../utils/utils';
 import Button from '../../ui/Button/Button';
@@ -8,7 +6,7 @@ import styles from './FullDetails.module.css';
 
 type FullDetailsProps = {
   transducer: Transducer;
-  onCloseModal: (event: MouseEvent<HTMLButtonElement>) => void;
+  onCloseModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
@@ -52,7 +50,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
       <fieldset className={styles.condition_field}>
         <legend className={styles.legend}>Condition log</legend>
         {transducer.currentCondition.map((condition: TransducerCondition) => (
-          <Condition key={transducer.id} transducerCondition={condition} />
+          <Condition key={condition.conditionId} transducerCondition={condition} />
         ))}
       </fieldset>
       <div className={styles.button_container}>

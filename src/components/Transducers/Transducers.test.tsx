@@ -15,7 +15,7 @@ describe('Transducers', () => {
 
   test('should render transducers', () => {
     render(
-      <TransducerContext.Provider value={{transducers:TRANSDUCERS}}>
+      <TransducerContext.Provider value={{transducers:TRANSDUCERS, addTransducer: () => {}}}>
         <Transducers />
       </TransducerContext.Provider>
     );

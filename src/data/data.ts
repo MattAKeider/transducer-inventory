@@ -3,6 +3,7 @@ export type Location = 'CMC' | 'MIDTOWN' | 'RISMAN' | 'CROCKER' | 'STREETSBORO' 
 export type Department = 'MFM' | 'L&D' | 'TA' | 'TV' | 'IVF';
 
 export interface TransducerCondition {
+  conditionId: string;
   condition: Condition;
   conditionChangedDate: Date;
   outOfService: boolean;
@@ -36,16 +37,19 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-17'),
         outOfService: true,
       },
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Refurbished',
         conditionChangedDate: new Date('2023-04-02'),
         outOfService: false,
       },
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-01-22'),
         outOfService: false,
@@ -65,6 +69,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-03-22'),
         outOfService: false,
@@ -84,6 +89,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-10-17'),
         outOfService: true,
@@ -103,6 +109,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-20'),
         outOfService: true,
@@ -122,6 +129,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2020-03-15'),
         outOfService: false,

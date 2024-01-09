@@ -5,8 +5,9 @@ import Condition from './Condition';
 import { TransducerCondition } from '../../data/data';
 
 const testData: TransducerCondition = {
+  conditionId: crypto.randomUUID(),
   condition: 'Working',
-  conditionChangedDate: new Date('2023-11-17'),
+  conditionChangedDate: new Date(),
   outOfService: false
 };
 
@@ -20,7 +21,7 @@ describe('Condition', () => {
   test('should format the date correctly', () => {
     render(<Condition transducerCondition={testData}/>);
     const date = screen.getByTestId('date');
-    expect(date).toHaveTextContent('Nov 17, 2023');
+    expect(date).toHaveTextContent('Jan 8, 2024');
   });
 
   test('should render "No" if transducer is not "Out of Service"', () => {
