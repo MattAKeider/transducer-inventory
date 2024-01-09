@@ -1,8 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useContext, useState } from 'react';
 
-import { Transducer, Location, Department, Condition } from "../../data/data";
-import Button from "../../ui/Button/Button";
+import { Transducer, Location, Department, Condition } from '../../data/data';
+import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';
+import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 
 interface FormState {
   name: string;
@@ -19,7 +20,6 @@ interface FormState {
 
 type TransducerFormProps = {
   onCloseForm: () => void;
-  onAddFormData: (transducer: Transducer) => void;
 };
 
 const initialState: FormState = {
@@ -35,15 +35,17 @@ const initialState: FormState = {
   note: ''
 };
 
-const TransducerForm = ({onCloseForm, onAddFormData}: TransducerFormProps) => {
+const TransducerForm = ({onCloseForm}: TransducerFormProps) => {
+  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [isOutOfService, setIsOutOfService] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<FormState>(initialState);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Create new transducer object from form data
     const transducer: Transducer = {
+      id: crypto.randomUUID(),
       name: formValues.name,
       location: formValues.location as Location,
       department: formValues.department as Department,
@@ -55,6 +57,7 @@ const TransducerForm = ({onCloseForm, onAddFormData}: TransducerFormProps) => {
       notes: formValues.note,
       currentCondition: [
         {
+          conditionId: crypto.randomUUID(),
           condition: formValues.condition as Condition,
           conditionChangedDate: new Date(),
           outOfService: isOutOfService
@@ -62,7 +65,7 @@ const TransducerForm = ({onCloseForm, onAddFormData}: TransducerFormProps) => {
       ]
     };
 
-    onAddFormData(transducer);
+    addTransducer(transducer);
     
     // Reset form
     setFormValues(initialState);
@@ -76,7 +79,7 @@ const TransducerForm = ({onCloseForm, onAddFormData}: TransducerFormProps) => {
     onCloseForm();
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
 
     setFormValues((prevState) => {

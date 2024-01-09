@@ -6,6 +6,7 @@ import TransducerItem from './TransducerItem';
 import { Transducer } from '../../data/data';
 
 const testData: Transducer = {
+  Id: crypto.randomUUID(),
   name: 'D1-4',
   location: 'CMC',
   department: 'MFM',
@@ -17,6 +18,7 @@ const testData: Transducer = {
   notes: 'New from GE',
   currentCondition: [
     {
+      conditionId: crypto.randomUUID(),
       condition: 'Working',
       conditionChangedDate: new Date('2023-03-22'),
       outOfService: false,

@@ -6,9 +6,8 @@ import TransducerForm from './TransducerForm';
 describe('TransducerForm', () => {
   test('inputs should contain the correct values', () => {
     const handleClose = vi.fn();
-    const handleAddFormData = vi.fn();
 
-    render(<TransducerForm onCloseForm={handleClose} onAddFormData={handleAddFormData} />);
+    render(<TransducerForm onCloseForm={handleClose} />);
 
     const nameInput = screen.getByLabelText<HTMLInputElement>('Name:');
     fireEvent.change(nameInput, {target: {value: 'C3-45'}});

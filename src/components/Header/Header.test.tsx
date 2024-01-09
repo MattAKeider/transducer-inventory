@@ -14,7 +14,7 @@ describe('Header', () => {
   test('should render a header title', () => {
     const text = 'Transducer Inventory';
 
-    render(<Header onAddTransducer={() => {}}/>);
+    render(<Header/>);
     const h1 = screen.getByText(text);
     expect(h1).toHaveTextContent(text);
   });

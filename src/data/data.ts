@@ -3,12 +3,14 @@ export type Location = 'CMC' | 'MIDTOWN' | 'RISMAN' | 'CROCKER' | 'STREETSBORO' 
 export type Department = 'MFM' | 'L&D' | 'TA' | 'TV' | 'IVF';
 
 export interface TransducerCondition {
+  conditionId: string;
   condition: Condition;
   conditionChangedDate: Date;
   outOfService: boolean;
 }
 
 export interface Transducer {
+  id: string;
   name: string;
   location: Location;
   department: Department;
@@ -23,6 +25,7 @@ export interface Transducer {
 
 export const TRANSDUCERS: Transducer[] = [
   {
+    id: crypto.randomUUID(),
     name: 'C1-5',
     location: 'MIDTOWN',
     department: 'MFM',
@@ -34,16 +37,19 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-17'),
         outOfService: true,
       },
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Refurbished',
         conditionChangedDate: new Date('2023-04-02'),
         outOfService: false,
       },
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-01-22'),
         outOfService: false,
@@ -51,6 +57,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'D1-4',
     location: 'CMC',
     department: 'MFM',
@@ -62,6 +69,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-03-22'),
         outOfService: false,
@@ -69,6 +77,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'F23-45',
     location: 'MIDTOWN',
     department: 'IVF',
@@ -80,6 +89,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-10-17'),
         outOfService: true,
@@ -87,6 +97,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'Z1-4',
     location: 'CROCKER',
     department: 'TV',
@@ -98,6 +109,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-20'),
         outOfService: true,
@@ -105,6 +117,7 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
   {
+    id: crypto.randomUUID(),
     name: 'C1-1',
     location: 'RISMAN',
     department: 'MFM',
@@ -116,6 +129,7 @@ export const TRANSDUCERS: Transducer[] = [
     notes: 'New from GE',
     currentCondition: [
       {
+        conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2020-03-15'),
         outOfService: false,

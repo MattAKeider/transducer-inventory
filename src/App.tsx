@@ -1,25 +1,15 @@
-import { useState } from 'react';
-
 import Header from './components/Header/Header';
 import Transducers from './components/Transducers/Transducers';
-import { TRANSDUCERS, Transducer } from './data/data';
+import TransducerContextProvider from './store/transducer-context';
 
 const App = () => {
-  const [transducers, setTransducers] = useState<Transducer[]>(TRANSDUCERS);
-
-  const handleAddTransducer = (transducer: Transducer) => {
-    setTransducers((prevState: Transducer[]) => {
-      return [transducer, ...prevState];
-    });
-  };
-
   return (
-    <>
-      <Header onAddTransducer={handleAddTransducer}/>
+    <TransducerContextProvider>
+      <Header />
       <main>
-        <Transducers transducers={transducers} />
+        <Transducers />
       </main>
-    </>
+    </TransducerContextProvider>
   );
 };
 

@@ -1,11 +1,9 @@
-import { MouseEvent } from 'react';
-
 import { Transducer } from '../../data/data';
 import styles from './TransducerItem.module.css';
 
 type TransducerItemProps = {
   transducerData: Transducer;
-  onClickTransducer: (event: MouseEvent<HTMLLIElement>) => void;
+  onClickTransducer: (event: React.MouseEvent<HTMLLIElement>) => void;
 };
 
 const TransducerItem = ({ transducerData, onClickTransducer }: TransducerItemProps) => {
