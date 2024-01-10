@@ -1,13 +1,13 @@
 import { describe, test, expect, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import TransducerForm from './TransducerForm';
+import NewTransducer from './NewTransducer';
 
-describe('TransducerForm', () => {
+describe('NewTransducer', () => {
   test('inputs should contain the correct values', () => {
     const handleClose = vi.fn();
 
-    render(<TransducerForm onCloseForm={handleClose} />);
+    render(<NewTransducer onCloseModal={handleClose} />);
 
     const nameInput = screen.getByLabelText<HTMLInputElement>('Name:');
     fireEvent.change(nameInput, {target: {value: 'C3-45'}});

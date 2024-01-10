@@ -14,13 +14,13 @@ const testData: Transducer = {
   serialNumber: 'F123300',
   internalIdentifier: '7',
   controlNumber: '00FB-12346',
-  dateReceived: new Date(),
+  dateReceived: new Date('2024-01-8'),
   notes: 'New from GE',
   currentCondition: [
     {
       conditionId: crypto.randomUUID(),
       condition: 'Working',
-      conditionChangedDate: new Date(),
+      conditionChangedDate: new Date('2024-01-8'),
       outOfService: false,
     },
   ],
