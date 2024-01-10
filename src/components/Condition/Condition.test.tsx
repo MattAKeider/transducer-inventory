@@ -7,7 +7,7 @@ import { TransducerCondition } from '../../data/data';
 const testData: TransducerCondition = {
   conditionId: crypto.randomUUID(),
   condition: 'Working',
-  conditionChangedDate: new Date(),
+  conditionChangedDate: new Date('2024-01-8'),
   outOfService: false
 };
 
