@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 
+import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { Transducer, Location, Department, Condition } from '../../data/data';
 import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';
-import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 
 interface FormState {
   name: string;
@@ -18,10 +18,6 @@ interface FormState {
   note: string;
 };
 
-type TransducerFormProps = {
-  onCloseForm: () => void;
-};
-
 const initialState: FormState = {
   name: '',
   location: '',
@@ -33,6 +29,10 @@ const initialState: FormState = {
   received: '',
   condition: '',
   note: ''
+};
+
+type TransducerFormProps = {
+  onCloseForm: () => void;
 };
 
 const TransducerForm = ({onCloseForm}: TransducerFormProps) => {
@@ -102,7 +102,7 @@ const TransducerForm = ({onCloseForm}: TransducerFormProps) => {
           <legend className={styles.legend}>Please enter details below</legend>
           <p className={styles.field}>
             <label htmlFor="name">Name:</label>
-            <input type="text" name="name" id="name" value={formValues.name} onChange={handleChange} placeholder="Enter name" required/>
+            <input type="text" name="name" id="name" value={formValues.name} onChange={handleChange} placeholder="Enter name" autoFocus required/>
           </p>
           <p className={styles.field}>
             <label htmlFor="location">Location:</label>
