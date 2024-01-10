@@ -3,7 +3,7 @@ import styles from './TransducerItem.module.css';
 
 type TransducerItemProps = {
   transducerData: Transducer;
-  onClickTransducer: (event: React.MouseEvent<HTMLLIElement>) => void;
+  onClickTransducer: () => void;
 };
 
 const TransducerItem = ({ transducerData, onClickTransducer }: TransducerItemProps) => {

@@ -6,7 +6,7 @@ import styles from './FullDetails.module.css';
 
 type FullDetailsProps = {
   transducer: Transducer;
-  onCloseModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onCloseModal: () => void;
 };
 
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {

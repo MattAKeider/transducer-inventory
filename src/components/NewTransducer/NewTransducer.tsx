@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { Transducer, Location, Department, Condition } from '../../data/data';
 import Button from '../../ui/Button/Button';
-import styles from './NewTransducer.module.css'
+import styles from './NewTransducer.module.css';
 
 interface FormState {
   name: string;
@@ -36,9 +36,10 @@ type NewTransducerProps = {
 };
 
 const NewTransducer = ({onCloseModal}: NewTransducerProps) => {
-  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [isOutOfService, setIsOutOfService] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<FormState>(initialState);
+
+  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,6 +66,7 @@ const NewTransducer = ({onCloseModal}: NewTransducerProps) => {
       ]
     };
 
+    // Add transducer object to existing transducers array in context api
     addTransducer(transducer);
     
     // Reset form
