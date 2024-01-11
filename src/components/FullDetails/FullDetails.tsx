@@ -22,6 +22,10 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
           <span>Department:</span>
           {transducer.department}
         </p>
+        <p data-testid="type">
+          <span>Type:</span>
+          {transducer.transducerType}
+        </p>
         <p data-testid="room">
           <span>Room:</span>
           {transducer.room}

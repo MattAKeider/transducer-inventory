@@ -1,6 +1,7 @@
 export type Condition = 'New' | 'Working' | 'Refurbished' | 'Loaner' | 'Broken (Out of Service)';
 export type Location = 'CMC' | 'MIDTOWN' | 'RISMAN' | 'CROCKER' | 'STREETSBORO' | 'BETTY THE BUS';
-export type Department = 'MFM' | 'L&D' | 'TA' | 'TV' | 'IVF';
+export type Department = 'MFM' | 'L&D' | 'IVF';
+export type TransducerType = 'TA' | 'TV';
 
 export interface TransducerCondition {
   conditionId: string;
@@ -14,6 +15,7 @@ export interface Transducer {
   name: string;
   location: Location;
   department: Department;
+  transducerType: TransducerType;
   room: string;
   serialNumber: string;
   internalIdentifier: string;
@@ -29,6 +31,7 @@ export const TRANSDUCERS: Transducer[] = [
     name: 'C1-5',
     location: 'MIDTOWN',
     department: 'MFM',
+    transducerType: 'TA',
     room: '1',
     serialNumber: 'K1302KR5',
     internalIdentifier: '1',
@@ -61,6 +64,7 @@ export const TRANSDUCERS: Transducer[] = [
     name: 'D1-4',
     location: 'CMC',
     department: 'MFM',
+    transducerType: 'TV',
     room: '2',
     serialNumber: 'F123300',
     internalIdentifier: '7',
@@ -81,6 +85,7 @@ export const TRANSDUCERS: Transducer[] = [
     name: 'F23-45',
     location: 'MIDTOWN',
     department: 'IVF',
+    transducerType: 'TA',
     room: 'IVF-A',
     serialNumber: 'K1377777',
     internalIdentifier: '21',
@@ -100,7 +105,8 @@ export const TRANSDUCERS: Transducer[] = [
     id: crypto.randomUUID(),
     name: 'Z1-4',
     location: 'CROCKER',
-    department: 'TV',
+    department: 'IVF',
+    transducerType: 'TA',
     room: '3',
     serialNumber: 'K1302KR0',
     internalIdentifier: '3',
@@ -121,6 +127,7 @@ export const TRANSDUCERS: Transducer[] = [
     name: 'C1-1',
     location: 'RISMAN',
     department: 'MFM',
+    transducerType: 'TV',
     room: '4',
     serialNumber: 'K1302Z34',
     internalIdentifier: '14',
