@@ -10,6 +10,7 @@ const testData: Transducer = {
   name: 'D1-4',
   location: 'CMC',
   department: 'MFM',
+  transducerType: 'TA',
   room: '2',
   serialNumber: 'F123300',
   internalIdentifier: '7',
@@ -33,6 +34,7 @@ describe('FullDetails', () => {
     expect(screen.getByRole('heading')).toHaveTextContent(testData.name);
     expect(screen.getByTestId('location')).toHaveTextContent(testData.location);
     expect(screen.getByTestId('department')).toHaveTextContent(testData.department);
+    expect(screen.getByTestId('type')).toHaveTextContent(testData.transducerType);
     expect(screen.getByTestId('room')).toHaveTextContent(testData.room);
     expect(screen.getByTestId('serial')).toHaveTextContent(testData.serialNumber);
     expect(screen.getByTestId('internal')).toHaveTextContent(testData.internalIdentifier);

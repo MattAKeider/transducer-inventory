@@ -10,6 +10,7 @@ const testData: Transducer = {
   name: 'D1-4',
   location: 'CMC',
   department: 'MFM',
+  transducerType: 'TV',
   room: '2',
   serialNumber: 'F123300',
   internalIdentifier: '7',

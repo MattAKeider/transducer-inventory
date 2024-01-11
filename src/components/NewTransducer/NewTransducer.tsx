@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
-import { Transducer, Location, Department, Condition } from '../../data/data';
+import { Transducer, Location, Department, Condition, TransducerType } from '../../data/data';
 import Button from '../../ui/Button/Button';
 import styles from './NewTransducer.module.css';
 
@@ -10,6 +10,7 @@ interface FormState {
   location: string;
   department: string;
   room: string;
+  type: string;
   serial: string;
   internal: string;
   control: string;
@@ -23,6 +24,7 @@ const initialState: FormState = {
   location: '',
   department: '',
   room: '',
+  type: '',
   serial: '',
   internal: '',
   control: '',
@@ -51,6 +53,7 @@ const NewTransducer = ({onCloseModal}: NewTransducerProps) => {
       location: formValues.location as Location,
       department: formValues.department as Department,
       room: formValues.room,
+      transducerType: formValues.type as TransducerType,
       serialNumber: formValues.serial,
       internalIdentifier: formValues.internal,
       controlNumber: formValues.control,
@@ -124,9 +127,15 @@ const NewTransducer = ({onCloseModal}: NewTransducerProps) => {
               <option value="">Select</option>
               <option value="MFM">MFM</option>
               <option value="L&D">L&D</option>
+              <option value="IVF">IVF</option>
+            </select>
+          </p>
+          <p className={styles.field}>
+            <label htmlFor="type">Type:</label>
+            <select name="type" id="type" value={formValues.type} onChange={handleChange} required>
+              <option value="">Select</option>
               <option value="TA">TA</option>
               <option value="TV">TV</option>
-              <option value="IVF">IVF</option>
             </select>
           </p>
           <p className={styles.field}>
