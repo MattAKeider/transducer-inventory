@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useReducer } from 'react';
 
 import { TRANSDUCERS, Transducer } from '../data/data';
 
@@ -12,16 +12,40 @@ export const TransducerContext = createContext<TransducerContextType>({
   addTransducer: () => {},
 });
 
+type ActionType = 'ADD_TRANSDUCER' | 'DELETE_TRANSDUCER' | 'EDIT_TRANSDUCER';
+
+type ActionPayload = {
+  transducer?: Transducer;
+  id?: string;
+};
+
+type TransducerAction = { 
+  type: ActionType, 
+  payload: ActionPayload 
+};
+
+const reducerFn = (state: Transducer[], action: TransducerAction): Transducer[] => {
+  switch(action.type) {
+    case 'ADD_TRANSDUCER':
+      return [action.payload.transducer, ...state];
+    default: 
+      return state;
+  };
+};
+
 type TransducerContextProviderProps = {
   children: ReactNode;
 };
 
 const TransducerContextProvider = ({children}: TransducerContextProviderProps) => {
-  const [transducers, setTransducers] = useState<Transducer[]>(TRANSDUCERS);
+  const [transducers, dispatch] = useReducer(reducerFn, TRANSDUCERS);
 
   const handleAddTransducer = (transducer: Transducer) => {
-    setTransducers((prevState: Transducer[]) => {
-      return [transducer, ...prevState];
+    dispatch({
+      type: 'ADD_TRANSDUCER',
+      payload: {
+        transducer
+      } 
     });
   };
 
