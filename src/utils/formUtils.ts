@@ -1,4 +1,10 @@
-import { Condition, Department, Location, Transducer, TransducerType } from "../data/data";
+import {
+  Condition,
+  Department,
+  Location,
+  Transducer,
+  TransducerType,
+} from '../data/data';
 
 export interface FormState {
   name: string;
@@ -15,7 +21,7 @@ export interface FormState {
   service: boolean;
 }
 
-export const createTransducerObject = (formData: FormState) => {
+export const createTransducerObject = (formData: FormState): Transducer => {
   const newTransducer: Transducer = {
     id: crypto.randomUUID(),
     name: formData.name,
@@ -33,7 +39,7 @@ export const createTransducerObject = (formData: FormState) => {
       {
         conditionId: crypto.randomUUID(),
         condition: formData.condition as Condition,
-        conditionChangedDate: new Date()
+        conditionChangedDate: new Date(),
       },
     ],
   };

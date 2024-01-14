@@ -6,6 +6,11 @@
   text-align: center;
 }
 
+.list_item:hover {
+  background-color: #a6518fdd;
+  box-shadow: 5px 5px 5px #632e55db;
+}
+
 .card_title {
   color: #ffebcd;
   font-weight: bold;

@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
-import { FormState, createTransducerObject } from '../../utils/TransducerFormUtils';
+import { FormState, createTransducerObject } from '../../utils/formUtils';
 import Button from '../../ui/Button/Button';
 import styles from './NewTransducer.module.css';
+import { emptyValuesOnDisabled, isValidDate } from '../../utils/validation';
 
 const initialState: FormState = {
   name: '',
@@ -28,8 +29,16 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const [formValues, setFormValues] = useState<FormState>(initialState);
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
 
+  const validDate = isValidDate(formValues.received);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const emptyValues: string[] = emptyValuesOnDisabled(formValues);
+
+    if (!validDate || emptyValues.length > 1) {
+      return;
+    }
 
     // Create new transducer object from form data
     const transducer = createTransducerObject(formValues);
@@ -102,7 +111,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
         <h1 className={styles.header}>New Transducer</h1>
         <fieldset className={styles.form_fieldset}>
           <legend className={styles.legend}>Please enter details below</legend>
-          <p className={styles.field}>
+          <div className={styles.field}>
             <label htmlFor="name">Name:</label>
             <input
               type="text"
@@ -115,8 +124,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               disabled={formValues.service}
               required
             />
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="location">Location:</label>
             <select
               name="location"
@@ -134,8 +143,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               <option value="STREETSBORO">STREETSBORO</option>
               <option value="BETTY THE BUS">BETTY THE BUS</option>
             </select>
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="department">Department:</label>
             <select
               name="department"
@@ -150,8 +159,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               <option value="L&D">L&D</option>
               <option value="IVF">IVF</option>
             </select>
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="type">Type:</label>
             <select
               name="type"
@@ -165,8 +174,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               <option value="TA">TA</option>
               <option value="TV">TV</option>
             </select>
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="room">Room:</label>
             <input
               type="text"
@@ -178,8 +187,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               disabled={formValues.service}
               required
             />
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="serial">Serial #:</label>
             <input
               type="text"
@@ -191,8 +200,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               disabled={formValues.service}
               required
             />
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="internal">Internal Identifier:</label>
             <input
               type="text"
@@ -204,8 +213,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               disabled={formValues.service}
               required
             />
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="control">Control #:</label>
             <input
               type="text"
@@ -217,8 +226,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               disabled={formValues.service}
               required
             />
-          </p>
-          <p className={styles.field}>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="received">Date Received:</label>
             <input
               type="date"
@@ -229,8 +238,9 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               disabled={formValues.service}
               required
             />
-          </p>
-          <p className={styles.field}>
+            <div>{!validDate && <p style={{color: 'orange'}}>Please enter valid date.</p>}</div>
+          </div>
+          <div className={styles.field}>
             <label htmlFor="condition">Select Condition:</label>
             <select
               name="condition"
@@ -249,8 +259,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
                 Broken (Out of Service)
               </option>
             </select>
-          </p>
-          <p className={styles.checkbox_field}>
+          </div>
+          <div className={styles.checkbox_field}>
             <label htmlFor="service">
               <input
                 type="checkbox"
@@ -261,9 +271,9 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               />
               Out of Service
             </label>
-          </p>
+          </div>
           <hr className={styles.line_break} />
-          <p className={styles.field}>
+          <div className={styles.field}>
             <label htmlFor="note">Notes:</label>
             <textarea
               name="note"
@@ -274,7 +284,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               rows={4}
               disabled={formValues.service}
             />
-          </p>
+          </div>
         </fieldset>
         <div className={styles.form_actions}>
           <Button type="button" onClick={handleCancel}>
