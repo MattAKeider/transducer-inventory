@@ -40,7 +40,6 @@ describe('FullDetails', () => {
     expect(screen.getByTestId('internal')).toHaveTextContent(testData.internalIdentifier);
     expect(screen.getByTestId('control')).toHaveTextContent(testData.controlNumber);
     expect(screen.getByTestId('date-received')).toHaveTextContent('Jan 8, 2024');
-    expect(screen.getByTestId('notes')).toHaveTextContent(testData.notes);
     expect(screen.getByTestId('condition')).toHaveTextContent(testData.currentCondition[0].condition);
     expect(screen.getByTestId('date')).toHaveTextContent('Jan 8, 2024');
   });

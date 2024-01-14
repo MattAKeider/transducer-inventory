@@ -1,5 +1,6 @@
 .condition_container p {
   margin: 0.35rem 0rem;
+  word-wrap: normal;
 }
 
 .condition_container span {
