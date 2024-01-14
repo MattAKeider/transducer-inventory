@@ -53,7 +53,6 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
           <Condition
             key={condition.conditionId}
             transducerCondition={condition}
-            note={transducer.notes}
           />
         ))}
       </fieldset>

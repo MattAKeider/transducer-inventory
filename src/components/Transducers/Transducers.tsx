@@ -9,9 +9,7 @@ import styles from './Transducers.module.css';
 
 const Transducers = () => {
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
-
   const { transducers } = useContext<TransducerContextType>(TransducerContext);
-  
   const modalRef = useRef<ModalHandle>();
 
   const handleClickedTransducer = (selectedTransducer: Transducer) => {

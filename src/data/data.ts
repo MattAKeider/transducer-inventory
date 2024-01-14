@@ -7,6 +7,7 @@ export interface TransducerCondition {
   conditionId: string;
   condition: Condition;
   conditionChangedDate: Date;
+  note: string;
 }
 
 export interface Transducer {
@@ -37,23 +38,26 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '1',
     controlNumber: '00FB-12345',
     dateReceived: new Date('2023-01-22'),
-    notes: 'New from GE',
+    notes: '',
     outOfService: true,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-17'),
+        note: 'Broke now',
       },
       {
         conditionId: crypto.randomUUID(),
         condition: 'Refurbished',
         conditionChangedDate: new Date('2023-04-02'),
+        note: 'Refurbished item',
       },
       {
         conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-01-22'),
+        note: 'New from GE',
       }
     ],
   },
@@ -68,13 +72,14 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '7',
     controlNumber: '00FB-12346',
     dateReceived: new Date('2023-03-22'),
-    notes: 'New from GE',
+    notes: '',
     outOfService: false,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-03-22'),
+        note: 'New from GE',
       },
     ],
   },
@@ -89,13 +94,14 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '21',
     controlNumber: '00SD-34444',
     dateReceived: new Date('2021-05-02'),
-    notes: 'New from GE',
+    notes: '',
     outOfService: true,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-10-17'),
+        note: 'New from GE',
       },
     ],
   },
@@ -110,13 +116,14 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '3',
     controlNumber: '00WB-12045',
     dateReceived: new Date('2023-01-22'),
-    notes: 'New from GE',
+    notes: '',
     outOfService: true,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-20'),
+        note: 'New from GE',
       },
     ],
   },
@@ -131,13 +138,14 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '14',
     controlNumber: '00FB-13221',
     dateReceived: new Date('2020-03-15'),
-    notes: 'New from GE',
+    notes: '',
     outOfService: false,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2020-03-15'),
+        note: 'New from GE',
       },
     ],
   },

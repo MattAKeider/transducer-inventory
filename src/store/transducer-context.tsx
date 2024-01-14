@@ -41,6 +41,8 @@ const TransducerContextProvider = ({children}: TransducerContextProviderProps) =
   const [transducers, dispatch] = useReducer(reducerFn, TRANSDUCERS);
 
   const handleAddTransducer = (transducer: Transducer) => {
+    transducer.notes = '';
+    
     dispatch({
       type: 'ADD_TRANSDUCER',
       payload: {

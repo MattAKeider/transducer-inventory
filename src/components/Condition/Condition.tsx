@@ -4,10 +4,9 @@ import styles from './Condition.module.css';
 
 type ConditionProps = {
   transducerCondition: TransducerCondition;
-  note: string;
 };
 
-const Condition = ({ transducerCondition, note }: ConditionProps) => {
+const Condition = ({ transducerCondition }: ConditionProps) => {
   return (
     <div className={styles.condition_container}>
       <p data-testid="condition">
@@ -18,10 +17,10 @@ const Condition = ({ transducerCondition, note }: ConditionProps) => {
         <span>Date Changed:</span>
         {formatDate(transducerCondition.conditionChangedDate)}
       </p>
-      {note !== '' && (
+      {transducerCondition.note !== '' && (
         <p data-testid="saved-note">
           <span>Note:</span>
-          {note}
+          {transducerCondition.note}
         </p>
       )}
       <hr />

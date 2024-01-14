@@ -4,7 +4,7 @@ import { TransducerContext, TransducerContextType } from '../../store/transducer
 import { FormState, createTransducerObject } from '../../utils/formUtils';
 import Button from '../../ui/Button/Button';
 import styles from './NewTransducer.module.css';
-import { emptyValuesOnDisabled, isValidDate } from '../../utils/validation';
+import { isValidDate } from '../../utils/validation';
 
 const initialState: FormState = {
   name: '',
@@ -17,7 +17,7 @@ const initialState: FormState = {
   control: '',
   received: '',
   condition: '',
-  note: '',
+  notes: '',
   service: false
 };
 
@@ -34,9 +34,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const emptyValues: string[] = emptyValuesOnDisabled(formValues);
-
-    if (!validDate || emptyValues.length > 1) {
+    if (!validDate) {
       return;
     }
 
@@ -121,7 +119,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               onChange={handleChange}
               placeholder="Enter name"
               autoFocus
-              disabled={formValues.service}
               required
             />
           </div>
@@ -132,7 +129,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               id="location"
               value={formValues.location}
               onChange={handleChange}
-              disabled={formValues.service}
               required
             >
               <option value="">Select</option>
@@ -151,7 +147,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               id="department"
               value={formValues.department}
               onChange={handleChange}
-              disabled={formValues.service}
               required
             >
               <option value="">Select</option>
@@ -167,7 +162,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               id="type"
               value={formValues.type}
               onChange={handleChange}
-              disabled={formValues.service}
               required
             >
               <option value="">Select</option>
@@ -184,7 +178,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               value={formValues.room}
               onChange={handleChange}
               placeholder="Enter room"
-              disabled={formValues.service}
               required
             />
           </div>
@@ -197,7 +190,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               value={formValues.serial}
               onChange={handleChange}
               placeholder="Enter Serial #"
-              disabled={formValues.service}
               required
             />
           </div>
@@ -210,7 +202,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               value={formValues.internal}
               onChange={handleChange}
               placeholder="Enter internal identifier"
-              disabled={formValues.service}
               required
             />
           </div>
@@ -223,7 +214,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               value={formValues.control}
               onChange={handleChange}
               placeholder="Enter control #"
-              disabled={formValues.service}
               required
             />
           </div>
@@ -235,7 +225,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               id="received"
               value={formValues.received}
               onChange={handleChange}
-              disabled={formValues.service}
               required
             />
             <div>{!validDate && <p style={{color: 'orange'}}>Please enter valid date.</p>}</div>
@@ -247,7 +236,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               id="condition"
               value={formValues.condition}
               onChange={handleChange}
-              disabled={formValues.service}
               required
             >
               <option value="">Select</option>
@@ -274,15 +262,14 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
           </div>
           <hr className={styles.line_break} />
           <div className={styles.field}>
-            <label htmlFor="note">Notes:</label>
+            <label htmlFor="notes">Notes:</label>
             <textarea
-              name="note"
-              id="note"
-              value={formValues.note}
+              name="notes"
+              id="notes"
+              value={formValues.notes}
               onChange={handleChange}
               placeholder="Enter a note"
               rows={4}
-              disabled={formValues.service}
             />
           </div>
         </fieldset>

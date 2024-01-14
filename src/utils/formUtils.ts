@@ -17,7 +17,7 @@ export interface FormState {
   control: string;
   received: string;
   condition: string;
-  note: string;
+  notes: string;
   service: boolean;
 }
 
@@ -33,13 +33,14 @@ export const createTransducerObject = (formData: FormState): Transducer => {
     internalIdentifier: formData.internal,
     controlNumber: formData.control,
     dateReceived: new Date(formData.received),
-    notes: formData.note,
+    notes: formData.notes,
     outOfService: formData.service,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: formData.condition as Condition,
         conditionChangedDate: new Date(),
+        note: formData.notes,
       },
     ],
   };
