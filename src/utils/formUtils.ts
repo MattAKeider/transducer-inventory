@@ -21,6 +21,7 @@ export interface FormState {
   service: boolean;
 }
 
+// Create a new transducer object from inputted form data
 export const createTransducerObject = (formData: FormState): Transducer => {
   const newTransducer: Transducer = {
     id: crypto.randomUUID(),

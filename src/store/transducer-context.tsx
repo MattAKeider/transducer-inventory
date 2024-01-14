@@ -41,6 +41,7 @@ const TransducerContextProvider = ({children}: TransducerContextProviderProps) =
   const [transducers, dispatch] = useReducer(reducerFn, TRANSDUCERS);
 
   const handleAddTransducer = (transducer: Transducer) => {
+    // Reset notes property to start empty for editing action
     transducer.notes = '';
     
     dispatch({
