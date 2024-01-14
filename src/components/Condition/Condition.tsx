@@ -17,10 +17,6 @@ const Condition = ({ transducerCondition }: ConditionProps) => {
         <span>Date Changed:</span>
         {formatDate(transducerCondition.conditionChangedDate)}
       </p>
-      <p data-testid="out-of-service">
-        <span>Out of Service:</span>
-        {transducerCondition.outOfService ? 'Yes' : 'No'}
-      </p>
       <hr />
     </div>
   );

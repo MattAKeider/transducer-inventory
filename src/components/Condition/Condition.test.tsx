@@ -8,7 +8,6 @@ const testData: TransducerCondition = {
   conditionId: crypto.randomUUID(),
   condition: 'Working',
   conditionChangedDate: new Date('2024-01-8'),
-  outOfService: false
 };
 
 describe('Condition', () => {
@@ -22,18 +21,5 @@ describe('Condition', () => {
     render(<Condition transducerCondition={testData}/>);
     const date = screen.getByTestId('date');
     expect(date).toHaveTextContent('Jan 8, 2024');
-  });
-
-  test('should render "No" if transducer is not "Out of Service"', () => {
-    render(<Condition transducerCondition={testData}/>);
-    const outOfService = screen.getByTestId('out-of-service');
-    expect(outOfService).toHaveTextContent('No');
-  });
-
-  test('should render "Yes" if transducer is "Out of Service"', () => {
-    testData.outOfService = true;
-    render(<Condition transducerCondition={testData}/>);
-    const outOfService = screen.getByTestId('out-of-service');
-    expect(outOfService).toHaveTextContent('Yes');
   });
 });

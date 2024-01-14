@@ -7,7 +7,6 @@ export interface TransducerCondition {
   conditionId: string;
   condition: Condition;
   conditionChangedDate: Date;
-  outOfService: boolean;
 }
 
 export interface Transducer {
@@ -22,6 +21,7 @@ export interface Transducer {
   controlNumber: string;
   dateReceived: Date;
   notes: string;
+  outOfService: boolean;
   currentCondition: TransducerCondition[];
 }
 
@@ -38,24 +38,22 @@ export const TRANSDUCERS: Transducer[] = [
     controlNumber: '00FB-12345',
     dateReceived: new Date('2023-01-22'),
     notes: 'New from GE',
+    outOfService: true,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-17'),
-        outOfService: true,
       },
       {
         conditionId: crypto.randomUUID(),
         condition: 'Refurbished',
         conditionChangedDate: new Date('2023-04-02'),
-        outOfService: false,
       },
       {
         conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-01-22'),
-        outOfService: false,
       }
     ],
   },
@@ -71,12 +69,12 @@ export const TRANSDUCERS: Transducer[] = [
     controlNumber: '00FB-12346',
     dateReceived: new Date('2023-03-22'),
     notes: 'New from GE',
+    outOfService: false,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2023-03-22'),
-        outOfService: false,
       },
     ],
   },
@@ -92,12 +90,12 @@ export const TRANSDUCERS: Transducer[] = [
     controlNumber: '00SD-34444',
     dateReceived: new Date('2021-05-02'),
     notes: 'New from GE',
+    outOfService: true,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-10-17'),
-        outOfService: true,
       },
     ],
   },
@@ -113,12 +111,12 @@ export const TRANSDUCERS: Transducer[] = [
     controlNumber: '00WB-12045',
     dateReceived: new Date('2023-01-22'),
     notes: 'New from GE',
+    outOfService: true,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
         conditionChangedDate: new Date('2023-11-20'),
-        outOfService: true,
       },
     ],
   },
@@ -134,12 +132,12 @@ export const TRANSDUCERS: Transducer[] = [
     controlNumber: '00FB-13221',
     dateReceived: new Date('2020-03-15'),
     notes: 'New from GE',
+    outOfService: false,
     currentCondition: [
       {
         conditionId: crypto.randomUUID(),
         condition: 'Working',
         conditionChangedDate: new Date('2020-03-15'),
-        outOfService: false,
       },
     ],
   },
