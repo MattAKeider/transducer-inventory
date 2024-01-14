@@ -46,15 +46,15 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
           <span>Date Received:</span>
           {formatDate(transducer.dateReceived)}
         </p>
-        <p data-testid="notes">
-          <span>Notes:</span>
-          <br/>{transducer.notes}
-        </p>
       </div>
       <fieldset className={styles.condition_field}>
         <legend className={styles.legend}>Condition log</legend>
         {transducer.currentCondition.map((condition: TransducerCondition) => (
-          <Condition key={condition.conditionId} transducerCondition={condition} />
+          <Condition
+            key={condition.conditionId}
+            transducerCondition={condition}
+            note={transducer.notes}
+          />
         ))}
       </fieldset>
       <div className={styles.button_container}>
