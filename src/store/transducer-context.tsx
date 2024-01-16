@@ -12,19 +12,17 @@ export const TransducerContext = createContext<TransducerContextType>({
   addTransducer: () => {},
 });
 
-type ActionType = 'ADD_TRANSDUCER' | 'DELETE_TRANSDUCER' | 'EDIT_TRANSDUCER';
+type Type = 'ADD_TRANSDUCER' | 'DELETE_TRANSDUCER' | 'EDIT_TRANSDUCER';
 
-type ActionPayload = {
-  transducer?: Transducer;
-  id?: string;
+type Action = { 
+  type: Type, 
+  payload: {
+    transducer?: Transducer;
+    id?: string;
+  }
 };
 
-type TransducerAction = { 
-  type: ActionType, 
-  payload: ActionPayload 
-};
-
-const reducerFn = (state: Transducer[], action: TransducerAction): Transducer[] => {
+const reducer = (state: Transducer[], action: Action): Transducer[] => {
   switch(action.type) {
     case 'ADD_TRANSDUCER':
       return [action.payload.transducer, ...state];
@@ -38,7 +36,7 @@ type TransducerContextProviderProps = {
 };
 
 const TransducerContextProvider = ({children}: TransducerContextProviderProps) => {
-  const [transducers, dispatch] = useReducer(reducerFn, TRANSDUCERS);
+  const [state, dispatch] = useReducer(reducer, TRANSDUCERS);
 
   const handleAddTransducer = (transducer: Transducer) => {
     // Reset notes property to start empty for editing action
@@ -53,7 +51,7 @@ const TransducerContextProvider = ({children}: TransducerContextProviderProps) =
   };
 
   const ctxValue: TransducerContextType = {
-    transducers: transducers,
+    transducers: state,
     addTransducer: handleAddTransducer,
   };
 

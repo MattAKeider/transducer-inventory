@@ -2,9 +2,9 @@ import { useContext, useReducer } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { FormState, createTransducerObject } from '../../utils/formUtils';
+import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import styles from './NewTransducer.module.css';
-import { isValidDate } from '../../utils/validation';
 
 const initialState: FormState = {
   name: '',
@@ -38,7 +38,7 @@ type Action = {
   };
 };
 
-const reducer = (state: FormState, action: Action) => {
+const reducer = (state: FormState, action: Action): FormState => {
   switch(action.type) {
     case 'CHANGE_INPUT':
       if (action.payload.name === 'condition') {
@@ -274,7 +274,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               onChange={handleChange}
               required
             />
-            <div>{!validDate && <p style={{color: 'orange'}}>Please enter valid date.</p>}</div>
+            <div className={styles.error}>{!validDate && <p>Please enter valid date.</p>}</div>
           </div>
           <div className={styles.field}>
             <label htmlFor="condition">Select Condition:</label>
