@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useReducer } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { FormState, createTransducerObject } from '../../utils/formUtils';
@@ -25,11 +25,71 @@ type NewTransducerProps = {
   onCloseModal: () => void;
 };
 
-const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
-  const [formValues, setFormValues] = useState<FormState>(initialState);
-  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
 
-  const validDate = isValidDate(formValues.received);
+type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
+
+type Action = {
+  type: Type,
+  payload: {
+    name?: string;
+    value?: string;
+    checked?: boolean;
+    initialState?: FormState
+  };
+};
+
+const reducer = (state: FormState, action: Action) => {
+  switch(action.type) {
+    case 'CHANGE_INPUT':
+      if (action.payload.name === 'condition') {
+        if (action.payload.value === 'Broken (Out of Service)') {
+          return {
+            ...state,
+            [action.payload.name]: action.payload.value,
+            ['service']: true
+          };
+        } else {
+          return {
+            ...state,
+            [action.payload.name]: action.payload.value,
+            ['service']: false
+          };
+        }
+      }
+
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      };
+
+    case 'CHANGE_CHECKBOX':
+      if (action.payload.checked) {
+        return {
+          ...state,
+          [action.payload.name]: action.payload.checked,
+          ['condition']: 'Broken (Out of Service)'
+        };
+      }
+
+      return {
+        ...state,
+        [action.payload.name]: action.payload.checked,
+        ['condition']: 'Working'
+      };
+
+    case 'RESET':
+      return initialState;
+
+    default: 
+      return state;
+  };
+};
+
+const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
+  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const validDate = isValidDate(state.received);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,67 +99,54 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
     }
 
     // Create new transducer object from form data
-    const transducer = createTransducerObject(formValues);
+    const transducer = createTransducerObject(state);
 
     // Add transducer object to existing transducers array in context api
     addTransducer(transducer);
 
     // Reset form
-    setFormValues(initialState);
+    dispatch({
+      type: 'RESET',
+      payload: {
+        initialState
+      }
+    });
+
     onCloseModal();
   };
 
   const handleCancel = () => {
-    setFormValues(initialState);
+    dispatch({
+      type: 'RESET',
+      payload: {
+        initialState
+      }
+    });
+
     onCloseModal();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
 
-    if (name === 'condition') {
-      if (value === 'Broken (Out of Service)' && !formValues.service) {
-        setFormValues((prevState) => {
-          return {
-            ...prevState,
-            ['service']: true,
-          };
-        });
+    dispatch({
+      type: 'CHANGE_INPUT',
+      payload: {
+        name,
+        value
       }
-    }
-
-    setFormValues((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
     });
   };
 
   const handleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
 
-    if (checked && formValues.condition !== 'Broken (Out of Service)') {
-      setFormValues((prevState) => {
-        return {
-          ...prevState,
-          ['condition']: 'Broken (Out of Service)',
-        };
-      });
-    } else if (!checked && formValues.condition === 'Broken (Out of Service)') {
-      setFormValues((prevState) => {
-        return {
-          ...prevState,
-          ['condition']: 'Working',
-        };
-      });
-    }
-
-    setFormValues((prevState) => {
-      return {
-        ...prevState,
-        [name]: checked
-      };
+    dispatch({
+      type: 'CHANGE_CHECKBOX',
+      payload: {
+        name,
+        checked
+      }
     });
   };
 
@@ -115,7 +162,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               type="text"
               name="name"
               id="name"
-              value={formValues.name}
+              value={state.name}
               onChange={handleChange}
               placeholder="Enter name"
               autoFocus
@@ -127,7 +174,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
             <select
               name="location"
               id="location"
-              value={formValues.location}
+              value={state.location}
               onChange={handleChange}
               required
             >
@@ -145,7 +192,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
             <select
               name="department"
               id="department"
-              value={formValues.department}
+              value={state.department}
               onChange={handleChange}
               required
             >
@@ -160,7 +207,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
             <select
               name="type"
               id="type"
-              value={formValues.type}
+              value={state.type}
               onChange={handleChange}
               required
             >
@@ -175,7 +222,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               type="text"
               name="room"
               id="room"
-              value={formValues.room}
+              value={state.room}
               onChange={handleChange}
               placeholder="Enter room"
               required
@@ -187,7 +234,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               type="text"
               name="serial"
               id="serial"
-              value={formValues.serial}
+              value={state.serial}
               onChange={handleChange}
               placeholder="Enter Serial #"
               required
@@ -199,7 +246,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               type="text"
               name="internal"
               id="internal"
-              value={formValues.internal}
+              value={state.internal}
               onChange={handleChange}
               placeholder="Enter internal identifier"
               required
@@ -211,7 +258,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               type="text"
               name="control"
               id="control"
-              value={formValues.control}
+              value={state.control}
               onChange={handleChange}
               placeholder="Enter control #"
               required
@@ -223,7 +270,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               type="date"
               name="received"
               id="received"
-              value={formValues.received}
+              value={state.received}
               onChange={handleChange}
               required
             />
@@ -234,7 +281,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
             <select
               name="condition"
               id="condition"
-              value={formValues.condition}
+              value={state.condition}
               onChange={handleChange}
               required
             >
@@ -253,7 +300,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
               <input
                 type="checkbox"
                 name="service"
-                checked={formValues.service}
+                checked={state.service}
                 onChange={handleIsChecked}
                 id="service"
               />
@@ -266,7 +313,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
             <textarea
               name="notes"
               id="notes"
-              value={formValues.notes}
+              value={state.notes}
               onChange={handleChange}
               placeholder="Enter a note"
               rows={4}

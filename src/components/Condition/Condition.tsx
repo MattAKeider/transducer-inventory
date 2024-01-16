@@ -23,7 +23,7 @@ const Condition = ({ transducerCondition }: ConditionProps) => {
           {transducerCondition.note}
         </p>
       )}
-      <hr />
+      <hr className={styles.line}/>
     </div>
   );
 };

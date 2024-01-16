@@ -7,8 +7,19 @@
   color: #ffebcd;
 }
 
+.name_container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.main_details {
+  margin-bottom: 1rem;
+}
+
 .main_details p {
   margin: 0.15rem 0rem;
+  margin-left: 1rem;
 }
 
 .main_details span {
