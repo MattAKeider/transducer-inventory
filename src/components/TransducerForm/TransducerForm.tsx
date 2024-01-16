@@ -4,7 +4,7 @@ import { TransducerContext, TransducerContextType } from '../../store/transducer
 import { FormState, createTransducerObject } from '../../utils/formUtils';
 import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
-import styles from './NewTransducer.module.css';
+import styles from './TransducerForm.module.css';
 
 const initialState: FormState = {
   name: '',
@@ -20,11 +20,6 @@ const initialState: FormState = {
   notes: '',
   service: false
 };
-
-type NewTransducerProps = {
-  onCloseModal: () => void;
-};
-
 
 type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
 
@@ -85,7 +80,12 @@ const reducer = (state: FormState, action: Action): FormState => {
   };
 };
 
-const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
+type TransducerFormProps = {
+  onCloseModal: () => void;
+};
+
+
+const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -331,4 +331,4 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   );
 };
 
-export default NewTransducer;
+export default TransducerForm;
