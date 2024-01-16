@@ -23,8 +23,7 @@ describe('Utils', () => {
 
     let formattedDate = formatDate(date);
 
-    expect(formattedDate).toEqual(`${month[date.getMonth()].slice(0, 3)} ${date.getUTCDate()}, ${date.getFullYear()}`
-    );
+    expect(formattedDate).toEqual(`${month[date.getMonth()].slice(0, 3)} ${date.getUTCDate()}, ${date.getFullYear()}`);
   });
 
   test('should format recieved input correctly', () => {

@@ -13,7 +13,9 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   return (
     <div className={styles.full_details_container}>
       <div className={styles.main_details}>
-        <h1 className={styles.name}>{transducer.name}</h1>
+        <div className={styles.name_container}>
+          <h1 className={styles.name}>{transducer.name}</h1>
+        </div>
         <p data-testid="location">
           <span>Location:</span>
           {transducer.location}
@@ -53,7 +55,6 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
           <Condition
             key={condition.conditionId}
             transducerCondition={condition}
-            note={transducer.notes}
           />
         ))}
       </fieldset>

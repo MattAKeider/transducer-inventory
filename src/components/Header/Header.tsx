@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
-import NewTransducer from '../NewTransducer/NewTransducer';
+import TransducerForm from '../TransducerForm/TransducerForm';
 import Button from '../../ui/Button/Button';
 import styles from './Header.module.css';
 
@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <>
       <Modal ref={modalRef}>
-        {<NewTransducer onCloseModal={handleCloseAddTransducer} />}
+        {<TransducerForm onCloseModal={handleCloseAddTransducer} />}
       </Modal>
       <header className={styles.header}>
         <div className={styles.container}>

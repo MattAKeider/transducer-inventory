@@ -57,6 +57,10 @@
   cursor: pointer;
 }
 
+.error {
+  color: orange;
+}
+
 .checkbox_field {
   display: flex;
   justify-content: center;
