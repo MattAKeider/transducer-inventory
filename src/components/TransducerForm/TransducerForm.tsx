@@ -1,89 +1,14 @@
 import { useContext, useReducer } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
-import { FormState, createTransducerObject } from '../../utils/formUtils';
+import { createTransducer, initialState, reducer } from '../../utils/formUtils';
 import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';
 
-const initialState: FormState = {
-  name: '',
-  location: '',
-  department: '',
-  room: '',
-  type: '',
-  serial: '',
-  internal: '',
-  control: '',
-  received: '',
-  condition: '',
-  notes: '',
-  service: false
-};
-
-type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
-
-type Action = {
-  type: Type,
-  payload: {
-    name?: string;
-    value?: string;
-    checked?: boolean;
-    initialState?: FormState
-  };
-};
-
-const reducer = (state: FormState, action: Action): FormState => {
-  switch(action.type) {
-    case 'CHANGE_INPUT':
-      if (action.payload.name === 'condition') {
-        if (action.payload.value === 'Broken (Out of Service)') {
-          return {
-            ...state,
-            [action.payload.name]: action.payload.value,
-            ['service']: true
-          };
-        } else {
-          return {
-            ...state,
-            [action.payload.name]: action.payload.value,
-            ['service']: false
-          };
-        }
-      }
-
-      return {
-        ...state,
-        [action.payload.name]: action.payload.value
-      };
-
-    case 'CHANGE_CHECKBOX':
-      if (action.payload.checked) {
-        return {
-          ...state,
-          [action.payload.name]: action.payload.checked,
-          ['condition']: 'Broken (Out of Service)'
-        };
-      }
-
-      return {
-        ...state,
-        [action.payload.name]: action.payload.checked,
-        ['condition']: 'Working'
-      };
-
-    case 'RESET':
-      return initialState;
-
-    default: 
-      return state;
-  };
-};
-
 type TransducerFormProps = {
   onCloseModal: () => void;
 };
-
 
 const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
@@ -99,7 +24,7 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
     }
 
     // Create new transducer object from form data
-    const transducer = createTransducerObject(state);
+    const transducer = createTransducer(state);
 
     // Add transducer object to existing transducers array in context api
     addTransducer(transducer);
