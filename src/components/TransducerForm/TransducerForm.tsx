@@ -150,8 +150,20 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
     });
   };
 
+  // Reset form on escape key
+  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      dispatch({
+        type: 'RESET',
+        payload: {
+          initialState
+        }
+      });
+    }
+  };
+
   return (
-    <div className={styles.form_container}>
+    <div onKeyDown={handleEsc} className={styles.form_container}>
       <form onSubmit={handleSubmit}>
         <h1 className={styles.header}>New Transducer</h1>
         <fieldset className={styles.form_fieldset}>
