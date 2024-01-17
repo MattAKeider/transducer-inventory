@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Action, FormState, initialState } from '../../utils/formUtils';
+import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';
 
@@ -8,13 +9,14 @@ type TransducerFormProps = {
   isNew: boolean;
   formState: FormState;
   dispatchAction: (value: Action) => void;
-  validDate: boolean;
-  onSubmitForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmitForm: (validDate: boolean, event: React.FormEvent<HTMLFormElement>) => void;
   onCancelForm: () => void;
 };
 
-const TransducerForm = ({ isNew, formState, dispatchAction, validDate, onSubmitForm, onCancelForm }: TransducerFormProps) => {
+const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCancelForm }: TransducerFormProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const validDate = isValidDate(formState.received);
 
   useEffect(() => {
     // Disable form on edit if "outOfService" was checked previously on new transducer
@@ -61,7 +63,7 @@ const TransducerForm = ({ isNew, formState, dispatchAction, validDate, onSubmitF
 
   return (
     <div onKeyDown={handleEsc} className={styles.form_container}>
-      <form onSubmit={onSubmitForm}>
+      <form onSubmit={(event) => onSubmitForm(validDate, event)}>
         <h1 className={styles.header}>{ isNew ? 'New' : 'Edit' } Transducer</h1>
         <fieldset className={styles.form_fieldset}>
           <legend className={styles.legend}>Please { isNew ? 'enter' : 'edit' } details below</legend>

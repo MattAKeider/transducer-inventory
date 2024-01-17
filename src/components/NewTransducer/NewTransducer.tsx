@@ -2,7 +2,6 @@ import { useContext, useReducer } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { createTransducer, initialState, reducer } from '../../utils/formUtils';
-import { isValidDate } from '../../utils/validation';
 import TransducerForm from '../TransducerForm/TransducerForm';
 
 type NewTransducerProps = {
@@ -13,9 +12,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const validDate = isValidDate(state.received);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (validDate: boolean, event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!validDate) {
@@ -55,7 +52,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
       isNew={true}
       formState={state}
       dispatchAction={dispatch}
-      validDate={validDate}
       onSubmitForm={handleSubmit}
       onCancelForm={handleCancel}
     />
