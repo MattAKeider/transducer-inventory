@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Action, FormState, initialState } from '../../utils/formUtils';
+import { Action, FormState } from '../../utils/formUtils';
 import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';
@@ -9,11 +9,12 @@ type TransducerFormProps = {
   isNew: boolean;
   formState: FormState;
   dispatchAction: (value: Action) => void;
-  onSubmitForm: (validDate: boolean, event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmitForm: (event: React.FormEvent<HTMLFormElement>, validDate?: boolean) => void;
   onCancelForm: () => void;
+  onEscForm: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
-const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCancelForm }: TransducerFormProps) => {
+const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCancelForm, onEscForm }: TransducerFormProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const validDate = isValidDate(formState.received);
@@ -49,21 +50,9 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
     });
   };
 
-  // Reset form on escape key
-  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape') {
-      dispatchAction({
-        type: 'RESET',
-        payload: {
-          initialState
-        }
-      });
-    }
-  };
-
   return (
-    <div onKeyDown={handleEsc} className={styles.form_container}>
-      <form onSubmit={(event) => onSubmitForm(validDate, event)}>
+    <div onKeyDown={onEscForm} className={styles.form_container}>
+      <form onSubmit={(event) => onSubmitForm(event, validDate)}>
         <h1 className={styles.header}>{ isNew ? 'New' : 'Edit' } Transducer</h1>
         <fieldset className={styles.form_fieldset}>
           <legend className={styles.legend}>Please { isNew ? 'enter' : 'edit' } details below</legend>
@@ -183,7 +172,7 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
               disabled={isDisabled}
             />
           </div>
-          <div className={styles.field}>
+          {isNew && <div className={styles.field}>
             <label htmlFor="received">Date Received:</label>
             <input
               type="date"
@@ -195,7 +184,7 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
               disabled={isDisabled}
             />
             <div className={styles.error}>{!validDate && <p>Please enter valid date.</p>}</div>
-          </div>
+          </div>}
           <div className={styles.field}>
             <label htmlFor="condition">Select Condition:</label>
             <select

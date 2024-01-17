@@ -15,7 +15,7 @@ export interface FormState {
   serial: string;
   internal: string;
   control: string;
-  received: string;
+  received?: string;
   condition: string;
   notes: string;
   service: boolean;
@@ -89,7 +89,7 @@ export const reducer = (state: FormState, action: Action): FormState => {
       };
 
     case 'RESET':
-      return initialState;
+      return action.payload.initialState;
 
     default: 
       return state;
@@ -122,4 +122,22 @@ export const createTransducer = (formData: FormState): Transducer => {
   };
 
   return newTransducer;
+};
+
+export const transducerFormValues = (transducer: Transducer): FormState => {
+  const newFormData: FormState = {
+    name: transducer.name,
+    location: transducer.location,
+    department: transducer.department,
+    room: transducer.room,
+    type: transducer.transducerType,
+    serial: transducer.serialNumber,
+    internal: transducer.internalIdentifier,
+    control: transducer.controlNumber,
+    condition: transducer.currentCondition[0].condition,
+    service: transducer.outOfService,
+    notes: '',
+  };
+
+  return newFormData;
 };

@@ -12,7 +12,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleSubmit = (validDate: boolean, event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();
 
     if (!validDate) {
@@ -47,6 +47,18 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
     onCloseModal();
   };
 
+  // Reset form on escape key
+  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      dispatch({
+        type: 'RESET',
+        payload: {
+          initialState
+        }
+      });
+    }
+  };
+
   return (
     <TransducerForm
       isNew={true}
@@ -54,6 +66,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
       dispatchAction={dispatch}
       onSubmitForm={handleSubmit}
       onCancelForm={handleCancel}
+      onEscForm={handleEsc}
     />
   );
 };
