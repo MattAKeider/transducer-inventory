@@ -6,7 +6,7 @@ import {
   TransducerType,
 } from '../data/data';
 
-interface FormState {
+export interface FormState {
   name: string;
   location: string;
   department: string;
@@ -39,7 +39,7 @@ export const initialState: FormState = {
 
 type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
 
-type Action = {
+export type Action = {
   type: Type,
   payload: {
     name?: string;

@@ -1,60 +1,32 @@
-import { useContext, useReducer } from 'react';
+import { useEffect, useState } from 'react';
 
-import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
-import { createTransducer, initialState, reducer } from '../../utils/formUtils';
-import { isValidDate } from '../../utils/validation';
+import { Action, FormState, initialState } from '../../utils/formUtils';
 import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';
 
 type TransducerFormProps = {
-  onCloseModal: () => void;
+  isNew: boolean;
+  formState: FormState;
+  dispatchAction: (value: Action) => void;
+  validDate: boolean;
+  onSubmitForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  onCancelForm: () => void;
 };
 
-const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
-  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
-  const [state, dispatch] = useReducer(reducer, initialState);
+const TransducerForm = ({ isNew, formState, dispatchAction, validDate, onSubmitForm, onCancelForm }: TransducerFormProps) => {
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  const validDate = isValidDate(state.received);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!validDate) {
-      return;
+  useEffect(() => {
+    // Disable form on edit if "outOfService" was checked previously on new transducer
+    if (!isNew) {
+      formState.service ? setIsDisabled(true) : setIsDisabled(false);
     }
-
-    // Create new transducer object from form data
-    const transducer = createTransducer(state);
-
-    // Add transducer object to existing transducers array in context api
-    addTransducer(transducer);
-
-    // Reset form
-    dispatch({
-      type: 'RESET',
-      payload: {
-        initialState
-      }
-    });
-
-    onCloseModal();
-  };
-
-  const handleCancel = () => {
-    dispatch({
-      type: 'RESET',
-      payload: {
-        initialState
-      }
-    });
-
-    onCloseModal();
-  };
+  }, [formState.service]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
 
-    dispatch({
+    dispatchAction({
       type: 'CHANGE_INPUT',
       payload: {
         name,
@@ -66,7 +38,7 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
   const handleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
 
-    dispatch({
+    dispatchAction({
       type: 'CHANGE_CHECKBOX',
       payload: {
         name,
@@ -78,7 +50,7 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
   // Reset form on escape key
   const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
-      dispatch({
+      dispatchAction({
         type: 'RESET',
         payload: {
           initialState
@@ -89,21 +61,22 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
 
   return (
     <div onKeyDown={handleEsc} className={styles.form_container}>
-      <form onSubmit={handleSubmit}>
-        <h1 className={styles.header}>New Transducer</h1>
+      <form onSubmit={onSubmitForm}>
+        <h1 className={styles.header}>{ isNew ? 'New' : 'Edit' } Transducer</h1>
         <fieldset className={styles.form_fieldset}>
-          <legend className={styles.legend}>Please enter details below</legend>
+          <legend className={styles.legend}>Please { isNew ? 'enter' : 'edit' } details below</legend>
           <div className={styles.field}>
             <label htmlFor="name">Name:</label>
             <input
               type="text"
               name="name"
               id="name"
-              value={state.name}
+              value={formState.name}
               onChange={handleChange}
               placeholder="Enter name"
               autoFocus
               required
+              disabled={isDisabled}
             />
           </div>
           <div className={styles.field}>
@@ -111,9 +84,10 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
             <select
               name="location"
               id="location"
-              value={state.location}
+              value={formState.location}
               onChange={handleChange}
               required
+              disabled={isDisabled}
             >
               <option value="">Select</option>
               <option value="CMC">CMC</option>
@@ -129,9 +103,10 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
             <select
               name="department"
               id="department"
-              value={state.department}
+              value={formState.department}
               onChange={handleChange}
               required
+              disabled={isDisabled}
             >
               <option value="">Select</option>
               <option value="MFM">MFM</option>
@@ -144,9 +119,10 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
             <select
               name="type"
               id="type"
-              value={state.type}
+              value={formState.type}
               onChange={handleChange}
               required
+              disabled={isDisabled}
             >
               <option value="">Select</option>
               <option value="TA">TA</option>
@@ -159,10 +135,11 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
               type="text"
               name="room"
               id="room"
-              value={state.room}
+              value={formState.room}
               onChange={handleChange}
               placeholder="Enter room"
               required
+              disabled={isDisabled}
             />
           </div>
           <div className={styles.field}>
@@ -171,10 +148,11 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
               type="text"
               name="serial"
               id="serial"
-              value={state.serial}
+              value={formState.serial}
               onChange={handleChange}
               placeholder="Enter Serial #"
               required
+              disabled={isDisabled}
             />
           </div>
           <div className={styles.field}>
@@ -183,10 +161,11 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
               type="text"
               name="internal"
               id="internal"
-              value={state.internal}
+              value={formState.internal}
               onChange={handleChange}
               placeholder="Enter internal identifier"
               required
+              disabled={isDisabled}
             />
           </div>
           <div className={styles.field}>
@@ -195,10 +174,11 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
               type="text"
               name="control"
               id="control"
-              value={state.control}
+              value={formState.control}
               onChange={handleChange}
               placeholder="Enter control #"
               required
+              disabled={isDisabled}
             />
           </div>
           <div className={styles.field}>
@@ -207,9 +187,10 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
               type="date"
               name="received"
               id="received"
-              value={state.received}
+              value={formState.received}
               onChange={handleChange}
               required
+              disabled={isDisabled}
             />
             <div className={styles.error}>{!validDate && <p>Please enter valid date.</p>}</div>
           </div>
@@ -218,9 +199,10 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
             <select
               name="condition"
               id="condition"
-              value={state.condition}
+              value={formState.condition}
               onChange={handleChange}
               required
+              disabled={isDisabled}
             >
               <option value="">Select</option>
               <option value="New">New</option>
@@ -237,7 +219,7 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
               <input
                 type="checkbox"
                 name="service"
-                checked={state.service}
+                checked={formState.service}
                 onChange={handleIsChecked}
                 id="service"
               />
@@ -250,18 +232,19 @@ const TransducerForm = ({ onCloseModal }: TransducerFormProps) => {
             <textarea
               name="notes"
               id="notes"
-              value={state.notes}
+              value={formState.notes}
               onChange={handleChange}
               placeholder="Enter a note"
               rows={4}
+              disabled={isDisabled}
             />
           </div>
         </fieldset>
         <div className={styles.form_actions}>
-          <Button type="button" onClick={handleCancel}>
+          <Button type="button" onClick={onCancelForm}>
             Cancel
           </Button>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={isDisabled}>{ isNew ? 'Submit' : 'Edit' }</Button>
         </div>
       </form>
     </div>
