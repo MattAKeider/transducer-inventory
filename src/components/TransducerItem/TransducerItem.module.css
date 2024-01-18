@@ -4,11 +4,13 @@
   border-radius: 5px;
   box-shadow: 5px 5px 5px #824070a6;
   text-align: center;
+  position: relative;
 }
 
 .list_item:hover {
   background-color: #a6518fdd;
   box-shadow: 5px 5px 5px #632e55db;
+  cursor: pointer;
 }
 
 .card_title {
@@ -22,4 +24,21 @@
 
 .list_item span {
   font-weight: bold;
+}
+
+.delete {
+  background-color: transparent;
+  border: none;
+  padding: 0.25rem;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: large;
+  font-weight: bolder;
+  color: #434242d1;
+}
+
+.delete:hover {
+  color: magenta;
+  cursor: pointer;
 }
