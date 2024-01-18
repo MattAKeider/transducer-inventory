@@ -235,7 +235,7 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
           <Button type="button" onClick={onCancelForm}>
             Cancel
           </Button>
-          <Button type="submit" disabled={isDisabled}>{ isNew ? 'Submit' : 'Edit' }</Button>
+          <Button type="submit">{ isNew ? 'Submit' : 'Edit' }</Button>
         </div>
       </form>
     </div>

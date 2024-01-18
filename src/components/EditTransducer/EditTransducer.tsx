@@ -1,6 +1,7 @@
-import { useEffect, useReducer } from 'react';
+import { useContext, useEffect, useReducer } from 'react';
 
-import { transducerFormValues, reducer } from '../../utils/formUtils';
+import { transducerFormValues, reducer, updateTransducer } from '../../utils/formUtils';
+import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { Transducer } from '../../data/data';
 import TransducerForm from '../TransducerForm/TransducerForm';
 
@@ -11,6 +12,8 @@ type EditTransducerProps = {
 
 const EditTransducer = ({ transducer, onCloseModal }: EditTransducerProps) => {
   const previousState = transducerFormValues(transducer);
+
+  const { editTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, previousState);
 
   useEffect(() => {
@@ -24,8 +27,13 @@ const EditTransducer = ({ transducer, onCloseModal }: EditTransducerProps) => {
 
   const handleEdit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+  
+    // Update already created transducer 
+    const updatedTransducer: Transducer = updateTransducer(state, transducer);
 
-    console.log(event.target);
+    // Edit this transducer 
+    editTransducer(updatedTransducer);
+    onCloseModal();
   };
 
   const handleCancel = () => {

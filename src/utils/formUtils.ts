@@ -124,6 +124,36 @@ export const createTransducer = (formData: FormState): Transducer => {
   return newTransducer;
 };
 
+// Edit a transducer with updated values
+export const updateTransducer = (formData: FormState, originalTransducer: Transducer): Transducer => {
+  const updatedTransducer: Transducer = {
+    id: originalTransducer.id,
+    name: formData.name,
+    location: formData.location as Location,
+    department: formData.department as Department,
+    room: formData.room,
+    transducerType: formData.type as TransducerType,
+    serialNumber: formData.serial,
+    internalIdentifier: formData.internal,
+    controlNumber: formData.control,
+    dateReceived: originalTransducer.dateReceived,
+    notes: '',
+    outOfService: formData.service,
+    currentCondition: [
+      {
+        conditionId: crypto.randomUUID(), 
+        condition: formData.condition as Condition,
+        conditionChangedDate: new Date(),
+        note: formData.notes,
+      }, 
+      ...originalTransducer.currentCondition
+    ]
+  };
+
+  return updatedTransducer;
+};
+
+// Extract already created transducer's data to populate edit form
 export const transducerFormValues = (transducer: Transducer): FormState => {
   const newFormData: FormState = {
     name: transducer.name,

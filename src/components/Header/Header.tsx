@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
+import NewTransducer from '../NewTransducer/NewTransducer';
 import Button from '../../ui/Button/Button';
 import styles from './Header.module.css';
-import NewTransducer from '../NewTransducer/NewTransducer';
 
 const Header = () => {
   const modalRef = useRef<ModalHandle>();

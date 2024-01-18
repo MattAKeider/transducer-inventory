@@ -2,6 +2,7 @@ import { useContext, useReducer } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { createTransducer, initialState, reducer } from '../../utils/formUtils';
+import { Transducer } from '../../data/data';
 import TransducerForm from '../TransducerForm/TransducerForm';
 
 type NewTransducerProps = {
@@ -20,7 +21,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
     }
 
     // Create new transducer object from form data
-    const transducer = createTransducer(state);
+    const transducer: Transducer = createTransducer(state);
 
     // Add transducer object to existing transducers array in context api
     addTransducer(transducer);
