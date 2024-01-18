@@ -9,12 +9,20 @@ import styles from './Transducers.module.css';
 
 const Transducers = () => {
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
-  const { transducers } = useContext<TransducerContextType>(TransducerContext);
+  const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
   const modalRef = useRef<ModalHandle>();
 
   const handleClickedTransducer = (selectedTransducer: Transducer) => {
     setSelectedTransducer(selectedTransducer);
     modalRef.current.open();
+  };
+
+  const handleDeleteTransducer = (id: string, name: string, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    if (confirm(`Are you sure you would like to delete ${name}?`)) {
+      deleteTransducer(id);
+    }
   };
 
   const handleCloseDetails = () => {
@@ -32,6 +40,7 @@ const Transducers = () => {
             key={transducer.id}
             transducerData={transducer}
             onClickTransducer={() => handleClickedTransducer(transducer)}
+            onClickDelete={(event) => handleDeleteTransducer(transducer.id, transducer.name, event)}
           />
         ))}
       </ul>
