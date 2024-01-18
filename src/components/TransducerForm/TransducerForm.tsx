@@ -227,7 +227,6 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
               onChange={handleChange}
               placeholder="Enter a note"
               rows={4}
-              disabled={isDisabled}
             />
           </div>
         </fieldset>
