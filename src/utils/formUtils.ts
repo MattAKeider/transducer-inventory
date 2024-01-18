@@ -6,7 +6,7 @@ import {
   TransducerType,
 } from '../data/data';
 
-interface FormState {
+export interface FormState {
   name: string;
   location: string;
   department: string;
@@ -15,7 +15,7 @@ interface FormState {
   serial: string;
   internal: string;
   control: string;
-  received: string;
+  received?: string;
   condition: string;
   notes: string;
   service: boolean;
@@ -39,7 +39,7 @@ export const initialState: FormState = {
 
 type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
 
-type Action = {
+export type Action = {
   type: Type,
   payload: {
     name?: string;
@@ -89,7 +89,7 @@ export const reducer = (state: FormState, action: Action): FormState => {
       };
 
     case 'RESET':
-      return initialState;
+      return action.payload.initialState;
 
     default: 
       return state;
@@ -122,4 +122,52 @@ export const createTransducer = (formData: FormState): Transducer => {
   };
 
   return newTransducer;
+};
+
+// Edit a transducer with updated values
+export const updateTransducer = (formData: FormState, originalTransducer: Transducer): Transducer => {
+  const updatedTransducer: Transducer = {
+    id: originalTransducer.id,
+    name: formData.name,
+    location: formData.location as Location,
+    department: formData.department as Department,
+    room: formData.room,
+    transducerType: formData.type as TransducerType,
+    serialNumber: formData.serial,
+    internalIdentifier: formData.internal,
+    controlNumber: formData.control,
+    dateReceived: originalTransducer.dateReceived,
+    notes: '',
+    outOfService: formData.service,
+    currentCondition: [
+      {
+        conditionId: crypto.randomUUID(), 
+        condition: formData.condition as Condition,
+        conditionChangedDate: new Date(),
+        note: formData.notes,
+      }, 
+      ...originalTransducer.currentCondition
+    ]
+  };
+
+  return updatedTransducer;
+};
+
+// Extract already created transducer's data to populate edit form
+export const transducerFormValues = (transducer: Transducer): FormState => {
+  const newFormData: FormState = {
+    name: transducer.name,
+    location: transducer.location,
+    department: transducer.department,
+    room: transducer.room,
+    type: transducer.transducerType,
+    serial: transducer.serialNumber,
+    internal: transducer.internalIdentifier,
+    control: transducer.controlNumber,
+    condition: transducer.currentCondition[0].condition,
+    service: transducer.outOfService,
+    notes: '',
+  };
+
+  return newFormData;
 };
