@@ -1,16 +1,18 @@
+import { TiDelete } from 'react-icons/ti';
+
 import { Transducer } from '../../data/data';
 import styles from './TransducerItem.module.css';
 
 type TransducerItemProps = {
   transducerData: Transducer;
   onClickTransducer: () => void;
-  onClickDelete: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickDelete: (event: React.MouseEvent<SVGAElement>) => void;
 };
 
 const TransducerItem = ({ transducerData, onClickTransducer, onClickDelete }: TransducerItemProps) => {
   return (
     <li className={styles.list_item} onClick={onClickTransducer}>
-      <button className={styles.delete} onClick={onClickDelete}>x</button>
+      <TiDelete className={styles.delete} onClick={onClickDelete} />
       <h2 className={styles.card_title}>{transducerData.name}</h2>
       <p>
         <span>Location: </span>{transducerData.location}
