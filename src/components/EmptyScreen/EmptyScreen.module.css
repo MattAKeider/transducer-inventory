@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image {
+  margin: 3rem 0rem;
+  width: 22%;
+}
+
+.text {
+  font-weight: bold;
+  font-size: large;
+}

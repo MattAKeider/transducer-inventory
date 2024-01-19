@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { MdAddHome } from "react-icons/md";
 
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import NewTransducer from '../NewTransducer/NewTransducer';
@@ -25,7 +26,7 @@ const Header = () => {
         <div className={styles.container}>
           <h1 className={styles.title}>Transducer Inventory</h1>
           <nav className={styles.navbar}>
-            <Button onClick={handleOpenAddTransducer}>Add Item</Button>
+            <Button onClick={handleOpenAddTransducer}><MdAddHome/> Add</Button>
           </nav>
         </div>
       </header>
