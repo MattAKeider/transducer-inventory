@@ -1,4 +1,3 @@
-import React, { useRef } from 'react';
 import { FaSearch } from "react-icons/fa";
 
 import styles from './Search.module.css';
@@ -9,8 +8,6 @@ type SearchProps = {
 };
 
 const Search = ({ searchValue, onChangeSearch }: SearchProps) => {
-  const inputRef = useRef<HTMLInputElement>();
-
   return (
     <search className={styles.container}>
       <FaSearch />

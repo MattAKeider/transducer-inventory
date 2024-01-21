@@ -1,21 +1,13 @@
-import { 
-  useState, 
-  useRef, 
-  useContext, 
-  useEffect 
-} from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 
-import {
-  TransducerContext,
-  TransducerContextType,
-} from '../../store/transducer-context';
+import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
+import { filterBySearch } from '../../utils/utils';
 import { Transducer } from '../../data/data';
 import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import Search from '../Search/Search';
-import { filterBySearch } from '../../utils/utils';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
