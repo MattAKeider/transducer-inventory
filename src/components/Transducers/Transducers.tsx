@@ -20,11 +20,17 @@ const Transducers = () => {
   const modalRef = useRef<ModalHandle>();
 
   useEffect(() => {
-    const filtered = transducers.filter((transducers: Transducer) => {
-      return transducers.location.toLowerCase().includes(searchValue.toLowerCase());
-    });
+    const timer = setTimeout(() => {
+      const filtered = transducers.filter((transducers: Transducer) => {
+        return transducers.location.toLowerCase().includes(searchValue.toLowerCase());
+      });
+  
+      setFilteredTransducers(filtered);
+    }, 300);
 
-    setFilteredTransducers(filtered);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [searchValue, transducers]);
 
   const handleClickedTransducer = (selectedTransducer: Transducer) => {
