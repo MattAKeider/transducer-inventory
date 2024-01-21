@@ -1,4 +1,9 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { 
+  useState, 
+  useRef, 
+  useContext, 
+  useEffect 
+} from 'react';
 
 import {
   TransducerContext,
@@ -10,6 +15,7 @@ import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import Search from '../Search/Search';
+import { filterBySearch } from '../../utils/utils';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
@@ -21,12 +27,9 @@ const Transducers = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const filtered = transducers.filter((transducers: Transducer) => {
-        return transducers.location.toLowerCase().includes(searchValue.toLowerCase());
-      });
-  
+      const filtered = filterBySearch(searchValue, transducers);
       setFilteredTransducers(filtered);
-    }, 300);
+    }, 200);
 
     return () => {
       clearTimeout(timer);
