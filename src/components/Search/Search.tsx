@@ -1,19 +1,20 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { FaSearch } from "react-icons/fa";
 
 import styles from './Search.module.css';
 
 type SearchProps = {
-  onClickSearch: (searchValue: string) => void;
+  searchValue: string;
+  onChangeSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Search = ({ onClickSearch }: SearchProps) => {
+const Search = ({ searchValue, onChangeSearch }: SearchProps) => {
   const inputRef = useRef<HTMLInputElement>();
 
   return (
     <search className={styles.container}>
-      <FaSearch className={styles.search_button} type="button" onClick={() => onClickSearch(inputRef.current.value)} />
-      <input className={styles.search} ref={inputRef} type="search" name="search" placeholder="Search for transducers..."/>
+      <FaSearch />
+      <input className={styles.search} type="search" name="search" value={searchValue} onChange={onChangeSearch} placeholder="Search for transducers..."/>
     </search>
   );
 };

@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 
 import {
   TransducerContext,
@@ -13,9 +13,19 @@ import Search from '../Search/Search';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
-  const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>(transducers);
   const modalRef = useRef<ModalHandle>();
+
+  useEffect(() => {
+    const filtered = transducers.filter((transducers: Transducer) => {
+      return transducers.location.toLowerCase().includes(searchValue.toLowerCase());
+    });
+
+    setFilteredTransducers(filtered);
+  }, [searchValue, transducers]);
 
   const handleClickedTransducer = (selectedTransducer: Transducer) => {
     setSelectedTransducer(selectedTransducer);
@@ -30,19 +40,21 @@ const Transducers = () => {
     }
   };
 
+  const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+
   const handleCloseDetails = () => {
     modalRef.current.close();
   };
 
-  const handleClickSearch = (searchValue: string) => {
-    console.log(searchValue);
-  };
-
   let content: JSX.Element = (
     <>
-      <Search onClickSearch={handleClickSearch} />
+      <Search searchValue={searchValue} onChangeSearch={handleChangeSearch} />
+      {filteredTransducers.length <= 0 && <h2 className={styles.empty}>No Results</h2>}
       <ul className={styles.container}>
-        {transducers.map((transducer: Transducer) => (
+        {filteredTransducers.map((transducer: Transducer) => (
           <TransducerItem
             key={transducer.id}
             transducerData={transducer}
