@@ -9,6 +9,7 @@ import { Transducer } from '../../data/data';
 import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
+import Search from '../Search/Search';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
@@ -33,19 +34,26 @@ const Transducers = () => {
     modalRef.current.close();
   };
 
+  const handleClickSearch = (searchValue: string) => {
+    console.log(searchValue);
+  };
+
   let content: JSX.Element = (
-    <ul className={styles.container}>
-      {transducers.map((transducer: Transducer) => (
-        <TransducerItem
-          key={transducer.id}
-          transducerData={transducer}
-          onClickTransducer={() => handleClickedTransducer(transducer)}
-          onClickDelete={(event) =>
-            handleDeleteTransducer(transducer.id, transducer.name, event)
-          }
-        />
-      ))}
-    </ul>
+    <>
+      <Search onClickSearch={handleClickSearch} />
+      <ul className={styles.container}>
+        {transducers.map((transducer: Transducer) => (
+          <TransducerItem
+            key={transducer.id}
+            transducerData={transducer}
+            onClickTransducer={() => handleClickedTransducer(transducer)}
+            onClickDelete={(event) =>
+              handleDeleteTransducer(transducer.id, transducer.name, event)
+            }
+          />
+        ))}
+      </ul>
+    </>
   );
 
   if (transducers.length === 0) {
