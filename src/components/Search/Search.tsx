@@ -9,10 +9,10 @@ type SearchProps = {
 
 const Search = ({ searchValue, onChangeSearch }: SearchProps) => {
   return (
-    <search className={styles.container}>
+    <div className={styles.container}>
       <FaSearch />
       <input className={styles.search} type="search" name="search" value={searchValue} onChange={onChangeSearch} placeholder="Search for transducers..."/>
-    </search>
+    </div>
   );
 };
 
