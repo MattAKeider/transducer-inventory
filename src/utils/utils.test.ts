@@ -1,6 +1,7 @@
 import { describe, test, expect } from 'vitest';
 
-import { formatDate } from './utils';
+import { filterBySearch, formatDate } from './utils';
+import { TRANSDUCERS } from '../data/data';
 
 describe('Utils', () => {
   test('should format date correctly', () => {
@@ -21,13 +22,23 @@ describe('Utils', () => {
 
     const date = new Date();
 
-    let formattedDate = formatDate(date);
+    const formattedDate = formatDate(date);
 
     expect(formattedDate).toEqual(`${month[date.getMonth()].slice(0, 3)} ${date.getUTCDate()}, ${date.getFullYear()}`);
   });
 
   test('should format recieved input correctly', () => {
-    let formattedDate = formatDate(new Date('2024-01-08'));
+    const formattedDate = formatDate(new Date('2024-01-08'));
     expect(formattedDate).toEqual('Jan 8, 2024');
+  });
+
+  test('should filter search correctly', () => {
+    const results = filterBySearch('midtown', TRANSDUCERS);
+    expect(results.length).toEqual(2);
+  });
+
+  test('should not return any results', () => {
+    const results = filterBySearch('y', TRANSDUCERS);
+    expect(results.length).toEqual(0);
   });
 });

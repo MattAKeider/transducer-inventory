@@ -22,14 +22,14 @@ const testData: Transducer = {
       conditionId: crypto.randomUUID(),
       condition: 'Working',
       conditionChangedDate: new Date('2023-03-22'),
-      outOfService: false,
+      note: '',
     },
   ]
 };
 
 describe('TransducerItem', () => {
   test('should contain correct name value', () => {
-    render(<TransducerItem transducerData={testData} onClickTransducer={() => {}}/>);
+    render(<TransducerItem transducerData={testData} onClickTransducer={() => {}} onClickDelete={() => {}} />);
     const header = screen.getByText('D1-4');
     expect(header).toHaveTextContent(testData.name);
   });
@@ -37,7 +37,7 @@ describe('TransducerItem', () => {
   test('should click on transducer item to open', async () => {
     const handleOpen = vi.fn();
 
-    render(<TransducerItem transducerData={testData} onClickTransducer={handleOpen}/>);
+    render(<TransducerItem transducerData={testData} onClickTransducer={handleOpen} onClickDelete={() => {}} />);
 
     await userEvent.click(screen.getByRole('listitem'));
     
