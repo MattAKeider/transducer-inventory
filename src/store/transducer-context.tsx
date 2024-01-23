@@ -11,9 +11,9 @@ export type TransducerContextType = {
 
 export const TransducerContext = createContext<TransducerContextType>({
   transducers: [],
-  addTransducer: (transducer) => {},
-  editTransducer: (transducer) => {},
-  deleteTransducer: (id) => {}
+  addTransducer: () => {},
+  editTransducer: () => {},
+  deleteTransducer: () => {}
 });
 
 type Type = 'ADD_TRANSDUCER' | 'DELETE_TRANSDUCER' | 'EDIT_TRANSDUCER';
@@ -30,18 +30,22 @@ const reducer = (state: Transducer[], action: Action): Transducer[] => {
   const transducers: Transducer[] = [...state];
   
   switch(action.type) {
-    case 'ADD_TRANSDUCER':
+    case 'ADD_TRANSDUCER': {
       return [action.payload.transducer, ...state];
-    case 'EDIT_TRANSDUCER':
+    }
+    case 'EDIT_TRANSDUCER': {
       const findIndex = state.findIndex((state: Transducer) => state.id === action.payload.transducer.id);
       transducers.splice(findIndex, 1, action.payload.transducer);
       return transducers;
-    case 'DELETE_TRANSDUCER':
+    }
+    case 'DELETE_TRANSDUCER': {
       const filtered = transducers.filter((transducer: Transducer) => transducer.id !== action.payload.id);
       return filtered;
-    default: 
+    }
+    default: {
       return transducers;
-  };
+    }
+  }
 };
 
 type TransducerContextProviderProps = {

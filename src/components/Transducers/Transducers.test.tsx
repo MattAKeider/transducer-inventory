@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { describe, test, expect, beforeEach } from 'vitest';
+import { describe, test, expect } from 'vitest';
 
 import Transducers from './Transducers';
 import { TransducerContext } from '../../store/transducer-context';
