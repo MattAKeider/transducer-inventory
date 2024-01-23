@@ -51,7 +51,7 @@ export type Action = {
 
 export const reducer = (state: FormState, action: Action): FormState => {
   switch(action.type) {
-    case 'CHANGE_INPUT':
+    case 'CHANGE_INPUT': {
       if (action.payload.name === 'condition') {
         if (action.payload.value === 'Broken (Out of Service)') {
           return {
@@ -72,8 +72,8 @@ export const reducer = (state: FormState, action: Action): FormState => {
         ...state,
         [action.payload.name]: action.payload.value
       };
-
-    case 'CHANGE_CHECKBOX':
+    }
+    case 'CHANGE_CHECKBOX': {
       if (action.payload.checked) {
         return {
           ...state,
@@ -87,13 +87,14 @@ export const reducer = (state: FormState, action: Action): FormState => {
         [action.payload.name]: action.payload.checked,
         ['condition']: 'Working'
       };
-
-    case 'RESET':
+    }
+    case 'RESET': {
       return action.payload.initialState;
-
-    default: 
+    }
+    default: {
       return state;
-  };
+    }
+  }
 };
 
 // Create a new transducer object from inputted form data

@@ -1,10 +1,8 @@
-import { createRef, useRef } from 'react';
 import { describe, test, expect, vi } from 'vitest';
 import { screen, render } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
 import FullDetails from './FullDetails';
-import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import { Transducer } from '../../data/data';
 
 const testData: Transducer = {
