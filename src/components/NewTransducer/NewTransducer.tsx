@@ -63,7 +63,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
         throw new Error(conditionResponseData.message || 'Something went wrong...');
       }
     } catch (error) {
-      throw error;
+      console.log(error);
     }
 
     // Reset form

@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useReducer } from 'react';
 
-import { TRANSDUCERS, Transducer } from '../data/data';
+import { Transducer } from '../data/data';
 
 export type TransducerContextType = {
   transducers: Transducer[];
