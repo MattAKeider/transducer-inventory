@@ -1,8 +1,6 @@
-import { useContext, useReducer } from 'react';
+import { useReducer } from 'react';
 
-import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
-import { createTransducer, initialState, reducer } from '../../utils/formUtils';
-import { Transducer } from '../../data/data';
+import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 
 type NewTransducerProps = {
@@ -10,21 +8,63 @@ type NewTransducerProps = {
 };
 
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
-  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();
 
     if (!validDate) {
       return;
     }
 
-    // Create new transducer object from form data
-    const transducer: Transducer = createTransducer(state);
+    try {
+      // create new transducer
+      const createTransducerResponse = await fetch('http://localhost:5000/api/transducers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: state.name,
+          location: state.location,
+          department: state.department,
+          room: state.room,
+          transducerType: state.type,
+          serialNumber: state.serial,
+          internalIdentifier: state.internal,
+          controlNumber: state.control,
+          dateReceived: state.received,
+          outOfService: state.service
+        })
+      });
 
-    // Add transducer object to existing transducers array in context api
-    addTransducer(transducer);
+      const transducerResponseData = await createTransducerResponse.json();
+
+      if (!createTransducerResponse.ok) {
+        throw new Error(transducerResponseData.message || 'Something went wrong...');
+      }
+
+      // Add new condition log entry for created transducer
+      const createConditionResponse = await fetch('http://localhost:5000/api/conditions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          condition: state.condition,
+          notes: state.notes,
+          transducer: transducerResponseData.transducer._id
+        })
+      });
+
+      const conditionResponseData = await createConditionResponse.json();
+
+      if (!createConditionResponse.ok) {
+        throw new Error(conditionResponseData.message || 'Something went wrong...');
+      }
+    } catch (error) {
+      throw error;
+    }
 
     // Reset form
     dispatch({

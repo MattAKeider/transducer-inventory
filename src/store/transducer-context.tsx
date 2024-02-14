@@ -53,7 +53,7 @@ type TransducerContextProviderProps = {
 };
 
 const TransducerContextProvider = ({children}: TransducerContextProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, TRANSDUCERS);
+  const [state, dispatch] = useReducer(reducer, []);
 
   const handleAddTransducer = (transducer: Transducer) => {
     // Reset notes property to start empty for editing action
