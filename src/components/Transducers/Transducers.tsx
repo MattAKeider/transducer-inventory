@@ -48,8 +48,8 @@ const Transducers = () => {
   }, [searchValue, transducers]);
 
   const handleClickedTransducer = (selectedTransducer: Transducer) => {
-    // setSelectedTransducer(selectedTransducer);
-    // modalRef.current.open();
+    setSelectedTransducer(selectedTransducer);
+    modalRef.current.open();
   };
 
   const handleDeleteTransducer = (id: string, name: string, event: React.MouseEvent<SVGAElement>) => {
