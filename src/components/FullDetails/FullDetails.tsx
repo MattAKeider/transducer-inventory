@@ -18,7 +18,6 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   const [isEdit, setIsEdit] = useState(false);
   const modalRef = useRef<ModalHandle>();
 
-  console.log(conditions);
   const id = transducer.id;
 
   useEffect(() => {
