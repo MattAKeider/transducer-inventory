@@ -110,13 +110,12 @@ export const updateTransducer = (formData: FormState, originalTransducer: Transd
     internalIdentifier: formData.internal,
     controlNumber: formData.control,
     dateReceived: originalTransducer.dateReceived,
-    notes: '',
     outOfService: formData.service,
     currentCondition: [
       {
-        conditionId: crypto.randomUUID(), 
+        id: crypto.randomUUID(), 
         condition: formData.condition as Condition,
-        conditionChangedDate: new Date(),
+        conditionChangedDate: '',
         note: formData.notes,
       }, 
       ...originalTransducer.currentCondition
