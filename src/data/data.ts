@@ -4,9 +4,9 @@ export type Department = 'MFM' | 'L&D' | 'IVF';
 export type TransducerType = 'TA' | 'TV';
 
 export interface TransducerCondition {
-  conditionId: string;
+  id: string;
   condition: Condition;
-  conditionChangedDate: Date;
+  conditionChangedDate: string;
   note: string;
 }
 
@@ -20,8 +20,7 @@ export interface Transducer {
   serialNumber: string;
   internalIdentifier: string;
   controlNumber: string;
-  dateReceived: Date;
-  notes: string;
+  dateReceived: string;
   outOfService: boolean;
   currentCondition: TransducerCondition[];
 }
@@ -37,26 +36,25 @@ export const TRANSDUCERS: Transducer[] = [
     serialNumber: 'K1302KR5',
     internalIdentifier: '1',
     controlNumber: '00FB-12345',
-    dateReceived: new Date('2023-01-22'),
-    notes: '',
+    dateReceived: "2024-02-15T03:50:45.695Z",
     outOfService: true,
     currentCondition: [
       {
-        conditionId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
-        conditionChangedDate: new Date('2023-11-17'),
+        conditionChangedDate: "2024-02-15T03:50:45.695Z",
         note: 'Broke now',
       },
       {
-        conditionId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         condition: 'Refurbished',
-        conditionChangedDate: new Date('2023-04-02'),
+        conditionChangedDate: "2024-02-15T03:50:45.695Z",
         note: 'Refurbished item',
       },
       {
-        conditionId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         condition: 'Working',
-        conditionChangedDate: new Date('2023-01-22'),
+        conditionChangedDate: "2024-02-15T03:50:45.695Z",
         note: 'New from GE',
       }
     ],
@@ -71,14 +69,13 @@ export const TRANSDUCERS: Transducer[] = [
     serialNumber: 'F123300',
     internalIdentifier: '7',
     controlNumber: '00FB-12346',
-    dateReceived: new Date('2023-03-22'),
-    notes: '',
+    dateReceived: "2024-02-15T03:50:45.695Z",
     outOfService: false,
     currentCondition: [
       {
-        conditionId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         condition: 'Working',
-        conditionChangedDate: new Date('2023-03-22'),
+        conditionChangedDate: "2024-02-15T03:50:45.695Z",
         note: 'New from GE',
       },
     ],
@@ -93,14 +90,13 @@ export const TRANSDUCERS: Transducer[] = [
     serialNumber: 'K1377777',
     internalIdentifier: '21',
     controlNumber: '00SD-34444',
-    dateReceived: new Date('2021-05-02'),
-    notes: '',
+    dateReceived: "2024-02-15T03:50:45.695Z",
     outOfService: true,
     currentCondition: [
       {
-        conditionId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
-        conditionChangedDate: new Date('2023-10-17'),
+        conditionChangedDate: "2024-02-15T03:50:45.695Z",
         note: 'New from GE',
       },
     ],
@@ -115,14 +111,13 @@ export const TRANSDUCERS: Transducer[] = [
     serialNumber: 'K1302KR0',
     internalIdentifier: '3',
     controlNumber: '00WB-12045',
-    dateReceived: new Date('2023-01-22'),
-    notes: '',
+    dateReceived: "2024-02-15T03:50:45.695Z",
     outOfService: true,
     currentCondition: [
       {
-        conditionId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         condition: 'Broken (Out of Service)',
-        conditionChangedDate: new Date('2023-11-20'),
+        conditionChangedDate: "2024-02-15T03:50:45.695Z",
         note: 'New from GE',
       },
     ],
@@ -137,14 +132,13 @@ export const TRANSDUCERS: Transducer[] = [
     serialNumber: 'K1302Z34',
     internalIdentifier: '14',
     controlNumber: '00FB-13221',
-    dateReceived: new Date('2020-03-15'),
-    notes: '',
+    dateReceived: "2024-02-15T03:50:45.695Z",
     outOfService: false,
     currentCondition: [
       {
-        conditionId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         condition: 'Working',
-        conditionChangedDate: new Date('2020-03-15'),
+        conditionChangedDate: "2024-02-15T03:50:45.695Z",
         note: 'New from GE',
       },
     ],

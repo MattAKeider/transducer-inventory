@@ -97,34 +97,6 @@ export const reducer = (state: FormState, action: Action): FormState => {
   }
 };
 
-// Create a new transducer object from inputted form data
-export const createTransducer = (formData: FormState): Transducer => {
-  const newTransducer: Transducer = {
-    id: crypto.randomUUID(),
-    name: formData.name,
-    location: formData.location as Location,
-    department: formData.department as Department,
-    room: formData.room,
-    transducerType: formData.type as TransducerType,
-    serialNumber: formData.serial,
-    internalIdentifier: formData.internal,
-    controlNumber: formData.control,
-    dateReceived: new Date(formData.received),
-    notes: formData.notes,
-    outOfService: formData.service,
-    currentCondition: [
-      {
-        conditionId: crypto.randomUUID(),
-        condition: formData.condition as Condition,
-        conditionChangedDate: new Date(),
-        note: formData.notes,
-      },
-    ],
-  };
-
-  return newTransducer;
-};
-
 // Edit a transducer with updated values
 export const updateTransducer = (formData: FormState, originalTransducer: Transducer): Transducer => {
   const updatedTransducer: Transducer = {
@@ -138,13 +110,12 @@ export const updateTransducer = (formData: FormState, originalTransducer: Transd
     internalIdentifier: formData.internal,
     controlNumber: formData.control,
     dateReceived: originalTransducer.dateReceived,
-    notes: '',
     outOfService: formData.service,
     currentCondition: [
       {
-        conditionId: crypto.randomUUID(), 
+        id: crypto.randomUUID(), 
         condition: formData.condition as Condition,
-        conditionChangedDate: new Date(),
+        conditionChangedDate: '',
         note: formData.notes,
       }, 
       ...originalTransducer.currentCondition

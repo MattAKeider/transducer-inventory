@@ -11,11 +11,30 @@ import Search from '../Search/Search';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
-  const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const { transducers, fetchTransducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
-  const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>(transducers);
+  const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
   const modalRef = useRef<ModalHandle>();
+
+  useEffect(() => {
+    async function getTransducers() {
+      try {
+        const response = await fetch('http://localhost:5000/api/transducers');
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message || 'Something went wrong...');
+        }
+
+        fetchTransducers(responseData.transducers);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getTransducers();
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {

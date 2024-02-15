@@ -1,10 +1,11 @@
 import { ReactNode, createContext, useReducer } from 'react';
 
-import { TRANSDUCERS, Transducer } from '../data/data';
+import { Transducer } from '../data/data';
 
 export type TransducerContextType = {
   transducers: Transducer[];
   addTransducer: (transducer: Transducer) => void;
+  fetchTransducers: (transducers: Transducer[]) => void;
   editTransducer: (transducer: Transducer) => void;
   deleteTransducer: (id: string) => void;
 };
@@ -12,16 +13,18 @@ export type TransducerContextType = {
 export const TransducerContext = createContext<TransducerContextType>({
   transducers: [],
   addTransducer: () => {},
+  fetchTransducers: () => {},
   editTransducer: () => {},
   deleteTransducer: () => {}
 });
 
-type Type = 'ADD_TRANSDUCER' | 'DELETE_TRANSDUCER' | 'EDIT_TRANSDUCER';
+type Type = 'ADD_TRANSDUCER' | 'FETCH_TRANSDUCERS' | 'DELETE_TRANSDUCER' | 'EDIT_TRANSDUCER';
 
 type Action = { 
   type: Type, 
   payload: {
     transducer?: Transducer;
+    transducers?: Transducer[];
     id?: string;
   }
 };
@@ -32,6 +35,9 @@ const reducer = (state: Transducer[], action: Action): Transducer[] => {
   switch(action.type) {
     case 'ADD_TRANSDUCER': {
       return [action.payload.transducer, ...state];
+    }
+    case 'FETCH_TRANSDUCERS': {
+      return [...action.payload.transducers];
     }
     case 'EDIT_TRANSDUCER': {
       const findIndex = state.findIndex((state: Transducer) => state.id === action.payload.transducer.id);
@@ -53,16 +59,22 @@ type TransducerContextProviderProps = {
 };
 
 const TransducerContextProvider = ({children}: TransducerContextProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, TRANSDUCERS);
+  const [state, dispatch] = useReducer(reducer, []);
 
   const handleAddTransducer = (transducer: Transducer) => {
-    // Reset notes property to start empty for editing action
-    transducer.notes = '';
-    
     dispatch({
       type: 'ADD_TRANSDUCER',
       payload: {
         transducer
+      } 
+    });
+  };
+
+  const handleFetchTransducers = (transducers: Transducer[]) => {
+    dispatch({
+      type: 'FETCH_TRANSDUCERS',
+      payload: {
+        transducers
       } 
     });
   };
@@ -88,6 +100,7 @@ const TransducerContextProvider = ({children}: TransducerContextProviderProps) =
   const ctxValue: TransducerContextType = {
     transducers: state,
     addTransducer: handleAddTransducer,
+    fetchTransducers: handleFetchTransducers,
     editTransducer: handleEditTransducer,
     deleteTransducer: handleDeleteTransducer,
   };

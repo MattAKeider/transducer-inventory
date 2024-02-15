@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 
 import Transducers from './Transducers';
@@ -6,14 +6,14 @@ import { TransducerContext } from '../../store/transducer-context';
 import { TRANSDUCERS } from '../../data/data';
 
 describe('Transducers', () => {
-  test('should render transducers', () => {
+  test('should render empty state', () => {
     render(
-      <TransducerContext.Provider value={{transducers:TRANSDUCERS, addTransducer: () => {}, editTransducer: () => {}, deleteTransducer: () => {}}}>
+      <TransducerContext.Provider value={{transducers:TRANSDUCERS, addTransducer: () => {}, fetchTransducers: () => {}, editTransducer: () => {}, deleteTransducer: () => {}}}>
         <Transducers />
       </TransducerContext.Provider>
     );
 
-    const list = document.querySelectorAll('li');
-    expect(list.length).toBeGreaterThan(1);
+    const heading = screen.getByText('No Results');
+    expect(heading).toHaveTextContent('No Results');
   });
 });

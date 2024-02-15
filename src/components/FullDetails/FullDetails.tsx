@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Transducer, TransducerCondition } from '../../data/data';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
@@ -14,8 +14,30 @@ type FullDetailsProps = {
 };
 
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
+  const [conditions, setConditions] = useState<TransducerCondition[]>([]);
   const [isEdit, setIsEdit] = useState(false);
   const modalRef = useRef<ModalHandle>();
+
+  const id = transducer.id;
+
+  useEffect(() => {
+    async function getConditions() {
+      try {
+        const response = await fetch(`http://localhost:5000/api/conditions/${id}`);
+        const responseData = await response.json();
+  
+        if (!response.ok) {
+          throw new Error(responseData.message || 'Something went wrong...');
+        }
+
+        setConditions(responseData.conditions);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getConditions();
+  }, []);
 
   const handleClickEditTransducer = () => {
     // Close previous FullDetails modal
@@ -73,9 +95,9 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
         </div>
         <fieldset className={styles.condition_field}>
           <legend className={styles.legend}>Condition log</legend>
-          {transducer.currentCondition.map((condition: TransducerCondition) => (
+          {conditions.map((condition: TransducerCondition) => (
             <Condition
-              key={condition.conditionId}
+              key={condition.id}
               transducerCondition={condition}
             />
           ))}

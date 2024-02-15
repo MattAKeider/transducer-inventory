@@ -1,7 +1,9 @@
 import { Transducer } from "../data/data";
 
-export const formatDate = (date: Date): string => {
-  const formattedDate = date.toLocaleString('en-US', {
+export const formatDate = (date: string): string => {
+  const shortDate = new Date(date.split('T', 1).toString());
+
+  const formattedDate = shortDate.toLocaleString('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

@@ -15,14 +15,13 @@ const testData: Transducer = {
   serialNumber: 'F123300',
   internalIdentifier: '7',
   controlNumber: '00FB-12346',
-  dateReceived: new Date('2024-01-8'),
-  notes: 'New from GE',
+  dateReceived: '2024-02-15T03:50:45.695Z',
   outOfService: false,
   currentCondition: [
     {
-      conditionId: crypto.randomUUID(),
+      id: crypto.randomUUID(),
       condition: 'Working',
-      conditionChangedDate: new Date('2024-01-8'),
+      conditionChangedDate: '2024-02-15T03:50:45.695Z',
       note: 'New transducer from company',
     },
   ],
@@ -40,14 +39,7 @@ describe('FullDetails', () => {
     expect(screen.getByTestId('serial')).toHaveTextContent(testData.serialNumber);
     expect(screen.getByTestId('internal')).toHaveTextContent(testData.internalIdentifier);
     expect(screen.getByTestId('control')).toHaveTextContent(testData.controlNumber);
-    expect(screen.getByTestId('date-received')).toHaveTextContent('Jan 8, 2024');
-    expect(screen.getByTestId('condition')).toHaveTextContent(testData.currentCondition[0].condition);
-    expect(screen.getByTestId('date')).toHaveTextContent('Jan 8, 2024');
-  });
-
-  test('should only contain one condition entry', () => {
-    render(<FullDetails transducer={testData} onCloseModal={() => {}}/>);
-    expect(screen.getAllByTestId('condition')).toHaveLength(1);
+    expect(screen.getByTestId('date-received')).toHaveTextContent('Feb 15, 2024');
   });
 
   test('should close on button click', async () => {
