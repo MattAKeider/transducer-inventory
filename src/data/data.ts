@@ -21,7 +21,6 @@ export interface Transducer {
   internalIdentifier: string;
   controlNumber: string;
   dateReceived: Date;
-  notes: string;
   outOfService: boolean;
   currentCondition: TransducerCondition[];
 }
@@ -38,7 +37,6 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '1',
     controlNumber: '00FB-12345',
     dateReceived: new Date('2023-01-22'),
-    notes: '',
     outOfService: true,
     currentCondition: [
       {
@@ -72,7 +70,6 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '7',
     controlNumber: '00FB-12346',
     dateReceived: new Date('2023-03-22'),
-    notes: '',
     outOfService: false,
     currentCondition: [
       {
@@ -94,7 +91,6 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '21',
     controlNumber: '00SD-34444',
     dateReceived: new Date('2021-05-02'),
-    notes: '',
     outOfService: true,
     currentCondition: [
       {
@@ -116,7 +112,6 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '3',
     controlNumber: '00WB-12045',
     dateReceived: new Date('2023-01-22'),
-    notes: '',
     outOfService: true,
     currentCondition: [
       {
@@ -138,7 +133,6 @@ export const TRANSDUCERS: Transducer[] = [
     internalIdentifier: '14',
     controlNumber: '00FB-13221',
     dateReceived: new Date('2020-03-15'),
-    notes: '',
     outOfService: false,
     currentCondition: [
       {
