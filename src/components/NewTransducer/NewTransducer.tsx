@@ -1,8 +1,9 @@
-import { useContext, useReducer } from 'react';
+import { useContext, useReducer, useState } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
+import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 
 type NewTransducerProps = {
   onCloseModal: () => void;
@@ -11,6 +12,8 @@ type NewTransducerProps = {
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();
@@ -18,6 +21,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
     if (!validDate) {
       return;
     }
+
+    setIsLoading(true);
 
     try {
       const createTransducerResponse = await fetch('http://localhost:5000/api/transducers', {
@@ -64,7 +69,9 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
       }
 
       addTransducer(transducerResponseData.transducer);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
 
@@ -103,14 +110,17 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   };
 
   return (
-    <TransducerForm
-      isNew={true}
-      formState={state}
-      dispatchAction={dispatch}
-      onSubmitForm={handleSubmit}
-      onCancelForm={handleCancel}
-      onEscForm={handleEsc}
-    />
+    <>
+      <LoadingSpinner loading={isLoading} style={{ marginTop: '35rem'}}/>
+      <TransducerForm
+        isNew={true}
+        formState={state}
+        dispatchAction={dispatch}
+        onSubmitForm={handleSubmit}
+        onCancelForm={handleCancel}
+        onEscForm={handleEsc}
+      />
+    </>
   );
 };
 

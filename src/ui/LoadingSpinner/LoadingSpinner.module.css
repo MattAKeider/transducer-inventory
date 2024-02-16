@@ -1,31 +1,6 @@
 .loading_spinner_overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading_spinner {
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 1px;
-  border-radius: 50%;
-  border: 10px solid;
-  border-color: #a6518f transparent #a6518f transparent;
-  animation: dual-ring 1.2s linear infinite;
-}
-
-@keyframes dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

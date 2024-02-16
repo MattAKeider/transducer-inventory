@@ -110,7 +110,7 @@ const Transducers = () => {
           />
         )}
       </Modal>
-      {isLoading && <LoadingSpinner />}
+      <LoadingSpinner loading={isLoading} />
       {!isLoading && isError && <MessagePage message="Something went wrong..." />}
       {!isLoading && !isError && content}
     </>
