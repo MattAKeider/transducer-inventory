@@ -8,6 +8,8 @@ import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import Search from '../Search/Search';
+import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
+import MessagePage from '../MessagePage/MessagePage';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
@@ -15,10 +17,13 @@ const Transducers = () => {
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const modalRef = useRef<ModalHandle>();
 
   useEffect(() => {
     async function getTransducers() {
+      setIsLoading(true);
       try {
         const response = await fetch('http://localhost:5000/api/transducers');
         const responseData = await response.json();
@@ -28,8 +33,11 @@ const Transducers = () => {
         }
 
         fetchTransducers(responseData.transducers);
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         console.log(error);
+        setIsError(true);
       }
     }
 
@@ -72,7 +80,7 @@ const Transducers = () => {
   let content: JSX.Element = (
     <>
       <Search searchValue={searchValue} onChangeSearch={handleChangeSearch} />
-      {filteredTransducers.length <= 0 && <h2 className={styles.empty}>No Results</h2>}
+      {filteredTransducers.length === 0 && <MessagePage message='No Results' />}
       <ul className={styles.container}>
         {filteredTransducers.map((transducer: Transducer) => (
           <TransducerItem
@@ -102,7 +110,9 @@ const Transducers = () => {
           />
         )}
       </Modal>
-      {content}
+      {isLoading && <LoadingSpinner />}
+      {!isLoading && isError && <MessagePage message="Something went wrong..." />}
+      {!isLoading && !isError && content}
     </>
   );
 };
