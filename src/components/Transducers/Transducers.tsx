@@ -10,6 +10,7 @@ import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import Search from '../Search/Search';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import MessagePage from '../MessagePage/MessagePage';
+import useHttp from '../../hooks/useHttp';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
@@ -17,27 +18,16 @@ const Transducers = () => {
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+  const { isLoading, isError, sendRequest } = useHttp();
   const modalRef = useRef<ModalHandle>();
 
   useEffect(() => {
     async function getTransducers() {
-      setIsLoading(true);
       try {
-        const response = await fetch('http://localhost:5000/api/transducers');
-        const responseData = await response.json();
-
-        if (!response.ok) {
-          throw new Error(responseData.message || 'Something went wrong...');
-        }
-
+        const responseData = await sendRequest('http://localhost:5000/api/transducers');
         fetchTransducers(responseData.transducers);
-        setIsLoading(false);
       } catch (error) {
-        setIsLoading(false);
         console.log(error);
-        setIsError(true);
       }
     }
 
