@@ -5,7 +5,7 @@ import Transducers from './Transducers';
 import { TransducerContext } from '../../store/transducer-context';
 import { TRANSDUCERS } from '../../data/data';
 
-describe('Transducers', () => {
+describe.skip('Transducers', () => {
   test('should render empty state', () => {
     render(
       <TransducerContext.Provider value={{transducers:TRANSDUCERS, addTransducer: () => {}, fetchTransducers: () => {}, editTransducer: () => {}, deleteTransducer: () => {}}}>

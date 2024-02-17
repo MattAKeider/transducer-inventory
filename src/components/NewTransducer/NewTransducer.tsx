@@ -3,6 +3,8 @@ import { useContext, useReducer } from 'react';
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
 import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
+import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
+import useHttp from '../../hooks/useHttp';
 
 type NewTransducerProps = {
   onCloseModal: () => void;
@@ -11,6 +13,7 @@ type NewTransducerProps = {
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { isLoading, sendRequest } = useHttp();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();
@@ -20,12 +23,10 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
     }
 
     try {
-      const createTransducerResponse = await fetch('http://localhost:5000/api/transducers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+      const transducerResponseData = await sendRequest(
+        'http://localhost:5000/api/transducers',
+        'POST',
+        JSON.stringify({
           name: state.name,
           location: state.location,
           department: state.department,
@@ -36,32 +37,24 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
           controlNumber: state.control,
           dateReceived: state.received,
           outOfService: state.service
-        })
-      });
-
-      const transducerResponseData = await createTransducerResponse.json();
-
-      if (!createTransducerResponse.ok) {
-        throw new Error(transducerResponseData.message || 'Something went wrong...');
-      }
-
-      const createConditionResponse = await fetch('http://localhost:5000/api/conditions', {
-        method: 'POST',
-        headers: {
+        }),
+        {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+        }
+      );
+
+      await sendRequest(
+        'http://localhost:5000/api/conditions',
+        'POST',
+        JSON.stringify({
           condition: state.condition,
           note: state.notes,
           transducer: transducerResponseData.transducer.id
-        })
-      });
-
-      const conditionResponseData = await createConditionResponse.json();
-
-      if (!createConditionResponse.ok) {
-        throw new Error(conditionResponseData.message || 'Something went wrong...');
-      }
+        }),
+        {
+          'Content-Type': 'application/json'
+        }
+      );
 
       addTransducer(transducerResponseData.transducer);
     } catch (error) {
@@ -103,14 +96,17 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   };
 
   return (
-    <TransducerForm
-      isNew={true}
-      formState={state}
-      dispatchAction={dispatch}
-      onSubmitForm={handleSubmit}
-      onCancelForm={handleCancel}
-      onEscForm={handleEsc}
-    />
+    <>
+      <LoadingSpinner loading={isLoading} style={{ marginTop: '35rem'}}/>
+      <TransducerForm
+        isNew={true}
+        formState={state}
+        dispatchAction={dispatch}
+        onSubmitForm={handleSubmit}
+        onCancelForm={handleCancel}
+        onEscForm={handleEsc}
+      />
+    </>
   );
 };
 

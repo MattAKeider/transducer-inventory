@@ -8,6 +8,9 @@ import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import Search from '../Search/Search';
+import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
+import MessagePage from '../MessagePage/MessagePage';
+import useHttp from '../../hooks/useHttp';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
@@ -15,18 +18,13 @@ const Transducers = () => {
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
+  const { isLoading, isError, sendRequest } = useHttp();
   const modalRef = useRef<ModalHandle>();
 
   useEffect(() => {
     async function getTransducers() {
       try {
-        const response = await fetch('http://localhost:5000/api/transducers');
-        const responseData = await response.json();
-
-        if (!response.ok) {
-          throw new Error(responseData.message || 'Something went wrong...');
-        }
-
+        const responseData = await sendRequest('http://localhost:5000/api/transducers');
         fetchTransducers(responseData.transducers);
       } catch (error) {
         console.log(error);
@@ -72,7 +70,7 @@ const Transducers = () => {
   let content: JSX.Element = (
     <>
       <Search searchValue={searchValue} onChangeSearch={handleChangeSearch} />
-      {filteredTransducers.length <= 0 && <h2 className={styles.empty}>No Results</h2>}
+      {filteredTransducers.length === 0 && <MessagePage message='No Results' />}
       <ul className={styles.container}>
         {filteredTransducers.map((transducer: Transducer) => (
           <TransducerItem
@@ -102,7 +100,9 @@ const Transducers = () => {
           />
         )}
       </Modal>
-      {content}
+      <LoadingSpinner loading={isLoading} />
+      {!isLoading && isError && <MessagePage message="Something went wrong..." />}
+      {!isLoading && !isError && content}
     </>
   );
 };
