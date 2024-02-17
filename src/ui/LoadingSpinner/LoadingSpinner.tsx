@@ -4,7 +4,7 @@ import styles from './LoadingSpinner.module.css';
 
 interface LoadingSpinnerProps extends React.AllHTMLAttributes<HTMLDivElement> {
   loading: boolean;
-};
+}
 
 const LoadingSpinner = ({ loading, ...props }: LoadingSpinnerProps) => {
   return (
