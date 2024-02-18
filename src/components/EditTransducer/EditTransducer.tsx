@@ -1,20 +1,24 @@
 import { useContext, useEffect, useReducer } from 'react';
 
-import { transducerFormValues, reducer, updateTransducer } from '../../utils/formUtils';
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
-import { Transducer } from '../../data/data';
+import { transducerFormValues, reducer } from '../../utils/formUtils';
+import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import TransducerForm from '../TransducerForm/TransducerForm';
+import { Transducer } from '../../data/data';
+import useHttp from '../../hooks/useHttp';
 
 type EditTransducerProps = {
   transducer: Transducer;
+  condition: string;
   onCloseModal: () => void;
 };
 
-const EditTransducer = ({ transducer, onCloseModal }: EditTransducerProps) => {
-  const previousState = transducerFormValues(transducer);
+const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerProps) => {
+  const previousState = transducerFormValues(transducer, condition);
 
   const { editTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [state, dispatch] = useReducer(reducer, previousState);
+  const { isLoading, sendRequest } = useHttp();
 
   useEffect(() => {
     dispatch({
@@ -25,14 +29,51 @@ const EditTransducer = ({ transducer, onCloseModal }: EditTransducerProps) => {
     });
   }, [transducer]);
 
-  const handleEdit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleEdit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
-    // Update already created transducer 
-    const updatedTransducer: Transducer = updateTransducer(state, transducer);
 
-    // Edit this transducer 
-    editTransducer(updatedTransducer);
+    const id = transducer.id;
+  
+    try {
+      // GET transducer that needs edited
+      const transducerData = await sendRequest(
+        `http://localhost:5000/api/transducers/${id}`,
+        'PATCH',
+        JSON.stringify({
+          name: state.name,
+          location: state.location,
+          department: state.department,
+          transducerType: state.type,
+          room: state.room,
+          serialNumber: state.serial,
+          internalIdentifier: state.internal,
+          controlNumber: state.control,
+          outOfService: state.service
+        }),
+        {
+          'Content-Type': 'application/json'
+        }
+      );
+
+      // Create a new conditon log item for transducer
+      await sendRequest(
+        'http://localhost:5000/api/conditions',
+        'POST',
+        JSON.stringify({
+          condition: state.condition,
+          note: state.notes,
+          transducer: id
+        }),
+        {
+          'Content-Type': 'application/json'
+        }
+      );
+
+      editTransducer(transducerData.transducer);
+    } catch (error) {
+      console.log(error);
+    }
+  
     onCloseModal();
   };
 
@@ -59,7 +100,19 @@ const EditTransducer = ({ transducer, onCloseModal }: EditTransducerProps) => {
     }
   };
 
-  return <TransducerForm isNew={false} formState={state} dispatchAction={dispatch} onSubmitForm={handleEdit} onCancelForm={handleCancel} onEscForm={handleEsc} />
+  return (
+    <>
+      <LoadingSpinner loading={isLoading} />
+      <TransducerForm 
+        isNew={false} 
+        formState={state} 
+        dispatchAction={dispatch} 
+        onSubmitForm={handleEdit} 
+        onCancelForm={handleCancel} 
+        onEscForm={handleEsc} 
+      />
+    </>
+  );
 };
 
 export default EditTransducer;
