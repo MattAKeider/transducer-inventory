@@ -126,7 +126,7 @@ export const updateTransducer = (formData: FormState, originalTransducer: Transd
 };
 
 // Extract already created transducer's data to populate edit form
-export const transducerFormValues = (transducer: Transducer): FormState => {
+export const transducerFormValues = (transducer: Transducer, condition: string): FormState => {
   const newFormData: FormState = {
     name: transducer.name,
     location: transducer.location,
@@ -136,7 +136,7 @@ export const transducerFormValues = (transducer: Transducer): FormState => {
     serial: transducer.serialNumber,
     internal: transducer.internalIdentifier,
     control: transducer.controlNumber,
-    condition: transducer.currentCondition[0].condition,
+    condition,
     service: transducer.outOfService,
     notes: '',
   };

@@ -30,14 +30,14 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
           throw new Error(responseData.message || 'Something went wrong...');
         }
 
-        setConditions(responseData.conditions);
+        setConditions(responseData.conditions.reverse());
       } catch (error) {
         console.log(error);
       }
     }
 
     getConditions();
-  }, []);
+  }, [transducer]);
 
   const handleClickEditTransducer = () => {
     // Close previous FullDetails modal
@@ -53,7 +53,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   return (
     <>
       <Modal ref={modalRef}>
-        {isEdit && <EditTransducer transducer={transducer} onCloseModal={handleCloseEditTransducer} />}
+        {isEdit && <EditTransducer transducer={transducer} condition={conditions[0].condition} onCloseModal={handleCloseEditTransducer} />}
       </Modal>
       <div className={styles.full_details_container}>
         <div className={styles.main_details}>

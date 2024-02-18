@@ -32,7 +32,7 @@ const Transducers = () => {
     }
 
     getTransducers();
-  }, []);
+  }, [sendRequest]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -50,11 +50,16 @@ const Transducers = () => {
     modalRef.current.open();
   };
 
-  const handleDeleteTransducer = (id: string, name: string, event: React.MouseEvent<SVGAElement>) => {
+  const handleDeleteTransducer = async (id: string, name: string, event: React.MouseEvent<SVGAElement>) => {
     event.stopPropagation();
 
     if (confirm(`Are you sure you would like to delete ${name}?`)) {
-      deleteTransducer(id);
+      try {
+        await sendRequest(`http://localhost:5000/api/transducers/${id}`, 'DELETE');
+        deleteTransducer(id);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
