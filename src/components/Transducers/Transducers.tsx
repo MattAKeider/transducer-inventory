@@ -57,7 +57,7 @@ const Transducers = () => {
     modalRef.current.close();
   };
 
-  let content: JSX.Element = (
+  const content: JSX.Element = (
     <>
       <Search searchValue={searchValue} onChangeSearch={handleChangeSearch} />
       {filteredTransducers.length === 0 && <MessagePage message='No Results' />}
