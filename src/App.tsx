@@ -1,16 +1,24 @@
-import Header from './components/Header/Header';
-import Transducers from './components/Transducers/Transducers';
-import TransducerContextProvider from './store/transducer-context';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import MessagePage from './components/MessagePage/MessagePage';
+import Root from './pages/Root';
+import Home from './pages/Home';
+import Login from './pages/Login';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    errorElement: <MessagePage message='Page cound not be found!' />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/login', element: <Login />}
+    ]
+  }
+]);
 
 const App = () => {
-  return (
-    <TransducerContextProvider>
-      <Header />
-      <main>
-        <Transducers />
-      </main>
-    </TransducerContextProvider>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
