@@ -1,38 +1,24 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
+import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import { filterBySearch } from '../../utils/utils';
 import { Transducer } from '../../data/data';
 import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
-import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import Search from '../Search/Search';
-import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import MessagePage from '../MessagePage/MessagePage';
 import useHttp from '../../hooks/useHttp';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
-  const { transducers, fetchTransducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
   const { isLoading, isError, sendRequest } = useHttp();
   const modalRef = useRef<ModalHandle>();
-
-  useEffect(() => {
-    async function getTransducers() {
-      try {
-        const responseData = await sendRequest('http://localhost:5000/api/transducers');
-        fetchTransducers(responseData.transducers);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    getTransducers();
-  }, [sendRequest]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -67,7 +53,6 @@ const Transducers = () => {
     setSearchValue(event.target.value);
   };
 
-
   const handleCloseDetails = () => {
     modalRef.current.close();
   };
@@ -90,10 +75,6 @@ const Transducers = () => {
       </ul>
     </>
   );
-
-  if (transducers.length === 0) {
-    content = <EmptyScreen />
-  }
 
   return (
     <>
