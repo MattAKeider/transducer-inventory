@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import Header from '../components/Header/Header';
-import TransducerContextProvider from '../store/transducer-context';
+import TransducerContextProvider from '../context/transducer-context';
 
 const Root = () => {
   return (
