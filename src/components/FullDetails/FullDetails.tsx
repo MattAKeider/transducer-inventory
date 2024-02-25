@@ -6,6 +6,8 @@ import { formatDate } from '../../utils/utils';
 import EditTransducer from '../EditTransducer/EditTransducer';
 import Button from '../../ui/Button/Button';
 import Condition from '../Condition/Condition';
+import useHttp from '../../hooks/useHttp';
+import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import styles from './FullDetails.module.css';
 
 type FullDetailsProps = {
@@ -16,6 +18,7 @@ type FullDetailsProps = {
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   const [conditions, setConditions] = useState<TransducerCondition[]>([]);
   const [isEdit, setIsEdit] = useState(false);
+  const { isError, isLoading, sendRequest } = useHttp();
   const modalRef = useRef<ModalHandle>();
 
   const id = transducer.id;
@@ -23,14 +26,8 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   useEffect(() => {
     async function getConditions() {
       try {
-        // TODO: Refactor to use newly created useHttp hook instead of fetch directly.
-        const response = await fetch(`http://localhost:5000/api/conditions/${id}`);
-        const responseData = await response.json();
-  
-        if (!response.ok) {
-          throw new Error(responseData.message || 'Something went wrong...');
-        }
-
+        const responseData = await sendRequest(`http://localhost:5000/api/conditions/${id}`);
+        
         setConditions(responseData.conditions.reverse());
       } catch (error) {
         console.log(error);
@@ -56,6 +53,8 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
       <Modal ref={modalRef}>
         {isEdit && <EditTransducer transducer={transducer} condition={conditions[0].condition} onCloseModal={handleCloseEditTransducer} />}
       </Modal>
+
+      <LoadingSpinner loading={isLoading} />
       <div className={styles.full_details_container}>
         <div className={styles.main_details}>
           <div className={styles.name_container}>
@@ -96,7 +95,8 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
         </div>
         <fieldset className={styles.condition_field}>
           <legend className={styles.legend}>Condition log</legend>
-          {conditions.map((condition: TransducerCondition) => (
+          {!isLoading && isError && <p>Error loading...</p>}
+          {!isLoading && !isError && conditions.map((condition: TransducerCondition) => (
             <Condition
               key={condition.id}
               transducerCondition={condition}
