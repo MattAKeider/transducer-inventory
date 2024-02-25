@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { MdAddHome } from "react-icons/md";
+import { MdAddHome, MdLogin, MdLogout } from "react-icons/md";
 
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import NewTransducer from '../NewTransducer/NewTransducer';
@@ -17,6 +17,10 @@ const Header = () => {
     modalRef.current.close();
   };
 
+  const handleOpenLogin = () => {
+    console.log('Log in!');
+  };
+
   return (
     <>
       <Modal ref={modalRef}>
@@ -26,7 +30,8 @@ const Header = () => {
         <div className={styles.container}>
           <h1 className={styles.title}>Transducer Inventory</h1>
           <nav className={styles.navbar}>
-            <Button onClick={handleOpenAddTransducer}><MdAddHome/> Add</Button>
+            <Button className={styles.button} onClick={handleOpenAddTransducer}><MdAddHome/> Add</Button>
+            <Button className={styles.button} onClick={handleOpenLogin}><MdLogin/> Login</Button>
           </nav>
         </div>
       </header>
