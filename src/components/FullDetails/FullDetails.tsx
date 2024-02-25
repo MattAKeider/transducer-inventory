@@ -23,6 +23,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   useEffect(() => {
     async function getConditions() {
       try {
+        // TODO: Refactor to use newly created useHttp hook instead of fetch directly.
         const response = await fetch(`http://localhost:5000/api/conditions/${id}`);
         const responseData = await response.json();
   
