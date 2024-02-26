@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MdAddHome, MdLogin, MdLogout } from "react-icons/md";
+import { MdAddHome, MdLogin } from "react-icons/md";
 
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import NewTransducer from '../NewTransducer/NewTransducer';

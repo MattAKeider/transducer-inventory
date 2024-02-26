@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { UserContext, UserContextType } from '../../context/user-context';
 import Button from '../../ui/Button/Button';
 import Card from '../../ui/Card/Card';
 import styles from './LoginForm.module.css';
@@ -14,7 +15,7 @@ interface User {
 const LoginForm = () => {
   const navigate = useNavigate();
 
-  const [isNewUser, setIsNewUser] = useState<boolean>(false);
+  const { isNewUser, switchForm } = useContext<UserContextType>(UserContext);
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -34,10 +35,6 @@ const LoginForm = () => {
 
   const handleChangeConfirm = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfirm(event.target.value);
-  };
-
-  const handleSwitchForm = () => {
-    setIsNewUser(prevState => !prevState);
   };
 
   const handleCancel = () => {
@@ -79,8 +76,8 @@ const LoginForm = () => {
             <label htmlFor="confirm">Confirm Password:</label>
             <input type="password" id="confirm" name="confirm" value={confirm} onChange={handleChangeConfirm}/>
           </div>}
-          {isNewUser && <p className={styles.switch_text}>Already a user? <span onClick={handleSwitchForm}>Login</span></p>}
-          {!isNewUser && <p className={styles.switch_text}>Not a user? <span onClick={handleSwitchForm}>Signup</span></p>}
+          {isNewUser && <p className={styles.switch_text}>Already a user? <span onClick={switchForm}>Login</span></p>}
+          {!isNewUser && <p className={styles.switch_text}>Not a user? <span onClick={switchForm}>Signup</span></p>}
           <div className={styles.form_actions}>
             <Button type="button" onClick={handleCancel}>Cancel</Button>
             <Button type="submit">Submit</Button>
