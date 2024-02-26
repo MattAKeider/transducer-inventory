@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 
-import { TransducerContext, TransducerContextType } from '../store/transducer-context';
+import { TransducerContext, TransducerContextType } from '../context/transducer-context';
 import EmptyScreen from '../components/EmptyScreen/EmptyScreen';
 import Transducers from '../components/Transducers/Transducers';
 import LoadingSpinner from '../ui/LoadingSpinner/LoadingSpinner';

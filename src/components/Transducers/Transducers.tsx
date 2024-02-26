@@ -1,6 +1,6 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 
-import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
+import { TransducerContext, TransducerContextType } from '../../context/transducer-context';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import { filterBySearch } from '../../utils/utils';

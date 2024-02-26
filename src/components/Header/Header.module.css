@@ -14,6 +14,8 @@
   color: #fff;
 }
 
-.navbar {
-  margin-right: 2rem;
+.button {
+  padding: 0.6rem;
+  width: 70px;
+  margin-right: 1rem;
 }

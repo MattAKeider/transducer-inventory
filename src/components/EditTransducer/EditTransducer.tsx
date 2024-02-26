@@ -1,6 +1,6 @@
 import { useContext, useEffect, useReducer } from 'react';
 
-import { TransducerContext, TransducerContextType } from '../../store/transducer-context';
+import { TransducerContext, TransducerContextType } from '../../context/transducer-context';
 import { transducerFormValues, reducer } from '../../utils/formUtils';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import TransducerForm from '../TransducerForm/TransducerForm';
