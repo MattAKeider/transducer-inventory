@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MdAddHome, MdLogin, MdLogout } from "react-icons/md";
 
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
@@ -8,6 +9,7 @@ import styles from './Header.module.css';
 
 const Header = () => {
   const modalRef = useRef<ModalHandle>();
+  const navigate = useNavigate();
 
   const handleOpenAddTransducer = () => {
     modalRef.current.open();
@@ -17,8 +19,8 @@ const Header = () => {
     modalRef.current.close();
   };
 
-  const handleOpenLogin = () => {
-    console.log('Log in!');
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -31,7 +33,7 @@ const Header = () => {
           <h1 className={styles.title}>Transducer Inventory</h1>
           <nav className={styles.navbar}>
             <Button className={styles.button} onClick={handleOpenAddTransducer}><MdAddHome/> Add</Button>
-            <Button className={styles.button} onClick={handleOpenLogin}><MdLogin/> Login</Button>
+            <Button className={styles.button} onClick={handleLogin}><MdLogin/> Login</Button>
           </nav>
         </div>
       </header>
