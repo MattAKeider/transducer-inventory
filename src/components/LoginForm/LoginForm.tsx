@@ -62,19 +62,19 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit}>
           {isNewUser && <div className={styles.field}> 
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" value={username} onChange={handleChangeUsername}/>
+            <input type="text" id="username" name="username" required value={username} onChange={handleChangeUsername}/>
           </div>}
           <div className={styles.field}>
             <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" value={email} onChange={handleChangeEmail}/>
+            <input type="email" id="email" name="email" required value={email} onChange={handleChangeEmail}/>
           </div>
           <div className={styles.field}>
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" value={password} onChange={handleChangePassword}/>
+            <input type="password" id="password" name="password" required value={password} onChange={handleChangePassword}/>
           </div>
           {isNewUser && <div className={styles.field}>
             <label htmlFor="confirm">Confirm Password:</label>
-            <input type="password" id="confirm" name="confirm" value={confirm} onChange={handleChangeConfirm}/>
+            <input type="password" id="confirm" name="confirm" required value={confirm} onChange={handleChangeConfirm}/>
           </div>}
           {isNewUser && <p className={styles.switch_text}>Already a user? <span onClick={switchForm}>Login</span></p>}
           {!isNewUser && <p className={styles.switch_text}>Not a user? <span onClick={switchForm}>Signup</span></p>}
