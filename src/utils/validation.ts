@@ -4,3 +4,7 @@ export const isValidDate = (date: string): boolean => {
 
   return dateAdded <= current || date === '';
 };
+
+export const passwordsAreEqual = (password: string, confirmed: string) => {
+  return password === confirmed;
+};

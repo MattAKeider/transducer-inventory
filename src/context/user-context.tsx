@@ -1,13 +1,15 @@
 import { createContext, useState } from 'react';
 
 export type UserContextType = {
-  isNewUser: boolean;
-  switchForm: () => void;
+  isLoggedIn: boolean;
+  login: (token: string) => void;
+  logout: () => void;
 };
 
 export const UserContext = createContext<UserContextType>({
-  isNewUser: false,
-  switchForm: () => {}
+  isLoggedIn: false,
+  login: () => {},
+  logout: () => {}
 });
 
 type UserContextProviderProps = {
@@ -15,15 +17,27 @@ type UserContextProviderProps = {
 };
 
 const UserContextProvider = ({children}: UserContextProviderProps) => {
-  const [isNewUser, setIsNewUser] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [token, setToken] = useState<string>(null);
 
-  const handleSwitchForm = () => {
-    setIsNewUser(prevState => !prevState);
+  const handleLogin = (token: string) => {
+    if (!token) {
+      return;
+    }
+
+    setToken(token);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setToken(null);
+    setIsLoggedIn(false);
   };
 
   const ctxValue: UserContextType = {
-    isNewUser,
-    switchForm: handleSwitchForm
+    isLoggedIn,
+    login: handleLogin,
+    logout: handleLogout
   };
 
   return (
