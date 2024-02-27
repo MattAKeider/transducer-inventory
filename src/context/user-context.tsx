@@ -2,12 +2,14 @@ import { createContext, useState } from 'react';
 
 export type UserContextType = {
   isLoggedIn: boolean;
+  token: string;
   login: (token: string) => void;
   logout: () => void;
 };
 
 export const UserContext = createContext<UserContextType>({
   isLoggedIn: false,
+  token: null,
   login: () => {},
   logout: () => {}
 });
@@ -36,6 +38,7 @@ const UserContextProvider = ({children}: UserContextProviderProps) => {
 
   const ctxValue: UserContextType = {
     isLoggedIn,
+    token,
     login: handleLogin,
     logout: handleLogout
   };

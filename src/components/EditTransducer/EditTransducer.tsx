@@ -6,6 +6,7 @@ import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import { Transducer } from '../../data/data';
 import useHttp from '../../hooks/useHttp';
+import { UserContext, UserContextType } from '../../context/user-context';
 
 type EditTransducerProps = {
   transducer: Transducer;
@@ -17,6 +18,7 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
   const previousState = transducerFormValues(transducer, condition);
 
   const { editTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const { token } = useContext<UserContextType>(UserContext);
   const [state, dispatch] = useReducer(reducer, previousState);
   const { isLoading, sendRequest } = useHttp();
 
@@ -51,7 +53,8 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
           outOfService: state.service
         }),
         {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
       );
 
@@ -65,7 +68,8 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
           transducer: id
         }),
         {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
       );
 

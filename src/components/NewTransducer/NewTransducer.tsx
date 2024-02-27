@@ -5,6 +5,7 @@ import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import useHttp from '../../hooks/useHttp';
+import { UserContext, UserContextType } from '../../context/user-context';
 
 type NewTransducerProps = {
   onCloseModal: () => void;
@@ -12,6 +13,7 @@ type NewTransducerProps = {
 
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const { token } = useContext<UserContextType>(UserContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { isLoading, sendRequest } = useHttp();
 
@@ -39,7 +41,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
           outOfService: state.service
         }),
         {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
       );
 
@@ -52,7 +55,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
           transducer: transducerResponseData.transducer.id
         }),
         {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
       );
 

@@ -1,6 +1,7 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../context/transducer-context';
+import { UserContext, UserContextType } from '../../context/user-context';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import { filterBySearch } from '../../utils/utils';
@@ -14,6 +15,7 @@ import styles from './Transducers.module.css';
 
 const Transducers = () => {
   const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const { token } = useContext<UserContextType>(UserContext);
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
@@ -41,7 +43,14 @@ const Transducers = () => {
 
     if (confirm(`Are you sure you would like to delete ${name}?`)) {
       try {
-        await sendRequest(`http://localhost:5000/api/transducers/${id}`, 'DELETE');
+        await sendRequest(
+          `http://localhost:5000/api/transducers/${id}`, 
+          'DELETE',
+          null,
+          {
+            Authorization: `Bearer ${token}`
+          }
+        );
         deleteTransducer(id);
       } catch (error) {
         console.log(error);

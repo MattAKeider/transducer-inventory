@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import { Transducer, TransducerCondition } from '../../data/data';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
@@ -8,6 +8,7 @@ import Button from '../../ui/Button/Button';
 import Condition from '../Condition/Condition';
 import useHttp from '../../hooks/useHttp';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
+import { UserContext } from '../../context/user-context';
 import styles from './FullDetails.module.css';
 
 type FullDetailsProps = {
@@ -16,6 +17,7 @@ type FullDetailsProps = {
 };
 
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
+  const { isLoggedIn } = useContext(UserContext);
   const [conditions, setConditions] = useState<TransducerCondition[]>([]);
   const [isEdit, setIsEdit] = useState(false);
   const { isError, isLoading, sendRequest } = useHttp();
@@ -104,7 +106,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
           ))}
         </fieldset>
         <div className={styles.button_container}>
-          <Button onClick={handleClickEditTransducer}>Edit</Button>
+          {isLoggedIn && <Button onClick={handleClickEditTransducer}>Edit</Button>}
           <Button onClick={onCloseModal}>Close</Button>
         </div>
       </div>   
