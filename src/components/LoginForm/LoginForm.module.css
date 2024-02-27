@@ -47,3 +47,7 @@
   margin-top: 1rem;
   gap: 1rem;
 }
+
+.error {
+  color: orangered;
+}
