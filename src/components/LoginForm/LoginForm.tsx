@@ -20,6 +20,7 @@ const LoginForm = () => {
 
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>(null);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { isLoading, isError, sendRequest } = useHttp();
   const { login } = useContext(UserContext);
 
@@ -27,16 +28,16 @@ const LoginForm = () => {
     username: '',
     email: '',
     password: '',
-    confirm: ''
+    confirm: '',
   });
 
   const handleChangeFields = (event: React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage(null);
-    setFields(prevState => {
+    setFields((prevState) => {
       const field = event.target.name;
       return {
         ...prevState,
-        [field]: event.target.value
+        [field]: event.target.value,
       };
     });
   };
@@ -46,11 +47,15 @@ const LoginForm = () => {
       username: '',
       email: '',
       password: '',
-      confirm: ''
+      confirm: '',
     });
 
     setErrorMessage(null);
-    setIsNewUser(prevState => !prevState);
+    setIsNewUser((prevState) => !prevState);
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
   const handleCancel = () => {
@@ -64,24 +69,24 @@ const LoginForm = () => {
       const userData: User = {
         username: fields.username,
         email: fields.email,
-        password: fields.password
+        password: fields.password,
       };
 
       try {
         if (!passwordsAreEqual(fields.password, fields.confirm)) {
-          throw new Error('Passwords must match!')
+          throw new Error('Passwords must match!');
         }
-        
+
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users/signup', 
+          'http://localhost:5000/api/users/signup',
           'POST',
           JSON.stringify(userData),
           {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           }
         );
 
-        login(responseData.token);
+        login(responseData.token, null);
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
@@ -90,20 +95,20 @@ const LoginForm = () => {
     } else if (!isNewUser) {
       const userData: User = {
         email: fields.email,
-        password: fields.password
+        password: fields.password,
       };
 
       try {
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users/login', 
+          'http://localhost:5000/api/users/login',
           'POST',
           JSON.stringify(userData),
           {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           }
         );
-  
-        login(responseData.token);
+
+        login(responseData.token, null);
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
@@ -117,32 +122,83 @@ const LoginForm = () => {
       <LoadingSpinner loading={isLoading} />
       <Card>
         <div className={styles.form_container}>
-          <h2 className={styles.title}>{isNewUser ? 'Create User' : 'Login'}</h2>
+          <h2 className={styles.title}>
+            {isNewUser ? 'Create User' : 'Login'}
+          </h2>
           <form onSubmit={handleSubmit}>
-            {isNewUser && <div className={styles.field}> 
-              <label htmlFor="username">Username:</label>
-              <input type="text" id="username" name="username" required value={fields.username} onChange={handleChangeFields}/>
-            </div>}
+            {isNewUser && (
+              <div className={styles.field}>
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  required
+                  value={fields.username}
+                  onChange={handleChangeFields}
+                />
+              </div>
+            )}
             <div className={styles.field}>
               <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" required value={fields.email} onChange={handleChangeFields}/>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={fields.email}
+                onChange={handleChangeFields}
+              />
             </div>
             <div className={styles.field}>
               <label htmlFor="password">Password:</label>
-              <input type="password" id="password" name="password" required value={fields.password} onChange={handleChangeFields}/>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                required
+                pattern="(?=.*?[#?!@$%^&*-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                value={fields.password}
+                onChange={handleChangeFields}
+                onDoubleClick={handleShowPassword}
+                title="Double-click to show!"
+              />
             </div>
-            {isNewUser && <div className={styles.field}>
-              <label htmlFor="confirm">Confirm Password:</label>
-              <input type="password" id="confirm" name="confirm" required value={fields.confirm} onChange={handleChangeFields}/>
-            </div>}
-            {isNewUser && <p className={styles.switch_text}>Already a user? <span onClick={handleSwitchForm}>Login</span></p>}
-            {!isNewUser && <p className={styles.switch_text}>Not a user? <span onClick={handleSwitchForm}>Signup</span></p>}
+            {isNewUser && (
+              <div className={styles.field}>
+                <label htmlFor="confirm">Confirm Password:</label>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="confirm"
+                  name="confirm"
+                  required
+                  value={fields.confirm}
+                  onChange={handleChangeFields}
+                  onDoubleClick={handleShowPassword}
+                  title="Double-click to show!"
+                />
+              </div>
+            )}
+            {isNewUser && (
+              <p className={styles.switch_text}>
+                Already a user? <span onClick={handleSwitchForm}>Login</span>
+              </p>
+            )}
+            {!isNewUser && (
+              <p className={styles.switch_text}>
+                Not a user? <span onClick={handleSwitchForm}>Signup</span>
+              </p>
+            )}
             <div className={styles.form_actions}>
-              <Button type="button" onClick={handleCancel}>Cancel</Button>
+              <Button type="button" onClick={handleCancel}>
+                Cancel
+              </Button>
               <Button type="submit">Submit</Button>
             </div>
           </form>
-          {!isLoading && isError && <p className={styles.error}>{errorMessage}</p>}
+          {!isLoading && isError && (
+            <p className={styles.error}>{errorMessage}</p>
+          )}
         </div>
       </Card>
     </>
