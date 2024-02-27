@@ -19,7 +19,7 @@ const Header = () => {
     if (storedToken) {
       login(storedToken);
     }
-  }, []);
+  }, [login]);
 
   const handleOpenAddTransducer = () => {
     modalRef.current.open();
