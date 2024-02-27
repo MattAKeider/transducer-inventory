@@ -28,11 +28,19 @@ const UserContextProvider = ({children}: UserContextProviderProps) => {
     }
 
     setToken(token);
+
+    // store in localstorage for persistant login until token expires
+    localStorage.setItem('token', JSON.stringify(token));
+
     setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
     setToken(null);
+
+    // clear token from localstorage on logout
+    localStorage.removeItem('token');
+
     setIsLoggedIn(false);
   };
 

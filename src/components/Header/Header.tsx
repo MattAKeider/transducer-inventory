@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdAddHome, MdLogin, MdLogout } from 'react-icons/md';
 
@@ -9,9 +9,17 @@ import styles from './Header.module.css';
 import { UserContext } from '../../context/user-context';
 
 const Header = () => {
-  const { isLoggedIn, logout } = useContext(UserContext);
+  const { isLoggedIn, logout, login } = useContext(UserContext);
   const modalRef = useRef<ModalHandle>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedToken = JSON.parse(localStorage.getItem('token'));
+
+    if (storedToken) {
+      login(storedToken);
+    }
+  }, []);
 
   const handleOpenAddTransducer = () => {
     modalRef.current.open();
