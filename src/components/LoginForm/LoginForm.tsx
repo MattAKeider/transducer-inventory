@@ -161,7 +161,7 @@ const LoginForm = () => {
                 value={fields.password}
                 onChange={handleChangeFields}
                 onDoubleClick={handleShowPassword}
-                title='Double-click to show!'
+                title="Double-click to show!"
               />
             </div>
             {isNewUser && (
@@ -175,7 +175,7 @@ const LoginForm = () => {
                   value={fields.confirm}
                   onChange={handleChangeFields}
                   onDoubleClick={handleShowPassword}
-                  title='Double-click to show!'
+                  title="Double-click to show!"
                 />
               </div>
             )}
