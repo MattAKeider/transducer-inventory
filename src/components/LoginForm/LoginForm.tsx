@@ -20,6 +20,7 @@ const LoginForm = () => {
 
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>(null);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { isLoading, isError, sendRequest } = useHttp();
   const { login } = useContext(UserContext);
 
@@ -51,6 +52,10 @@ const LoginForm = () => {
 
     setErrorMessage(null);
     setIsNewUser((prevState) => !prevState);
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
   const handleCancel = () => {
@@ -155,6 +160,7 @@ const LoginForm = () => {
                 pattern="(?=.*?[#?!@$%^&*-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                 value={fields.password}
                 onChange={handleChangeFields}
+                onDoubleClick={handleShowPassword}
                 title='Double-click to show!'
               />
             </div>
@@ -168,6 +174,7 @@ const LoginForm = () => {
                   required
                   value={fields.confirm}
                   onChange={handleChangeFields}
+                  onDoubleClick={handleShowPassword}
                   title='Double-click to show!'
                 />
               </div>
