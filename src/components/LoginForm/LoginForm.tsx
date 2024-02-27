@@ -129,7 +129,7 @@ const LoginForm = () => {
             </div>
             <div className={styles.field}>
               <label htmlFor="password">Password:</label>
-              <input type="password" id="password" name="password" required value={fields.password} onChange={handleChangeFields}/>
+              <input type="password" id="password" name="password" required pattern='(?=.*?[#?!@$%^&*-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}' value={fields.password} onChange={handleChangeFields}/>
             </div>
             {isNewUser && <div className={styles.field}>
               <label htmlFor="confirm">Confirm Password:</label>
