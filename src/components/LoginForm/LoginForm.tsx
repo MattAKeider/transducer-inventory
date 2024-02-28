@@ -21,7 +21,7 @@ const LoginForm = () => {
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { isLoading, isError, sendRequest } = useHttp();
+  const { isLoading, sendRequest } = useHttp();
   const { login } = useContext(UserContext);
 
   const [fields, setFields] = useState({
@@ -157,7 +157,7 @@ const LoginForm = () => {
                 id="password"
                 name="password"
                 required
-                pattern="(?=.*?[#?!@$%^&*-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                pattern="(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                 value={fields.password}
                 onChange={handleChangeFields}
                 onDoubleClick={handleShowPassword}
@@ -172,6 +172,7 @@ const LoginForm = () => {
                   id="confirm"
                   name="confirm"
                   required
+                  pattern="(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                   value={fields.confirm}
                   onChange={handleChangeFields}
                   onDoubleClick={handleShowPassword}
@@ -196,7 +197,7 @@ const LoginForm = () => {
               <Button type="submit">Submit</Button>
             </div>
           </form>
-          {!isLoading && isError && (
+          {!isLoading && errorMessage && (
             <p className={styles.error}>{errorMessage}</p>
           )}
         </div>
