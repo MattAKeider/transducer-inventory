@@ -9,7 +9,7 @@ import Button from '../../ui/Button/Button';
 import styles from './Header.module.css';
 
 const Header = () => {
-  const { isLoggedIn, logout, login } = useContext(UserContext);
+  const { isLoggedIn, username, logout, login } = useContext(UserContext);
   const modalRef = useRef<ModalHandle>();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const Header = () => {
     const storedToken = JSON.parse(localStorage.getItem('token'));
 
     if (storedToken && storedToken.token && new Date(storedToken.expiration) > new Date()) {
-      login(storedToken.token, new Date(storedToken.expiration));
+      login(storedToken.token, new Date(storedToken.expiration), username);
     }
   }, [login]);
 
@@ -42,6 +42,7 @@ const Header = () => {
         <div className={styles.container}>
           <h1 className={styles.title}>Transducer Inventory</h1>
           <nav className={styles.navbar}>
+            {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
             {isLoggedIn && <Button className={styles.button} onClick={handleOpenAddTransducer}><MdAddHome/> Add</Button>}
             {!isLoggedIn && <Button className={styles.button} onClick={handleLogin}><MdLogin/> Login</Button>}
             {isLoggedIn && <Button className={styles.button} onClick={logout}><MdLogout/> Logout</Button>}

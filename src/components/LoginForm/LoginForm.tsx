@@ -86,7 +86,7 @@ const LoginForm = () => {
           }
         );
 
-        login(responseData.token, null);
+        login(responseData.token, null, responseData.username);
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
@@ -108,7 +108,7 @@ const LoginForm = () => {
           }
         );
 
-        login(responseData.token, null);
+        login(responseData.token, null, responseData.username);
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
