@@ -1,15 +1,16 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../context/transducer-context';
 import EmptyScreen from '../components/EmptyScreen/EmptyScreen';
 import Transducers from '../components/Transducers/Transducers';
 import LoadingSpinner from '../ui/LoadingSpinner/LoadingSpinner';
-import MessagePage from '../components/MessagePage/MessagePage';
+import MessagePage from '../ui/MessagePage/MessagePage';
 import useHttp from '../hooks/useHttp';
 
 const Home = () => {
   const { transducers, fetchTransducers } = useContext<TransducerContextType>(TransducerContext);
-  const { sendRequest, isError, isLoading } = useHttp();
+  const [errorMessage, setErrorMessage] = useState<string>(null);
+  const { sendRequest, isLoading } = useHttp();
 
   useEffect(() => {
     async function getTransducers() {
@@ -17,7 +18,7 @@ const Home = () => {
         const responseData = await sendRequest('http://localhost:5000/api/transducers');
         fetchTransducers(responseData.transducers);
       } catch (error) {
-        console.log(error);
+        setErrorMessage(error.message);
       }
     }
 
@@ -33,8 +34,8 @@ const Home = () => {
   return (
     <>
       <LoadingSpinner loading={isLoading} />
-      {!isLoading && isError && <MessagePage message="Something went wrong..." />}
-      {!isLoading && !isError && content}
+      {!isLoading && errorMessage && <MessagePage message={errorMessage} isError />}
+      {!isLoading && !errorMessage && content}
     </>
   );
 };

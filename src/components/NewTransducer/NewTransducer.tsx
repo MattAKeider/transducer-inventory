@@ -1,11 +1,11 @@
-import { useContext, useReducer } from 'react';
+import { useContext, useReducer, useState } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../context/transducer-context';
 import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
-import useHttp from '../../hooks/useHttp';
 import { UserContext, UserContextType } from '../../context/user-context';
+import useHttp from '../../hooks/useHttp';
 
 type NewTransducerProps = {
   onCloseModal: () => void;
@@ -14,11 +14,15 @@ type NewTransducerProps = {
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
-  const [state, dispatch] = useReducer(reducer, initialState);
   const { isLoading, sendRequest } = useHttp();
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [errorMessage, setErrorMessage] = useState<string>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();
+
+    setErrorMessage(null);
 
     if (!validDate) {
       return;
@@ -62,7 +66,8 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
 
       addTransducer(transducerResponseData.transducer);
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error.message);
+      return;
     }
 
     // Reset form
@@ -109,6 +114,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
         onSubmitForm={handleSubmit}
         onCancelForm={handleCancel}
         onEscForm={handleEsc}
+        error={errorMessage}
       />
     </>
   );

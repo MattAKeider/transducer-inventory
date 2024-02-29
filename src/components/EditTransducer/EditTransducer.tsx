@@ -1,12 +1,12 @@
-import { useContext, useEffect, useReducer } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../context/transducer-context';
+import { UserContext, UserContextType } from '../../context/user-context';
 import { transducerFormValues, reducer } from '../../utils/formUtils';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import { Transducer } from '../../data/data';
 import useHttp from '../../hooks/useHttp';
-import { UserContext, UserContextType } from '../../context/user-context';
 
 type EditTransducerProps = {
   transducer: Transducer;
@@ -19,8 +19,10 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
   const { editTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
-  const [state, dispatch] = useReducer(reducer, previousState);
   const { isLoading, sendRequest } = useHttp();
+
+  const [state, dispatch] = useReducer(reducer, previousState);
+  const [errorMessage, setErrorMessage] = useState<string>(null);
 
   useEffect(() => {
     dispatch({
@@ -33,6 +35,7 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
   const handleEdit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErrorMessage(null);
 
     const id = transducer.id;
   
@@ -75,7 +78,8 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
       editTransducer(transducerData.transducer);
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error);
+      return;
     }
   
     onCloseModal();
@@ -113,7 +117,8 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
         dispatchAction={dispatch} 
         onSubmitForm={handleEdit} 
         onCancelForm={handleCancel} 
-        onEscForm={handleEsc} 
+        onEscForm={handleEsc}
+        error={errorMessage}
       />
     </>
   );

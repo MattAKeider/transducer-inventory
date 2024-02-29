@@ -7,6 +7,7 @@ import { passwordsAreEqual } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import Card from '../../ui/Card/Card';
 import useHttp from '../../hooks/useHttp';
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
 import styles from './LoginForm.module.css';
 
 interface User {
@@ -16,13 +17,14 @@ interface User {
 }
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const { isLoading, sendRequest } = useHttp();
   const { login } = useContext(UserContext);
+  
+  const navigate = useNavigate();
 
   const [fields, setFields] = useState({
     username: '',
@@ -90,7 +92,6 @@ const LoginForm = () => {
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
-        console.log(error);
       }
     } else if (!isNewUser) {
       const userData: User = {
@@ -112,7 +113,6 @@ const LoginForm = () => {
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
-        console.log(error);
       }
     }
   };
@@ -161,7 +161,7 @@ const LoginForm = () => {
                 value={fields.password}
                 onChange={handleChangeFields}
                 onDoubleClick={handleShowPassword}
-                title="Double-click to show!"
+                title="Must contain an uppercase letter, number, and special character"
               />
             </div>
             {isNewUser && (
@@ -176,7 +176,7 @@ const LoginForm = () => {
                   value={fields.confirm}
                   onChange={handleChangeFields}
                   onDoubleClick={handleShowPassword}
-                  title="Double-click to show!"
+                  title="Must contain an uppercase letter, number, and special character"
                 />
               </div>
             )}
@@ -198,7 +198,7 @@ const LoginForm = () => {
             </div>
           </form>
           {!isLoading && errorMessage && (
-            <p className={styles.error}>{errorMessage}</p>
+            <ErrorMessage errorMessage={errorMessage}/>
           )}
         </div>
       </Card>

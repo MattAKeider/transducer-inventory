@@ -8,3 +8,11 @@
   text-align: center;
   font-weight: bold;
 }
+
+.text h2 {
+  color: orangered;
+}
+
+.message {
+  font-size: x-large;
+}

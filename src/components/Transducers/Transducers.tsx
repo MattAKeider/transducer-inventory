@@ -9,18 +9,20 @@ import { Transducer } from '../../data/data';
 import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
 import Search from '../Search/Search';
-import MessagePage from '../MessagePage/MessagePage';
+import MessagePage from '../../ui/MessagePage/MessagePage';
 import useHttp from '../../hooks/useHttp';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
   const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
+  const { isLoading, sendRequest } = useHttp();
+  const modalRef = useRef<ModalHandle>();
+
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
-  const { isLoading, isError, sendRequest } = useHttp();
-  const modalRef = useRef<ModalHandle>();
+  const [errorMessage, setErrorMessage] = useState<string>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,7 +55,7 @@ const Transducers = () => {
         );
         deleteTransducer(id);
       } catch (error) {
-        console.log(error);
+        setErrorMessage(error.message);
       }
     }
   };
@@ -96,8 +98,8 @@ const Transducers = () => {
         )}
       </Modal>
       <LoadingSpinner loading={isLoading} />
-      {!isLoading && isError && <MessagePage message="Something went wrong..." />}
-      {!isLoading && !isError && content}
+      {!isLoading && errorMessage && <MessagePage message={errorMessage} isError />}
+      {!isLoading && !errorMessage && content}
     </>
   );
 };

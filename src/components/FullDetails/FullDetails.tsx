@@ -8,6 +8,7 @@ import Button from '../../ui/Button/Button';
 import Condition from '../Condition/Condition';
 import useHttp from '../../hooks/useHttp';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
 import { UserContext } from '../../context/user-context';
 import styles from './FullDetails.module.css';
 
@@ -17,10 +18,13 @@ type FullDetailsProps = {
 };
 
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
-  const { isLoggedIn } = useContext(UserContext);
   const [conditions, setConditions] = useState<TransducerCondition[]>([]);
-  const [isEdit, setIsEdit] = useState(false);
-  const { isError, isLoading, sendRequest } = useHttp();
+  const [errorMessage, setErrorMessage] = useState<string>(null);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+
+  const { isLoggedIn } = useContext(UserContext);
+  const { isLoading, sendRequest } = useHttp();
+  
   const modalRef = useRef<ModalHandle>();
 
   const id = transducer.id;
@@ -32,7 +36,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
         
         setConditions(responseData.conditions.reverse());
       } catch (error) {
-        console.log(error);
+        setErrorMessage(error.message);
       }
     }
 
@@ -97,8 +101,8 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
         </div>
         <fieldset className={styles.condition_field}>
           <legend className={styles.legend}>Condition log</legend>
-          {!isLoading && isError && <p>Error loading...</p>}
-          {!isLoading && !isError && conditions.map((condition: TransducerCondition) => (
+          {!isLoading && errorMessage && <ErrorMessage errorMessage='Error loading...'/>}
+          {!isLoading && !errorMessage && conditions.map((condition: TransducerCondition) => (
             <Condition
               key={condition.id}
               transducerCondition={condition}
