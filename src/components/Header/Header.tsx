@@ -10,7 +10,9 @@ import styles from './Header.module.css';
 
 const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
+
   const modalRef = useRef<ModalHandle>();
+  
   const navigate = useNavigate();
 
   useEffect(() => {

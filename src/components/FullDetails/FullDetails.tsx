@@ -21,8 +21,10 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   const [conditions, setConditions] = useState<TransducerCondition[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+
   const { isLoggedIn } = useContext(UserContext);
   const { isLoading, sendRequest } = useHttp();
+  
   const modalRef = useRef<ModalHandle>();
 
   const id = transducer.id;

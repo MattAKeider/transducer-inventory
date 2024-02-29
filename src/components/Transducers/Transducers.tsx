@@ -16,12 +16,13 @@ import styles from './Transducers.module.css';
 const Transducers = () => {
   const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
+  const { isLoading, sendRequest } = useHttp();
+  const modalRef = useRef<ModalHandle>();
+
   const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
-  const [ errorMessage, setErrorMessage] = useState<string>(null);
-  const { isLoading, sendRequest } = useHttp();
-  const modalRef = useRef<ModalHandle>();
+  const [errorMessage, setErrorMessage] = useState<string>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {

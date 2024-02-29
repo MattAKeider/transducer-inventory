@@ -4,8 +4,8 @@ import { TransducerContext, TransducerContextType } from '../../context/transduc
 import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
-import useHttp from '../../hooks/useHttp';
 import { UserContext, UserContextType } from '../../context/user-context';
+import useHttp from '../../hooks/useHttp';
 
 type NewTransducerProps = {
   onCloseModal: () => void;
@@ -14,9 +14,10 @@ type NewTransducerProps = {
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
+  const { isLoading, sendRequest } = useHttp();
+
   const [state, dispatch] = useReducer(reducer, initialState);
   const [errorMessage, setErrorMessage] = useState<string>(null);
-  const { isLoading, sendRequest } = useHttp();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();

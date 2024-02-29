@@ -19,9 +19,10 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
   const { editTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
+  const { isLoading, sendRequest } = useHttp();
+
   const [state, dispatch] = useReducer(reducer, previousState);
   const [errorMessage, setErrorMessage] = useState<string>(null);
-  const { isLoading, sendRequest } = useHttp();
 
   useEffect(() => {
     dispatch({
