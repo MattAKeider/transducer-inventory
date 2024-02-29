@@ -7,6 +7,7 @@ import { passwordsAreEqual } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import Card from '../../ui/Card/Card';
 import useHttp from '../../hooks/useHttp';
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
 import styles from './LoginForm.module.css';
 
 interface User {
@@ -90,7 +91,6 @@ const LoginForm = () => {
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
-        console.log(error);
       }
     } else if (!isNewUser) {
       const userData: User = {
@@ -112,7 +112,6 @@ const LoginForm = () => {
         navigate('/');
       } catch (error) {
         setErrorMessage(error.message);
-        console.log(error);
       }
     }
   };
@@ -198,7 +197,7 @@ const LoginForm = () => {
             </div>
           </form>
           {!isLoading && errorMessage && (
-            <p className={styles.error}>{errorMessage}</p>
+            <ErrorMessage errorMessage={errorMessage}/>
           )}
         </div>
       </Card>

@@ -2,13 +2,15 @@ import styles from './MessagePage.module.css';
 
 type MessagePageProps = {
   message: string;
+  isError?: boolean;
 };
 
-const MessagePage = ({ message }: MessagePageProps) => {
+const MessagePage = ({ message, isError }: MessagePageProps) => {
   return (
     <section className={styles.container}>
       <div className={styles.text}>
-        <h2>{message}</h2>
+        { isError && <h2>Something went wrong...</h2> }
+        <p className={!isError && styles.message}>{message}</p>
       </div>
     </section>
   );
