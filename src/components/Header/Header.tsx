@@ -15,9 +15,10 @@ const Header = () => {
 
   useEffect(() => {
     const storedToken = JSON.parse(localStorage.getItem('token'));
+    const storedUsername = JSON.parse(localStorage.getItem('username'));
 
     if (storedToken && storedToken.token && new Date(storedToken.expiration) > new Date()) {
-      login(storedToken.token, new Date(storedToken.expiration), username);
+      login(storedToken.token, new Date(storedToken.expiration), storedUsername);
     }
   }, [login]);
 
