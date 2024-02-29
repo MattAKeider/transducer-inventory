@@ -23,7 +23,7 @@ describe('TransducerForm', () => {
   test('inputs should contain the correct values', () => {
     const handleEvent = vi.fn();
 
-    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={true} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} />);
+    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={true} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} error='Please enter valid date..' />);
 
     const nameInput = screen.getByLabelText<HTMLInputElement>('Name:');
     const serialInput = screen.getByLabelText<HTMLInputElement>('Serial #:');
@@ -35,7 +35,7 @@ describe('TransducerForm', () => {
   test('should contain the correct heading if a "New" form,', () => {
     const handleEvent = vi.fn();
 
-    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={true} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} />);
+    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={true} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} error='Please enter valid date..' />);
 
     const h1 = screen.getByText('New Transducer');
     expect(h1).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('TransducerForm', () => {
   test('should contain the correct heading if an "Edit" form,', () => {
     const handleEvent = vi.fn();
 
-    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={false} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} />);
+    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={false} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} error='Please enter valid date..' />);
 
     const h1 = screen.getByText<HTMLElement>('Edit Transducer');
     expect(h1).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('TransducerForm', () => {
   test('should give error on wrong date given', () => {
     const handleEvent = vi.fn();
 
-    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={true} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} />);
+    render(<TransducerForm formState={testData} dispatchAction={() => {}} isNew={true} onSubmitForm={handleEvent} onEscForm={handleEvent} onCancelForm={handleEvent} error='Please enter valid date..' />);
 
     const error = screen.getByText<HTMLElement>('Please enter valid date.');
 

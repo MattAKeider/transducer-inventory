@@ -185,7 +185,7 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
               required
               disabled={isDisabled}
             />
-            <div className={styles.error}>{!validDate && <ErrorMessage errorMessage='Please enter a valid date'/>}</div>
+            <div className={styles.error}>{!validDate && <ErrorMessage errorMessage='Please enter valid date.'/>}</div>
           </div>}
           <div className={styles.field}>
             <label htmlFor="condition">Select Condition:</label>
