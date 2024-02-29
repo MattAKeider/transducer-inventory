@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
 import { Action, FormState } from '../../utils/formUtils';
 import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
@@ -12,9 +13,10 @@ type TransducerFormProps = {
   onSubmitForm: (event: React.FormEvent<HTMLFormElement>, validDate?: boolean) => void;
   onCancelForm: () => void;
   onEscForm: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+  error: string;
 };
 
-const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCancelForm, onEscForm }: TransducerFormProps) => {
+const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCancelForm, onEscForm, error }: TransducerFormProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const validDate = isValidDate(formState.received);
@@ -183,7 +185,7 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
               required
               disabled={isDisabled}
             />
-            <div className={styles.error}>{!validDate && <p>Please enter valid date.</p>}</div>
+            <div className={styles.error}>{!validDate && <ErrorMessage errorMessage='Please enter a valid date'/>}</div>
           </div>}
           <div className={styles.field}>
             <label htmlFor="condition">Select Condition:</label>
@@ -230,6 +232,7 @@ const TransducerForm = ({ isNew, formState, dispatchAction, onSubmitForm, onCanc
             />
           </div>
         </fieldset>
+        <ErrorMessage errorMessage={error}/>
         <div className={styles.form_actions}>
           <Button type="button" onClick={onCancelForm}>
             Cancel
