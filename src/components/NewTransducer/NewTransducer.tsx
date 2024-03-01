@@ -30,7 +30,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
 
     try {
       const transducerResponseData = await sendRequest(
-        'http://localhost:5000/api/transducers',
+        `${import.meta.env.VITE_API_URL}/transducers`,
         'POST',
         JSON.stringify({
           name: state.name,
@@ -51,7 +51,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
       );
 
       await sendRequest(
-        'http://localhost:5000/api/conditions',
+        `${import.meta.env.VITE_API_URL}/conditions`,
         'POST',
         JSON.stringify({
           condition: state.condition,
