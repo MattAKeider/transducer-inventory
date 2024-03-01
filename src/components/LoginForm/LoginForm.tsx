@@ -80,7 +80,7 @@ const LoginForm = () => {
         }
 
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users/signup',
+          `${import.meta.env.VITE_API_URL}/users/signup`,
           'POST',
           JSON.stringify(userData),
           {
@@ -101,7 +101,7 @@ const LoginForm = () => {
 
       try {
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users/login',
+          `${import.meta.env.VITE_API_URL}/users/login`,
           'POST',
           JSON.stringify(userData),
           {

@@ -32,7 +32,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   useEffect(() => {
     async function getConditions() {
       try {
-        const responseData = await sendRequest(`http://localhost:5000/api/conditions/${id}`);
+        const responseData = await sendRequest(`${import.meta.env.VITE_API_URL}/conditions/${id}`);
         
         setConditions(responseData.conditions.reverse());
       } catch (error) {

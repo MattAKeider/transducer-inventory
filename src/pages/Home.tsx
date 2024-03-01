@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     async function getTransducers() {
       try {
-        const responseData = await sendRequest('http://localhost:5000/api/transducers');
+        const responseData = await sendRequest(`${import.meta.env.VITE_API_URL}/transducers`);
         fetchTransducers(responseData.transducers);
       } catch (error) {
         setErrorMessage(error.message);

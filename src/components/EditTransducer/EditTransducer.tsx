@@ -42,7 +42,7 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
     try {
       // GET transducer that needs edited
       const transducerData = await sendRequest(
-        `http://localhost:5000/api/transducers/${id}`,
+        `${import.meta.env.VITE_API_URL}/transducers/${id}`,
         'PATCH',
         JSON.stringify({
           name: state.name,
@@ -63,7 +63,7 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
       // Create a new conditon log item for transducer
       await sendRequest(
-        'http://localhost:5000/api/conditions',
+        `${import.meta.env.VITE_API_URL}/conditions`,
         'POST',
         JSON.stringify({
           condition: state.condition,

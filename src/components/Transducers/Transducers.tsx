@@ -46,7 +46,7 @@ const Transducers = () => {
     if (confirm(`Are you sure you would like to delete ${name}?`)) {
       try {
         await sendRequest(
-          `http://localhost:5000/api/transducers/${id}`, 
+          `${import.meta.env.VITE_API_URL}/transducers/${id}`, 
           'DELETE',
           null,
           {
