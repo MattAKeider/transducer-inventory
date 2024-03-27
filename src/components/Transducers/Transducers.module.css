@@ -1,9 +1,0 @@
-.container {
-  margin: 3rem 2rem 0 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 14rem);
-  gap: 1.5rem;
-  justify-content: center;
-  list-style: none;
-  position: relative;
-}
