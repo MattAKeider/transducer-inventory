@@ -2,9 +2,9 @@
   display: flex;
   gap: 0.8rem;
   max-width: 400px;
-  margin: 1.4rem auto;
+  margin: 1.6rem auto;
   padding: 0.8rem;
-  background-color: #1f2937;
+  background-color: var(--bg-tint-color);
 }
 
 .search {
@@ -12,13 +12,13 @@
   font-size: 1rem;
   font-weight: 500;
   background-color: transparent;
-  color: #e5e7eb;
+  color: var(--light-color);
   border: none;
   outline: none;
 }
 
 .icon {
-  fill: #db2777;
+  fill: var(--brand-color);
   width: 18px;
   height: 18px;
 }

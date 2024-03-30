@@ -1,13 +1,13 @@
 .button {
-  background-color: #111827;
-  color: #e5e7eb;
+  background-color: var(--bg-color);
+  color: var(--light-color);
   padding: 0.4rem;
   border: none;
-  box-shadow: 2px 2px 5px #111827eb;
+  box-shadow: 2px 2px 5px var(--bg-shadow-color);
   cursor: pointer;
 }
 
 .button:hover {
-  color: #db2777;
-  box-shadow: 2px 2px 5px #db2778eb;
+  color: var(--brand-color);
+  box-shadow: 2px 2px 5px var(--brand-shadow-color);
 }

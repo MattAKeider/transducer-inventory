@@ -1,0 +1,10 @@
+.transducers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 12rem);
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+  list-style: none;
+  max-height: 100vh;
+  overflow: auto;
+}

@@ -11,24 +11,34 @@ type TransducerItemProps = {
   onClickDelete: (event: React.MouseEvent<SVGAElement>) => void;
 };
 
-const TransducerItem = ({ transducerData, onClickTransducer, onClickDelete }: TransducerItemProps) => {
+const TransducerItem = ({
+  transducerData,
+  onClickTransducer,
+  onClickDelete,
+}: TransducerItemProps) => {
   const { isLoggedIn } = useContext<UserContextType>(UserContext);
 
   return (
-    <li className={styles.list_item} onClick={onClickTransducer}>
-      {isLoggedIn && <TiDelete className={styles.delete} onClick={onClickDelete} />}
-      <h2 className={styles.card_title}>{transducerData.name}</h2>
-      <p>
-        <span>Location: </span>{transducerData.location}
+    <li className={styles.transducer} onClick={onClickTransducer}>
+      {isLoggedIn && (
+        <TiDelete className={styles.delete} onClick={onClickDelete} />
+      )}
+      <h2 className={styles.item_title}>{transducerData.name}</h2>
+      <p className={styles.item_info}>
+        <span>Location: </span>
+        {transducerData.location}
       </p>
-      <p>
-        <span>Room: </span>{transducerData.room}
+      <p className={styles.item_info}>
+        <span>Room: </span>
+        {transducerData.room}
       </p>
-      <p>
-        <span>S #: </span>{transducerData.serialNumber}
+      <p className={styles.item_info}>
+        <span>S #: </span>
+        {transducerData.serialNumber}
       </p>
-      <p>
-        <span>Control #: </span>{transducerData.controlNumber}
+      <p className={styles.item_info}>
+        <span>Control #: </span>
+        {transducerData.controlNumber}
       </p>
     </li>
   );
