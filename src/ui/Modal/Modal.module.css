@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  margin: auto;
+  padding: 1.2rem;
+  background-color: var(--bg-tint-color);
+  border: none;
+  animation: slide-up-fade-in 0.4s ease-out forwards;
+  box-shadow: 3px 3px 5px var(--bg-tint-shadow-color);
+}
+
+.modal::backdrop {
+  background-color: #000000e3;
+}
+
+@keyframes slide-up-fade-in {
+  from {
+    transform: translatey(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translatey(0);
+    opacity: 1;
+  }
+}
