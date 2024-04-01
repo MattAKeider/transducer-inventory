@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   const { isLoading, sendRequest } = useHttp();
   const { login } = useContext(UserContext);
-  
+
   const navigate = useNavigate();
 
   const [fields, setFields] = useState({
@@ -119,7 +119,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <LoadingSpinner loading={isLoading} />
+      {/* <LoadingSpinner loading={isLoading} /> */}
       <Card>
         <div className={styles.form_container}>
           <h2 className={styles.title}>
@@ -198,7 +198,7 @@ const LoginForm = () => {
             </div>
           </form>
           {!isLoading && errorMessage && (
-            <ErrorMessage errorMessage={errorMessage}/>
+            <ErrorMessage errorMessage={errorMessage} />
           )}
         </div>
       </Card>

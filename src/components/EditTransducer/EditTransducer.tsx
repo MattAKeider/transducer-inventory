@@ -110,7 +110,7 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
   return (
     <>
-      <LoadingSpinner loading={isLoading} style={{ marginTop: '35rem'}} />
+      {/* <LoadingSpinner loading={isLoading} style={{ marginTop: '35rem'}} /> */}
       <TransducerForm 
         isNew={false} 
         formState={state} 

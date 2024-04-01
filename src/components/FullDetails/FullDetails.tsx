@@ -24,7 +24,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
 
   const { isLoggedIn } = useContext(UserContext);
   const { isLoading, sendRequest } = useHttp();
-  
+
   const modalRef = useRef<ModalHandle>();
 
   const id = transducer.id;
@@ -32,8 +32,10 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   useEffect(() => {
     async function getConditions() {
       try {
-        const responseData = await sendRequest(`${import.meta.env.VITE_API_URL}/conditions/${id}`);
-        
+        const responseData = await sendRequest(
+          `${import.meta.env.VITE_API_URL}/conditions/${id}`
+        );
+
         setConditions(responseData.conditions.reverse());
       } catch (error) {
         setErrorMessage(error.message);
@@ -57,10 +59,16 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   return (
     <>
       <Modal ref={modalRef}>
-        {isEdit && <EditTransducer transducer={transducer} condition={conditions[0].condition} onCloseModal={handleCloseEditTransducer} />}
+        {isEdit && (
+          <EditTransducer
+            transducer={transducer}
+            condition={conditions[0].condition}
+            onCloseModal={handleCloseEditTransducer}
+          />
+        )}
       </Modal>
 
-      <LoadingSpinner loading={isLoading} />
+      {/* <LoadingSpinner loading={isLoading} /> */}
       <div className={styles.full_details_container}>
         <div className={styles.main_details}>
           <div className={styles.name_container}>
@@ -101,19 +109,22 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
         </div>
         <fieldset className={styles.condition_field}>
           <legend className={styles.legend}>Condition log</legend>
-          {!isLoading && errorMessage && <ErrorMessage errorMessage='Error loading...'/>}
-          {!isLoading && !errorMessage && conditions.map((condition: TransducerCondition) => (
-            <Condition
-              key={condition.id}
-              transducerCondition={condition}
-            />
-          ))}
+          {!isLoading && errorMessage && (
+            <ErrorMessage errorMessage="Error loading..." />
+          )}
+          {!isLoading &&
+            !errorMessage &&
+            conditions.map((condition: TransducerCondition) => (
+              <Condition key={condition.id} transducerCondition={condition} />
+            ))}
         </fieldset>
         <div className={styles.button_container}>
-          {isLoggedIn && <Button onClick={handleClickEditTransducer}>Edit</Button>}
+          {isLoggedIn && (
+            <Button onClick={handleClickEditTransducer}>Edit</Button>
+          )}
           <Button onClick={onCloseModal}>Close</Button>
         </div>
-      </div>   
+      </div>
     </>
   );
 };
