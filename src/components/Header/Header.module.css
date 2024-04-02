@@ -22,3 +22,8 @@
   font-weight: 700;
   color: var(--bg-color);
 }
+
+.button:hover {
+  color: var(--brand-color);
+  background-color: var(--bg-color);
+}

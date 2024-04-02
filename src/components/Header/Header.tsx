@@ -54,17 +54,17 @@ const Header = () => {
         <nav className={styles.navbar}>
           {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
           {isLoggedIn && (
-            <Button onClick={handleOpenAddTransducer}>
+            <Button className={styles.button} onClick={handleOpenAddTransducer}>
               <MdAddHome /> Add
             </Button>
           )}
           {!isLoggedIn && (
-            <Button onClick={handleLogin}>
+            <Button className={styles.button} onClick={handleLogin}>
               <MdLogin /> Login
             </Button>
           )}
           {isLoggedIn && (
-            <Button onClick={logout}>
+            <Button className={styles.button} onClick={logout}>
               <MdLogout /> Logout
             </Button>
           )}

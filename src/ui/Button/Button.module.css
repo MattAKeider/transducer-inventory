@@ -3,11 +3,9 @@
   color: var(--light-color);
   padding: 0.4rem;
   border: none;
-  box-shadow: 2px 2px 5px var(--bg-shadow-color);
   cursor: pointer;
 }
 
 .button:hover {
-  color: var(--brand-color);
-  box-shadow: 2px 2px 5px var(--brand-shadow-color);
+  background-color: var(--brand-color);
 }
