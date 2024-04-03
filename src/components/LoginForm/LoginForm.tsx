@@ -119,7 +119,7 @@ const LoginForm = () => {
 
   return (
     <>
-      {/* <LoadingSpinner loading={isLoading} /> */}
+      <LoadingSpinner loading={isLoading} />
       <Card>
         <h2 className={styles.title}>{isNewUser ? 'Create User' : 'Login'}</h2>
         <form onSubmit={handleSubmit}>

@@ -68,7 +68,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
         )}
       </Modal>
 
-      {/* <LoadingSpinner loading={isLoading} /> */}
+      <LoadingSpinner loading={isLoading} />
       <div className={styles.main_details}>
         <div className={styles.name_container}>
           <h2 className={styles.name}>{transducer.name}</h2>

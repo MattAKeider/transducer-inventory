@@ -109,7 +109,7 @@ const Transducers = () => {
           />
         )}
       </Modal>
-      {/* <LoadingSpinner loading={isLoading} /> */}
+      <LoadingSpinner loading={isLoading} />
       {!isLoading && errorMessage && (
         <MessagePage message={errorMessage} isError />
       )}

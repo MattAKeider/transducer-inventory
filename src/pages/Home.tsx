@@ -39,7 +39,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <LoadingSpinner loading={isLoading} /> */}
+      <LoadingSpinner loading={isLoading} />
       {!isLoading && errorMessage && (
         <MessagePage message={errorMessage} isError />
       )}
