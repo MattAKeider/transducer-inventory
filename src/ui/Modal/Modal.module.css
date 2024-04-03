@@ -6,7 +6,9 @@
 
 .modal {
   margin: auto;
-  padding: 1.2rem;
+  max-width: 35%;
+  max-height: 90%;
+  padding: 1.6rem;
   background-color: var(--bg-tint-color);
   border: none;
   animation: slide-up-fade-in 0.4s ease-out forwards;

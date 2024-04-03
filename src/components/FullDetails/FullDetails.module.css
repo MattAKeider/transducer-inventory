@@ -1,0 +1,50 @@
+.main_details {
+  font-size: 1rem;
+}
+
+.name_container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+}
+
+.name {
+  font-size: 1.8rem;
+  color: var(--brand-color);
+}
+
+.info {
+  color: var(--light-color);
+  margin-bottom: 0.2rem;
+}
+
+.info:last-child {
+  margin-bottom: 1rem;
+}
+
+.info span {
+  color: var(--brand-color);
+  font-weight: 700;
+  margin-right: 0.2rem;
+}
+
+.condition_field {
+  padding: 0 0.4rem 0.4rem 0.4rem;
+  margin-bottom: 1.6rem;
+  max-height: 125px;
+  overflow-y: scroll;
+}
+
+.legend {
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  padding: 0 0.4rem;
+  color: var(--brand-color);
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

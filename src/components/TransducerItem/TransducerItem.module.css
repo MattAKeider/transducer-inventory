@@ -42,4 +42,5 @@
 .item_info span {
   color: var(--brand-color);
   font-weight: 700;
+  margin-right: 0.2rem;
 }
