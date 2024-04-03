@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image {
+  margin: 4rem auto;
+  width: 22%;
+}
+
+.text {
+  color: var(--light-color);
+  font-size: 1rem;
+}
