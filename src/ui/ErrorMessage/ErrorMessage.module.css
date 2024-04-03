@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.message {
+  margin-top: 0.2rem;
+  color: var(--alert-color);
+}
