@@ -27,9 +27,11 @@ FONT SIZE SYSTEM (px)
 }
 
 body {
+  min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   font-size: 62.5%;
   font-weight: 400;
   line-height: 1.5;
   background-color: var(--bg-color);
+  position: relative;
 }

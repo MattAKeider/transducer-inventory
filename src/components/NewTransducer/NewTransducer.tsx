@@ -113,7 +113,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
 
   return (
     <>
-      <LoadingSpinner loading={isLoading} style={{ marginTop: '35rem' }} />
+      <LoadingSpinner loading={isLoading} />
       <TransducerForm
         isNew={true}
         formState={state}

@@ -118,7 +118,7 @@ const EditTransducer = ({
 
   return (
     <>
-      <LoadingSpinner loading={isLoading} style={{ marginTop: '35rem' }} />
+      <LoadingSpinner loading={isLoading} />
       <TransducerForm
         isNew={false}
         formState={state}

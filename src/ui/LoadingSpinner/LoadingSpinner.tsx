@@ -2,14 +2,14 @@ import { Circles } from 'react-loader-spinner';
 
 import styles from './LoadingSpinner.module.css';
 
-interface LoadingSpinnerProps extends React.AllHTMLAttributes<HTMLDivElement> {
+type LoadingSpinnerProps = {
   loading: boolean;
-}
+};
 
-const LoadingSpinner = ({ loading, ...props }: LoadingSpinnerProps) => {
+const LoadingSpinner = ({ loading }: LoadingSpinnerProps) => {
   return (
-    <div className={`${styles.loading_spinner_overlay} ${props.className}`} {...props}>
-      <Circles visible={loading} color='orangered'/>
+    <div className={styles.spinner}>
+      <Circles visible={loading} color="#ff4500" />
     </div>
   );
 };
