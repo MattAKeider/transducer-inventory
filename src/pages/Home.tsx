@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { TransducerContext, TransducerContextType } from '../context/transducer-context';
+import {
+  TransducerContext,
+  TransducerContextType,
+} from '../context/transducer-context';
 import EmptyScreen from '../components/EmptyScreen/EmptyScreen';
 import Transducers from '../components/Transducers/Transducers';
 import LoadingSpinner from '../ui/LoadingSpinner/LoadingSpinner';
@@ -8,14 +11,17 @@ import MessagePage from '../ui/MessagePage/MessagePage';
 import useHttp from '../hooks/useHttp';
 
 const Home = () => {
-  const { transducers, fetchTransducers } = useContext<TransducerContextType>(TransducerContext);
+  const { transducers, fetchTransducers } =
+    useContext<TransducerContextType>(TransducerContext);
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const { sendRequest, isLoading } = useHttp();
 
   useEffect(() => {
     async function getTransducers() {
       try {
-        const responseData = await sendRequest(`${import.meta.env.VITE_API_URL}/transducers`);
+        const responseData = await sendRequest(
+          `${import.meta.env.VITE_API_URL}/transducers`
+        );
         fetchTransducers(responseData.transducers);
       } catch (error) {
         setErrorMessage(error.message);
@@ -34,7 +40,9 @@ const Home = () => {
   return (
     <>
       <LoadingSpinner loading={isLoading} />
-      {!isLoading && errorMessage && <MessagePage message={errorMessage} isError />}
+      {!isLoading && errorMessage && (
+        <MessagePage message={errorMessage} isError />
+      )}
       {!isLoading && !errorMessage && content}
     </>
   );

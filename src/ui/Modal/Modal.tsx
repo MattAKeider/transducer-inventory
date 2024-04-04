@@ -21,11 +21,15 @@ const Modal = forwardRef<ModalHandle, ModalProps>(({ children }, ref) => {
     },
     close: () => {
       dialogRef.current.close();
-    }
+    },
   }));
 
   return createPortal(
-    <dialog className={styles.modal} ref={dialogRef}>{children}</dialog>,
+    <div className={styles.container}>
+      <dialog className={styles.modal} ref={dialogRef}>
+        {children}
+      </dialog>
+    </div>,
     document.getElementById('modal')
   );
 });

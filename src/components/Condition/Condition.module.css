@@ -1,13 +1,19 @@
-.condition_container p {
-  margin: 0.35rem 0rem;
-  word-wrap: normal;
+.condition_container {
+  margin: 0.4rem;
 }
 
-.condition_container span {
-  font-weight: bold;
-  margin-right: 0.40rem;
+.info {
+  color: var(--light-color);
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
+}
+
+.info span {
+  color: var(--brand-color);
+  font-weight: 700;
+  margin-right: 0.2rem;
 }
 
 .line {
-  margin: 0.5rem 0rem;
+  color: var(--bg-color);
 }

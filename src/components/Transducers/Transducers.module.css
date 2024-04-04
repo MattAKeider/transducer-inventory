@@ -1,9 +1,10 @@
-.container {
-  margin: 3rem 2rem 0 2rem;
+.transducers {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 14rem);
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, 12rem);
+  gap: 2rem;
   justify-content: center;
+  padding: 2rem;
   list-style: none;
-  position: relative;
+  max-height: 100vh;
+  overflow: auto;
 }

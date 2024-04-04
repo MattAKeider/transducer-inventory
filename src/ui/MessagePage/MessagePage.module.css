@@ -1,18 +1,21 @@
 .container {
   display: flex;
   justify-content: center;
-  padding-top: 10rem;
 }
 
 .text {
+  margin-top: 10rem;
   text-align: center;
-  font-weight: bold;
+  font-size: 1rem;
+  color: var(--light-color);
 }
 
-.text h2 {
-  color: orangered;
+.problem {
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+  color: var(--alert-color);
 }
 
 .message {
-  font-size: x-large;
+  font-size: 1.8rem;
 }

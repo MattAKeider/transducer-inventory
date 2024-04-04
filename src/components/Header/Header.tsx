@@ -12,15 +12,23 @@ const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
 
   const modalRef = useRef<ModalHandle>();
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedToken = JSON.parse(localStorage.getItem('token'));
     const storedUsername = JSON.parse(localStorage.getItem('username'));
 
-    if (storedToken && storedToken.token && new Date(storedToken.expiration) > new Date()) {
-      login(storedToken.token, new Date(storedToken.expiration), storedUsername);
+    if (
+      storedToken &&
+      storedToken.token &&
+      new Date(storedToken.expiration) > new Date()
+    ) {
+      login(
+        storedToken.token,
+        new Date(storedToken.expiration),
+        storedUsername
+      );
     }
   }, [login]);
 
@@ -42,15 +50,25 @@ const Header = () => {
         {<NewTransducer onCloseModal={handleCloseAddTransducer} />}
       </Modal>
       <header className={styles.header}>
-        <div className={styles.container}>
-          <h1 className={styles.title}>Transducer Inventory</h1>
-          <nav className={styles.navbar}>
-            {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
-            {isLoggedIn && <Button className={styles.button} onClick={handleOpenAddTransducer}><MdAddHome/> Add</Button>}
-            {!isLoggedIn && <Button className={styles.button} onClick={handleLogin}><MdLogin/> Login</Button>}
-            {isLoggedIn && <Button className={styles.button} onClick={logout}><MdLogout/> Logout</Button>}
-          </nav>
-        </div>
+        <h1 className={styles.title}>Transducer Inventory</h1>
+        <nav className={styles.navbar}>
+          {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
+          {isLoggedIn && (
+            <Button className={styles.button} onClick={handleOpenAddTransducer}>
+              <MdAddHome /> Add
+            </Button>
+          )}
+          {!isLoggedIn && (
+            <Button className={styles.button} onClick={handleLogin}>
+              <MdLogin /> Login
+            </Button>
+          )}
+          {isLoggedIn && (
+            <Button className={styles.button} onClick={logout}>
+              <MdLogout /> Logout
+            </Button>
+          )}
+        </nav>
       </header>
     </>
   );

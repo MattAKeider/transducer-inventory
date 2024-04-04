@@ -1,53 +1,57 @@
-.form_container {
-  margin: 1rem;
-}
-
 .title {
-  color: #a6518ff1;
+  align-self: flex-start;
+  color: var(--brand-color);
+  margin-bottom: 0.8rem;
+  font-size: 1.8rem;
 }
 
 .field {
-  margin-top: 0.75rem;
+  margin-bottom: 0.8rem;
 }
 
 .field label {
   display: block;
-  color: #ffebcd;
-  font-weight: bolder;
+  color: var(--brand-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
 }
 
 .field input {
   width: 400px;
-  padding: 0.30rem;
+  padding: 0.2rem;
   border: none;
-  border-bottom: 2px solid pink;
-  background-color: #773f6828;
-  color: #fff;
-  font-size: large;
+  border-bottom: 2px solid var(--bg-color);
+  background-color: var(--form-input-color);
+  color: var(--light-color);
+  font-size: 1.2rem;
+}
+
+.field input:focus-visible {
+  outline: none;
 }
 
 .switch_text {
-  color: #a6518ff1;
-  font-size: small;
-  margin-top: 0.1rem;
+  color: var(--bg-color);
+  font-size: 0.8rem;
+  margin-bottom: 1.2rem;
 }
 
-.switch_text > span{
-  color: cyan;
+.switch_text > span {
+  color: var(--light-color);
 }
 
 .switch_text > span:hover {
   cursor: pointer;
-  color: violet;
+  color: var(--alert-color);
 }
 
 .form_actions {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
   gap: 1rem;
 }
 
 .error {
-  color: orangered;
+  color: var(--alert-color);
 }

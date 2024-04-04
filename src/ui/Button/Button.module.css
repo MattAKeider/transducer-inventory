@@ -1,11 +1,14 @@
 .button {
-  padding: 0.65rem;
-  border: 1px #0505058e;
-  border-radius: 4px;
-  background-color: #0505058e;
-  color: #ffebcd;
+  width: 80px;
+  height: 32px;
+  background-color: var(--bg-color);
+  color: var(--light-color);
+  padding: 0.4rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .button:hover {
-  color: pink;
+  background-color: var(--brand-color);
 }

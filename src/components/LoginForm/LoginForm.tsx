@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   const { isLoading, sendRequest } = useHttp();
   const { login } = useContext(UserContext);
-  
+
   const navigate = useNavigate();
 
   const [fields, setFields] = useState({
@@ -121,86 +121,82 @@ const LoginForm = () => {
     <>
       <LoadingSpinner loading={isLoading} />
       <Card>
-        <div className={styles.form_container}>
-          <h2 className={styles.title}>
-            {isNewUser ? 'Create User' : 'Login'}
-          </h2>
-          <form onSubmit={handleSubmit}>
-            {isNewUser && (
-              <div className={styles.field}>
-                <label htmlFor="username">Username:</label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  required
-                  value={fields.username}
-                  onChange={handleChangeFields}
-                />
-              </div>
-            )}
+        <h2 className={styles.title}>{isNewUser ? 'Create User' : 'Login'}</h2>
+        <form onSubmit={handleSubmit}>
+          {isNewUser && (
             <div className={styles.field}>
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="username">Username:</label>
               <input
-                type="email"
-                id="email"
-                name="email"
+                type="text"
+                id="username"
+                name="username"
                 required
-                value={fields.email}
+                value={fields.username}
                 onChange={handleChangeFields}
               />
             </div>
+          )}
+          <div className={styles.field}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={fields.email}
+              onChange={handleChangeFields}
+            />
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="password">Password:</label>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              name="password"
+              required
+              pattern="(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+              value={fields.password}
+              onChange={handleChangeFields}
+              onDoubleClick={handleShowPassword}
+              title="Must contain an uppercase letter, number, and special character"
+            />
+          </div>
+          {isNewUser && (
             <div className={styles.field}>
-              <label htmlFor="password">Password:</label>
+              <label htmlFor="confirm">Confirm Password:</label>
               <input
                 type={showPassword ? 'text' : 'password'}
-                id="password"
-                name="password"
+                id="confirm"
+                name="confirm"
                 required
                 pattern="(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                value={fields.password}
+                value={fields.confirm}
                 onChange={handleChangeFields}
                 onDoubleClick={handleShowPassword}
                 title="Must contain an uppercase letter, number, and special character"
               />
             </div>
-            {isNewUser && (
-              <div className={styles.field}>
-                <label htmlFor="confirm">Confirm Password:</label>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="confirm"
-                  name="confirm"
-                  required
-                  pattern="(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                  value={fields.confirm}
-                  onChange={handleChangeFields}
-                  onDoubleClick={handleShowPassword}
-                  title="Must contain an uppercase letter, number, and special character"
-                />
-              </div>
-            )}
-            {isNewUser && (
-              <p className={styles.switch_text}>
-                Already a user? <span onClick={handleSwitchForm}>Login</span>
-              </p>
-            )}
-            {!isNewUser && (
-              <p className={styles.switch_text}>
-                Not a user? <span onClick={handleSwitchForm}>Signup</span>
-              </p>
-            )}
-            <div className={styles.form_actions}>
-              <Button type="button" onClick={handleCancel}>
-                Cancel
-              </Button>
-              <Button type="submit">Submit</Button>
-            </div>
-          </form>
-          {!isLoading && errorMessage && (
-            <ErrorMessage errorMessage={errorMessage}/>
           )}
-        </div>
+          {isNewUser && (
+            <p className={styles.switch_text}>
+              Already a user? <span onClick={handleSwitchForm}>Login</span>
+            </p>
+          )}
+          {!isNewUser && (
+            <p className={styles.switch_text}>
+              Not a user? <span onClick={handleSwitchForm}>Signup</span>
+            </p>
+          )}
+          <div className={styles.form_actions}>
+            <Button type="button" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button type="submit">Submit</Button>
+          </div>
+        </form>
+        {!isLoading && errorMessage && (
+          <ErrorMessage errorMessage={errorMessage} />
+        )}
       </Card>
     </>
   );

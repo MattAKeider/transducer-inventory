@@ -1,6 +1,9 @@
 import { useContext, useReducer, useState } from 'react';
 
-import { TransducerContext, TransducerContextType } from '../../context/transducer-context';
+import {
+  TransducerContext,
+  TransducerContextType,
+} from '../../context/transducer-context';
 import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
@@ -12,14 +15,18 @@ type NewTransducerProps = {
 };
 
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
-  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
+  const { addTransducer } =
+    useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
   const { isLoading, sendRequest } = useHttp();
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [errorMessage, setErrorMessage] = useState<string>(null);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>,
+    validDate: boolean
+  ) => {
     event.preventDefault();
 
     setErrorMessage(null);
@@ -42,11 +49,11 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
           internalIdentifier: state.internal,
           controlNumber: state.control,
           dateReceived: state.received,
-          outOfService: state.service
+          outOfService: state.service,
         }),
         {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         }
       );
 
@@ -56,11 +63,11 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
         JSON.stringify({
           condition: state.condition,
           note: state.notes,
-          transducer: transducerResponseData.transducer.id
+          transducer: transducerResponseData.transducer.id,
         }),
         {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         }
       );
 
@@ -98,15 +105,15 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
       dispatch({
         type: 'RESET',
         payload: {
-          initialState
-        }
+          initialState,
+        },
       });
     }
   };
 
   return (
     <>
-      <LoadingSpinner loading={isLoading} style={{ marginTop: '35rem'}}/>
+      <LoadingSpinner loading={isLoading} />
       <TransducerForm
         isNew={true}
         formState={state}

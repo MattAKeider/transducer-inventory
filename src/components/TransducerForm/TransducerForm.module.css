@@ -1,56 +1,51 @@
-.form_container {
-  margin: 2rem;
+.container {
+  margin: 0.2rem;
 }
 
-.header {
-  color: #a6518ff1;
-  font-weight: bolder;
-  margin-bottom: 1rem;
-}
-
-.form_fieldset {
-  padding: 0.60rem;
-}
-
-.legend {
-  padding: 0 0.30rem;
-  color: #a6518ff1;
-  font-weight: bold;
+.title {
+  font-size: 1.8rem;
+  color: var(--brand-color);
+  margin-bottom: 0.4rem;
 }
 
 .field {
-  margin: 1rem;
-  margin-top: 0.75rem;
-  font-size: large;
+  margin-bottom: 0.4rem;
 }
 
 .field label {
+  font-size: 0.8rem;
+  font-weight: 700;
   display: block;
-  color: #ffebcd;
-  font-weight: bolder;
+  color: var(--brand-color);
 }
 
 .field input,
 .field textarea,
 .field select {
   width: 100%;
-  padding: 0.30rem;
+  padding: 0.2rem;
   border: none;
-  border-bottom: 2px solid pink;
-  background-color: #773f6828;
-  color: #fff;
-  font-size: large;
+  border-bottom: 2px solid var(--bg-color);
+  background-color: var(--form-input-color);
+  color: var(--light-color);
+  font-size: 1rem;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
 }
 
 .field input:disabled,
 .field textarea:disabled,
 .field select:disabled {
-  background-color: gray;
+  background-color: var(--bg-color);
 }
 
 .field textarea {
+  font-size: 1rem;
   resize: none;
-  font-size: large;
+  margin-bottom: 0.4rem;
 }
 
 .field select {
@@ -58,7 +53,7 @@
 }
 
 .error {
-  color: orange;
+  color: var(--alert-color);
 }
 
 .checkbox_field {
@@ -67,24 +62,20 @@
 }
 
 .checkbox_field label {
-  color: pink;
-  font-weight: bolder;
+  color: var(--brand-color);
+  font-weight: 700;
 }
 
 .checkbox_field input {
-  margin-right: 0.50rem;
+  margin: 0 0.4rem 0.4rem 0;
 }
 
 .line_break {
-  margin: 1.50rem 0;
+  margin-bottom: 0.4rem;
 }
 
 .form_actions {
   display: flex;
-  justify-content: right;
-  margin-top: 1rem;
-}
-
-.form_actions button {
-  margin-left: 0.75rem;
+  justify-content: center;
+  gap: 1rem;
 }

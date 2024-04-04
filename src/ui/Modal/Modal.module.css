@@ -1,19 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .modal {
-  position: absolute;
-  top: 5%;
-  left: 28%;
-  transform: translate(-50%, -50%);
-  width: 35rem;
-  max-width: 90%;
-  background: #242424;
+  margin: auto;
+  width: 30%;
+  max-height: 90%;
+  padding: 1.6rem;
+  background-color: var(--bg-tint-color);
   border: none;
-  border-radius: 6px;
-  outline: none;
   animation: slide-up-fade-in 0.4s ease-out forwards;
+  box-shadow: 3px 3px 5px var(--bg-tint-shadow-color);
+  outline: none;
 }
 
 .modal::backdrop {
-  background: #000000df;
+  background-color: #000000e3;
 }
 
 @keyframes slide-up-fade-in {

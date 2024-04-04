@@ -1,4 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+/*
+SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+FONT SIZE SYSTEM (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+*/
+
+:root {
+  --brand-color: #db2777;
+  --brand-shadow-color: #db2777eb;
+  --alert-color: #ff4500;
+  --bg-color: #111827;
+  --bg-shadow-color: #111827eb;
+  --bg-tint-color: #1f2937;
+  --bg-tint-shadow-color: #1f2937eb;
+  --form-input-color: #374151;
+  --light-color: #e5e7eb;
+}
 
 * {
   box-sizing: border-box;
@@ -7,10 +27,11 @@
 }
 
 body {
-  font-family: "Quicksand", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-size: 1rem;
-  line-height: 1.5;
-  background: linear-gradient(85deg, #fc9c9c, #ffebcd);
   min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  font-size: 62.5%;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: var(--bg-color);
+  position: relative;
 }

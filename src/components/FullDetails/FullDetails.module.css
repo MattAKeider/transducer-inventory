@@ -1,54 +1,51 @@
-.full_details_container {
-  color: #fff;
-  margin: 2rem;
-}
-
-.full_details_container span {
-  color: #ffebcd;
+.main_details {
+  font-size: 1rem;
 }
 
 .name_container {
   display: flex;
   justify-content: center;
-  padding-bottom: 1rem;
-}
-
-.main_details {
-  margin-bottom: 1rem;
-}
-
-.main_details p {
-  margin: 0.15rem 0rem;
-  margin-left: 1rem;
-}
-
-.main_details span {
-  font-weight: bold;
-  margin-right: 0.40rem;
+  margin-bottom: 0.8rem;
 }
 
 .name {
-  color: #a6518ff1;
-  font-weight: bolder;
+  font-size: 1.8rem;
+  color: var(--brand-color);
 }
 
-.condition_field {
-  padding: 0.30rem 0.80rem 0.80rem 0.80rem;
-  margin: 0.25rem;
+.info {
+  color: var(--light-color);
+  margin-bottom: 0.2rem;
+}
+
+.info:last-child {
   margin-bottom: 1rem;
 }
 
+.info span {
+  color: var(--brand-color);
+  font-weight: 700;
+  margin-right: 0.2rem;
+}
+
+.condition_field {
+  padding: 0 0.4rem 0.4rem 0.4rem;
+  margin-bottom: 1.6rem;
+  max-height: 125px;
+  overflow-y: scroll;
+  color: var(--light-color);
+}
+
 .legend {
-  padding: 0 0.30rem;
-  color: #a6518ff1;
-  font-weight: bold;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  padding: 0 0.4rem;
+  color: var(--brand-color);
 }
 
 .button_container {
   display: flex;
-  justify-content: right;
-}
-
-.button_container button {
-  margin-left: 0.75rem;
+  justify-content: center;
+  gap: 1rem;
 }
