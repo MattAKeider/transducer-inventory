@@ -23,7 +23,7 @@ const TransducerItem = ({
       {isLoggedIn && (
         <TiDelete className={styles.delete} onClick={onClickDelete} />
       )}
-      <h2 className={styles.item_title}>{transducerData.name}</h2>
+      <h3 className={styles.item_title}>{transducerData.name}</h3>
       <p className={styles.item_info}>
         <span>Location: </span>
         {transducerData.location}

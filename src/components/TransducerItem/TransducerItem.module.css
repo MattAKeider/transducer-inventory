@@ -1,12 +1,13 @@
 .transducer {
   width: 12rem;
-  height: 10rem;
+  height: 12rem;
   background-color: var(--bg-tint-color);
   position: relative;
-  padding: 0.4rem;
+  padding: 1.6rem 1rem;
   text-align: center;
   cursor: pointer;
   box-shadow: 3px 3px 5px var(--bg-tint-shadow-color);
+  overflow: auto;
 }
 
 .transducer:hover {
@@ -29,7 +30,7 @@
 
 .item_title {
   color: var(--brand-color);
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   margin-bottom: 0.2rem;
 }
 

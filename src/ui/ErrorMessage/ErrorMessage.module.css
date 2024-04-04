@@ -4,6 +4,7 @@
 }
 
 .message {
+  font-size: 1rem;
   margin-top: 0.2rem;
   color: var(--alert-color);
 }
