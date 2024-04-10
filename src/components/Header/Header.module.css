@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   background-color: var(--brand-color);
   padding: 0.4rem 0.8rem;
 }
@@ -26,4 +27,42 @@
 .button:hover {
   color: var(--brand-color);
   background-color: var(--bg-color);
+}
+
+@media (max-width: 896px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .welcome {
+    margin-bottom: 0.8rem;
+    color: var(--brand-color);
+  }
+
+  .navbar {
+    position: fixed;
+    flex-direction: column;
+    z-index: 1;
+    inset: 0 0 0 15%;
+    background-color: var(--bg-color);
+    padding: 4rem 2rem;
+    border-left: 5px solid var(--bg-tint-color);
+  }
+
+  .menu {
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: var(--bg-color);
+    cursor: pointer;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: var(--brand-color);
+    cursor: pointer;
+  }
 }

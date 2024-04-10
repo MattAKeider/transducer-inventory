@@ -1,6 +1,6 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MdAddHome, MdLogin, MdLogout } from 'react-icons/md';
+import { MdAddHome, MdLogin, MdLogout, MdMenu, MdClose } from 'react-icons/md';
 
 import { UserContext } from '../../context/user-context';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
@@ -10,6 +10,8 @@ import styles from './Header.module.css';
 
 const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
 
   const modalRef = useRef<ModalHandle>();
 
@@ -32,6 +34,18 @@ const Header = () => {
     }
   }, [login]);
 
+  useEffect(() => {
+    const resize = () => {
+      window.innerWidth > 896 ? setIsMobile(false) : setIsMobile(true);
+    };
+
+    window.addEventListener('resize', resize);
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
+
   const handleOpenAddTransducer = () => {
     modalRef.current.open();
   };
@@ -44,6 +58,34 @@ const Header = () => {
     navigate('/login');
   };
 
+  const handleClickMobileNav = () => {
+    setShowMobileNav((prevState) => !prevState);
+  };
+
+  const navigation = (
+    <nav className={styles.navbar}>
+      {isMobile && (
+        <MdClose className={styles.close} onClick={handleClickMobileNav} />
+      )}
+      {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
+      {isLoggedIn && (
+        <Button className={styles.button} onClick={handleOpenAddTransducer}>
+          <MdAddHome /> Add
+        </Button>
+      )}
+      {!isLoggedIn && (
+        <Button className={styles.button} onClick={handleLogin}>
+          <MdLogin /> Login
+        </Button>
+      )}
+      {isLoggedIn && (
+        <Button className={styles.button} onClick={logout}>
+          <MdLogout /> Logout
+        </Button>
+      )}
+    </nav>
+  );
+
   return (
     <>
       <Modal ref={modalRef}>
@@ -51,24 +93,10 @@ const Header = () => {
       </Modal>
       <header className={styles.header}>
         <h1 className={styles.title}>Transducer Inventory</h1>
-        <nav className={styles.navbar}>
-          {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
-          {isLoggedIn && (
-            <Button className={styles.button} onClick={handleOpenAddTransducer}>
-              <MdAddHome /> Add
-            </Button>
-          )}
-          {!isLoggedIn && (
-            <Button className={styles.button} onClick={handleLogin}>
-              <MdLogin /> Login
-            </Button>
-          )}
-          {isLoggedIn && (
-            <Button className={styles.button} onClick={logout}>
-              <MdLogout /> Logout
-            </Button>
-          )}
-        </nav>
+        {isMobile && (
+          <MdMenu className={styles.menu} onClick={handleClickMobileNav} />
+        )}
+        {(!isMobile || showMobileNav) && navigation}
       </header>
     </>
   );
