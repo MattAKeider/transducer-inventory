@@ -47,6 +47,7 @@
     background-color: var(--bg-color);
     padding: 4rem 2rem;
     border-left: 5px solid var(--bg-tint-color);
+    animation: slide-left 0.2s ease-in-out;
   }
 
   .menu {
@@ -64,5 +65,17 @@
     height: 1.8rem;
     fill: var(--brand-color);
     cursor: pointer;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    transform: translatex(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translatex(0);
+    opacity: 1;
   }
 }
