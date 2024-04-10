@@ -46,8 +46,13 @@ const Header = () => {
     };
   }, []);
 
+  const handleClickMobileNav = () => {
+    setShowMobileNav((prevState) => !prevState);
+  };
+
   const handleOpenAddTransducer = () => {
     modalRef.current.open();
+    isMobile && handleClickMobileNav();
   };
 
   const handleCloseAddTransducer = () => {
@@ -56,10 +61,12 @@ const Header = () => {
 
   const handleLogin = () => {
     navigate('/login');
+    isMobile && handleClickMobileNav();
   };
 
-  const handleClickMobileNav = () => {
-    setShowMobileNav((prevState) => !prevState);
+  const handleLogout = () => {
+    logout();
+    isMobile && handleClickMobileNav();
   };
 
   const navigation = (
@@ -79,7 +86,7 @@ const Header = () => {
         </Button>
       )}
       {isLoggedIn && (
-        <Button className={styles.button} onClick={logout}>
+        <Button className={styles.button} onClick={handleLogout}>
           <MdLogout /> Logout
         </Button>
       )}
