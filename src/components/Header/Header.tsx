@@ -35,14 +35,15 @@ const Header = () => {
   }, [login]);
 
   useEffect(() => {
-    const resize = () => {
+    const checkSize = () => {
       window.innerWidth > 896 ? setIsMobile(false) : setIsMobile(true);
     };
 
-    window.addEventListener('resize', resize);
+    checkSize();
+    window.addEventListener('resize', checkSize);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', checkSize);
     };
   }, []);
 
