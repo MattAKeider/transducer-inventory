@@ -6,7 +6,7 @@
 
 .modal {
   margin: auto;
-  width: 30%;
+  width: 35%;
   max-height: 90%;
   padding: 1.6rem;
   background-color: var(--bg-tint-color);
@@ -29,5 +29,17 @@
   to {
     transform: translatey(0);
     opacity: 1;
+  }
+}
+
+@media (max-width: 1000px) {
+  .modal {
+    min-width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal {
+    min-width: 90%;
   }
 }

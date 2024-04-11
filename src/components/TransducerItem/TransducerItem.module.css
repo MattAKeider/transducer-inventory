@@ -45,3 +45,17 @@
   font-weight: 700;
   margin-right: 0.2rem;
 }
+
+@media (max-width: 476px) {
+  .transducer {
+    min-width: 100%;
+  }
+
+  .item_title {
+    font-size: 1.4rem;
+  }
+
+  .item_info {
+    font-size: 1rem;
+  }
+}

@@ -18,7 +18,7 @@
 }
 
 .field input {
-  width: 400px;
+  width: 25rem;
   padding: 0.2rem;
   border: none;
   border-bottom: 2px solid var(--bg-color);
@@ -54,4 +54,10 @@
 
 .error {
   color: var(--alert-color);
+}
+
+@media (max-width: 550px) {
+  .field input {
+    width: 100%;
+  }
 }
