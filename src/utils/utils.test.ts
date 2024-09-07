@@ -1,6 +1,6 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vitest } from 'vitest';
 
-import { filterBySearch, formatDate } from './utils';
+import { filterBySearch, formatDate, setExpirationDate } from './utils';
 import { TRANSDUCERS } from '../data/data';
 
 describe('Utils', () => {
@@ -17,5 +17,20 @@ describe('Utils', () => {
   test('should not return any results', () => {
     const results = filterBySearch('y', TRANSDUCERS);
     expect(results.length).toEqual(0);
+  });
+
+  test('should set expiration date to 3 hours from current date', () => {
+    vitest.setSystemTime('2024-09-08T01:13:34.000Z');
+    expect(setExpirationDate(3).getTime() - new Date().getTime()).toBe(10800000);
+  });
+
+  test('should expire in 1 hour if hoursTillExpiration is greater than 24 hours', () => {
+    vitest.setSystemTime('2024-09-08T01:13:34.000Z');
+    expect(setExpirationDate(32).getTime()).toBe(new Date().getTime() + 3600000);
+  });
+
+  test('should expire in 1 hour if hoursTillExpiration is a negative number', () => {
+    vitest.setSystemTime('2024-09-08T01:13:34.000Z');
+    expect(setExpirationDate(-2).getTime()).toBe(new Date().getTime() + 3600000);
   });
 });

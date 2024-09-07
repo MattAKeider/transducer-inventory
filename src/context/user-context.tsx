@@ -1,5 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
 
+import { setExpirationDate } from '../utils/utils';
+
 export type UserContextType = {
   isLoggedIn: boolean;
   token: string;
@@ -37,7 +39,7 @@ const UserContextProvider = ({children}: UserContextProviderProps) => {
     setUsername(username);
 
     // time till expiration of token, i.e., 3 hours
-    const tokenExpDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 180);
+    const tokenExpDate = expirationDate || setExpirationDate(3);
     setTokenExpirationDate(tokenExpDate);
 
     // store in localstorage for persistant login until token expires
