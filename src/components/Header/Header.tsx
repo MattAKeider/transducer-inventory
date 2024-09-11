@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdAddHome, MdLogin, MdLogout, MdMenu, MdClose } from 'react-icons/md';
 
-import { UserContext } from '../../context/user-context';
+import { UserContext } from '../../context/UserContext';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import NewTransducer from '../NewTransducer/NewTransducer';
 import Button from '../../ui/Button/Button';

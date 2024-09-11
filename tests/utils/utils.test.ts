@@ -1,7 +1,7 @@
 import { describe, test, expect, vitest } from 'vitest';
 
-import { filterBySearch, formatDate, setExpirationDate } from './utils';
-import { TRANSDUCERS } from '../data/data';
+import { filterBySearch, formatDate, setExpirationDate } from '../../src/utils/utils';
+import { TRANSDUCERS } from '../../src/data/data';
 
 describe('Utils', () => {
   test('should format recieved input correctly', () => {

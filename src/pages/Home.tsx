@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import {
   TransducerContext,
   TransducerContextType,
-} from '../context/transducer-context';
+} from '../context/TransducerContext';
 import EmptyScreen from '../components/EmptyScreen/EmptyScreen';
 import Transducers from '../components/Transducers/Transducers';
 import LoadingSpinner from '../ui/LoadingSpinner/LoadingSpinner';

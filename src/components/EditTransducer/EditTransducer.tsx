@@ -3,8 +3,8 @@ import { useContext, useEffect, useReducer, useState } from 'react';
 import {
   TransducerContext,
   TransducerContextType,
-} from '../../context/transducer-context';
-import { UserContext, UserContextType } from '../../context/user-context';
+} from '../../context/TransducerContext';
+import { UserContext, UserContextType } from '../../context/UserContext';
 import { transducerFormValues, reducer } from '../../utils/formUtils';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import TransducerForm from '../TransducerForm/TransducerForm';
