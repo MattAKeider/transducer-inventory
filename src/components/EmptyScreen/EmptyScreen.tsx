@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { UserContext } from '../../context/user-context';
+import { UserContext } from '../../context/UserContext';
 import emptyImg from '../../assets/empty-box.png';
 import styles from './EmptyScreen.module.css';
 

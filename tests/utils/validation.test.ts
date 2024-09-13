@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { isValidDate } from './validation';
+import { isValidDate } from '../../src/utils/validation';
 
 describe('Validation', () => {
   test('should have a valid date', () => {

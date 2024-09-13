@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
-import { UserContext } from '../../context/user-context';
+import { UserContext } from '../../context/UserContext';
 import { passwordsAreEqual } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import Card from '../../ui/Card/Card';

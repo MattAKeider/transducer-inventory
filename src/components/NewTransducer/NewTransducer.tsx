@@ -3,11 +3,11 @@ import { useContext, useReducer, useState } from 'react';
 import {
   TransducerContext,
   TransducerContextType,
-} from '../../context/transducer-context';
+} from '../../context/TransducerContext';
 import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
-import { UserContext, UserContextType } from '../../context/user-context';
+import { UserContext, UserContextType } from '../../context/UserContext';
 import useHttp from '../../hooks/useHttp';
 
 type NewTransducerProps = {

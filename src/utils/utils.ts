@@ -28,3 +28,15 @@ export const filterBySearch = (searchValue: string, transducers: Transducer[]): 
     }
   });
 };
+
+export const setExpirationDate = (hoursTillExpiration: number) => {
+  let hours: number;
+
+  if (hoursTillExpiration > 24 || hoursTillExpiration < 1) {
+    hours = 1;
+  } else {
+    hours = hoursTillExpiration;
+  }
+
+  return new Date(new Date().getTime() + 1000 * 60 * 60 * hours);
+};

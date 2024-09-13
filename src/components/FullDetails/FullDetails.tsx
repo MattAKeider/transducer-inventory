@@ -9,7 +9,7 @@ import Condition from '../Condition/Condition';
 import useHttp from '../../hooks/useHttp';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
-import { UserContext } from '../../context/user-context';
+import { UserContext } from '../../context/UserContext';
 import styles from './FullDetails.module.css';
 
 type FullDetailsProps = {
