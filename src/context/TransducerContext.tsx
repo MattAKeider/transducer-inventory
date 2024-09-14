@@ -47,7 +47,7 @@ const reducer = (state: Transducer[], action: Action): Transducer[] => {
       return state.filter((transducer: Transducer) => transducer.id !== action.payload.id);
     }
     default:
-      throw Error('Unknown action ' + action.type)
+      throw Error('Unknown action ' + action.type);
   }
 };
 
