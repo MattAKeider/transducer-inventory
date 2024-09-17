@@ -3,9 +3,11 @@ Frontend web application used to manage transducer inventory in a healthcare set
 
 Built using React.js, TypeScript, and CSS Modules. Connects to the transducer-inventory-api Express.js and MongoDB backend.
 
-<img src="./src/assets/header_welcome.png" width="320" height="200"/>
-<img src="./src/assets/signup.png" width="320" height="200"/>
-<img src="./src/assets/details.png" width="320" height="200"/>
+<span>
+  <img src="./src/assets/header_welcome.png" width="320" height="200"/>
+  <img src="./src/assets/signup.png" width="320" height="200"/>
+  <img src="./src/assets/details.png" width="320" height="200"/>
+<span/>
 
 ## Create .env
 Create a .env file in the root of repository and add:
