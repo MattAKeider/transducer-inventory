@@ -30,27 +30,24 @@ type Action = {
 };
 
 const reducer = (state: Transducer[], action: Action): Transducer[] => {
-  const transducers: Transducer[] = [...state];
-  
   switch(action.type) {
     case 'ADD_TRANSDUCER': {
-      return [action.payload.transducer, ...state];
+      return [...state, action.payload.transducer];
     }
     case 'FETCH_TRANSDUCERS': {
       return [...action.payload.transducers];
     }
     case 'EDIT_TRANSDUCER': {
-      const findIndex = state.findIndex((state: Transducer) => state.id === action.payload.transducer.id);
-      transducers.splice(findIndex, 1, action.payload.transducer);
-      return transducers;
+      return state.map((transducer: Transducer) => {
+        return transducer.id === action.payload.transducer.id ? 
+          {...action.payload.transducer} : transducer;
+      });
     }
     case 'DELETE_TRANSDUCER': {
-      const filtered = transducers.filter((transducer: Transducer) => transducer.id !== action.payload.id);
-      return filtered;
+      return state.filter((transducer: Transducer) => transducer.id !== action.payload.id);
     }
-    default: {
-      return transducers;
-    }
+    default:
+      throw Error('Unknown action ' + action.type);
   }
 };
 

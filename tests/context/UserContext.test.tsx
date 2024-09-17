@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { useContext, useEffect } from 'react';
 
 import UserContextProvider, { UserContext } from '../../src/context/UserContext';
@@ -24,10 +24,6 @@ const TestComponent = ({ loginUser }: { loginUser: boolean }) => {
 };
 
 describe('UserContextProvider', () => {
-  beforeEach(() => {
-    cleanup();
-  });
-
   test('should render TestComponent using the UserContextProvider login', () => {
     render(
       <UserContextProvider>
