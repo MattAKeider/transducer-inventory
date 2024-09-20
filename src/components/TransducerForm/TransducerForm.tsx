@@ -16,7 +16,7 @@ type TransducerFormProps = {
   ) => void;
   onCancelForm: () => void;
   onEscForm: (event: React.KeyboardEvent<HTMLDivElement>) => void;
-  error: string;
+  error: Error;
 };
 
 const TransducerForm = ({
@@ -244,7 +244,7 @@ const TransducerForm = ({
             rows={4}
           />
         </div>
-        <ErrorMessage errorMessage={error} />
+        {error && <ErrorMessage errorMessage={error.message} />}
         <div className={styles.form_actions}>
           <Button type="button" onClick={onCancelForm}>
             Cancel
