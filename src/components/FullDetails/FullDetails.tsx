@@ -19,11 +19,10 @@ type FullDetailsProps = {
 
 const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
   const [conditions, setConditions] = useState<TransducerCondition[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const { isLoggedIn } = useContext(UserContext);
-  const { isLoading, sendRequest } = useHttp();
+  const { isLoading, error, sendRequest } = useHttp();
 
   const modalRef = useRef<ModalHandle>();
 
@@ -31,14 +30,10 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
 
   useEffect(() => {
     async function getConditions() {
-      try {
-        const responseData = await sendRequest(
-          `${import.meta.env.VITE_API_URL}/conditions/${id}`
-        );
+      const responseData = await sendRequest(`${import.meta.env.VITE_API_URL}/conditions/${id}`);
 
+      if (responseData) {
         setConditions(responseData.conditions.reverse());
-      } catch (error) {
-        setErrorMessage(error.message);
       }
     }
 
@@ -108,11 +103,11 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
       </div>
       <fieldset className={styles.condition_field}>
         <legend className={styles.legend}>Condition log</legend>
-        {!isLoading && errorMessage && (
+        {!isLoading && error && (
           <ErrorMessage errorMessage="Error loading..." />
         )}
         {!isLoading &&
-          !errorMessage &&
+          !error &&
           conditions.map((condition: TransducerCondition) => (
             <Condition key={condition.id} transducerCondition={condition} />
           ))}
