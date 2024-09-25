@@ -32,7 +32,7 @@ const Header = () => {
         storedUsername
       );
     }
-  }, [login]);
+  }, []);
 
   useEffect(() => {
     const checkSize = () => {
