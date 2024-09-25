@@ -4,6 +4,7 @@ const useHttp = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>(null);
 
+  // TODO: Try and remove useCallback if possible
   const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
     setIsLoading(true);
 
@@ -29,7 +30,7 @@ const useHttp = () => {
     }
   }, []);
 
-  return { isLoading, error, sendRequest };
+  return { isLoading, error, setError, sendRequest };
 };
 
 export default useHttp;
