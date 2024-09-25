@@ -94,6 +94,7 @@ const Header = () => {
     </nav>
   );
 
+  // TODO: Show modal child conditionally to mitigate unneeded renders.
   return (
     <>
       <Modal ref={modalRef}>
