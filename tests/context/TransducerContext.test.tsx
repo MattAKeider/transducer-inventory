@@ -102,8 +102,6 @@ describe('TransducerContextProvider', () => {
     
     heading = screen.getByRole('heading', {name: 'Edited'});
     expect(heading).toBeInTheDocument();
-
-    screen.debug()
   });
 });
 
