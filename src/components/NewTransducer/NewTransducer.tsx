@@ -1,9 +1,6 @@
-import { useContext, useReducer, useState } from 'react';
+import { useContext, useReducer } from 'react';
 
-import {
-  TransducerContext,
-  TransducerContextType,
-} from '../../context/TransducerContext';
+import { TransducerContext, TransducerContextType } from '../../context/TransducerContext';
 import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
@@ -15,13 +12,11 @@ type NewTransducerProps = {
 };
 
 const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
-  const { addTransducer } =
-    useContext<TransducerContextType>(TransducerContext);
+  const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
-  const { isLoading, sendRequest } = useHttp();
+  const { isLoading, error, sendRequest } = useHttp();
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [errorMessage, setErrorMessage] = useState<string>(null);
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>,
@@ -29,63 +24,58 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   ) => {
     event.preventDefault();
 
-    setErrorMessage(null);
-
     if (!validDate) {
       return;
     }
 
-    try {
-      const transducerResponseData = await sendRequest(
-        `${import.meta.env.VITE_API_URL}/transducers`,
-        'POST',
-        JSON.stringify({
-          name: state.name,
-          location: state.location,
-          department: state.department,
-          transducerType: state.type,
-          room: state.room,
-          serialNumber: state.serial,
-          internalIdentifier: state.internal,
-          controlNumber: state.control,
-          dateReceived: state.received,
-          outOfService: state.service,
-        }),
-        {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        }
-      );
+    const responseData = await sendRequest(
+      `${import.meta.env.VITE_API_URL}/transducers`,
+      'POST',
+      JSON.stringify({
+        name: state.name,
+        location: state.location,
+        department: state.department,
+        transducerType: state.type,
+        room: state.room,
+        serialNumber: state.serial,
+        internalIdentifier: state.internal,
+        controlNumber: state.control,
+        dateReceived: state.received,
+        outOfService: state.service,
+      }),
+      {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }
+    );
 
+    if (responseData) {
       await sendRequest(
         `${import.meta.env.VITE_API_URL}/conditions`,
         'POST',
         JSON.stringify({
           condition: state.condition,
           note: state.notes,
-          transducer: transducerResponseData.transducer.id,
+          transducer: responseData.transducer.id,
         }),
         {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         }
       );
-
-      addTransducer(transducerResponseData.transducer);
-    } catch (error) {
-      setErrorMessage(error.message);
-      return;
+  
+      addTransducer(responseData.transducer);
+  
+      // Reset form
+      dispatch({
+        type: 'RESET',
+        payload: {
+          initialState,
+        },
+      });
+  
+      onCloseModal();
     }
-
-    // Reset form
-    dispatch({
-      type: 'RESET',
-      payload: {
-        initialState,
-      },
-    });
-
-    onCloseModal();
   };
 
   const handleCancel = () => {
@@ -121,7 +111,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
         onSubmitForm={handleSubmit}
         onCancelForm={handleCancel}
         onEscForm={handleEsc}
-        error={errorMessage}
+        error={error}
       />
     </>
   );

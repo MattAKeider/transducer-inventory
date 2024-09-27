@@ -1,9 +1,6 @@
 import { useState, useRef, useContext, useEffect } from 'react';
 
-import {
-  TransducerContext,
-  TransducerContextType,
-} from '../../context/TransducerContext';
+import { TransducerContext, TransducerContextType } from '../../context/TransducerContext';
 import { UserContext, UserContextType } from '../../context/UserContext';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
@@ -17,20 +14,14 @@ import useHttp from '../../hooks/useHttp';
 import styles from './Transducers.module.css';
 
 const Transducers = () => {
-  const { transducers, deleteTransducer } =
-    useContext<TransducerContextType>(TransducerContext);
+  const { transducers, deleteTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
-  const { isLoading, sendRequest } = useHttp();
+  const { isLoading, error, sendRequest } = useHttp();
   const modalRef = useRef<ModalHandle>();
 
-  const [selectedTransducer, setSelectedTransducer] = useState<
-    Transducer | undefined
-  >();
+  const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
   const [searchValue, setSearchValue] = useState<string>('');
-  const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>(
-    []
-  );
-  const [errorMessage, setErrorMessage] = useState<string>(null);
+  const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,18 +47,17 @@ const Transducers = () => {
     event.stopPropagation();
 
     if (confirm(`Are you sure you would like to delete ${name}?`)) {
-      try {
-        await sendRequest(
-          `${import.meta.env.VITE_API_URL}/transducers/${id}`,
-          'DELETE',
-          null,
-          {
-            Authorization: `Bearer ${token}`,
-          }
-        );
+      const responseData = await sendRequest(
+        `${import.meta.env.VITE_API_URL}/transducers/${id}`,
+        'DELETE',
+        null,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (responseData) {
         deleteTransducer(id);
-      } catch (error) {
-        setErrorMessage(error.message);
       }
     }
   };
@@ -110,10 +100,10 @@ const Transducers = () => {
         )}
       </Modal>
       <LoadingSpinner loading={isLoading} />
-      {!isLoading && errorMessage && (
-        <MessagePage message={errorMessage} isError />
+      {!isLoading && error && (
+        <MessagePage message={`${error.message} please reload page!`} isError />
       )}
-      {!isLoading && !errorMessage && content}
+      {!isLoading && !error && content}
     </>
   );
 };

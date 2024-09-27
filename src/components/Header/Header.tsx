@@ -32,7 +32,7 @@ const Header = () => {
         storedUsername
       );
     }
-  }, [login]);
+  }, []);
 
   useEffect(() => {
     const checkSize = () => {
@@ -94,6 +94,7 @@ const Header = () => {
     </nav>
   );
 
+  // TODO: Show modal child conditionally to mitigate unneeded renders.
   return (
     <>
       <Modal ref={modalRef}>

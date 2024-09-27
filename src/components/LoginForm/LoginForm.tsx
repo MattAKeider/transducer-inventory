@@ -18,10 +18,8 @@ interface User {
 
 const LoginForm = () => {
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const { isLoading, sendRequest } = useHttp();
+  const { isLoading, error, setError, sendRequest } = useHttp();
   const { login } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -34,7 +32,7 @@ const LoginForm = () => {
   });
 
   const handleChangeFields = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorMessage(null);
+    setError(null);
     setFields((prevState) => {
       const field = event.target.name;
       return {
@@ -52,7 +50,7 @@ const LoginForm = () => {
       confirm: '',
     });
 
-    setErrorMessage(null);
+    setError(null);
     setIsNewUser((prevState) => !prevState);
   };
 
@@ -74,24 +72,23 @@ const LoginForm = () => {
         password: fields.password,
       };
 
-      try {
-        if (!passwordsAreEqual(fields.password, fields.confirm)) {
-          throw new Error('Passwords must match!');
+      if (!passwordsAreEqual(fields.password, fields.confirm)) {
+        setError(new Error('Passwords must match!'));
+        return;
+      }
+
+      const responseData = await sendRequest(
+        `${import.meta.env.VITE_API_URL}/users/signup`,
+        'POST',
+        JSON.stringify(userData),
+        {
+          'Content-Type': 'application/json',
         }
+      );
 
-        const responseData = await sendRequest(
-          `${import.meta.env.VITE_API_URL}/users/signup`,
-          'POST',
-          JSON.stringify(userData),
-          {
-            'Content-Type': 'application/json',
-          }
-        );
-
+      if (responseData) {
         login(responseData.token, null, responseData.username);
         navigate('/');
-      } catch (error) {
-        setErrorMessage(error.message);
       }
     } else if (!isNewUser) {
       const userData: User = {
@@ -99,20 +96,18 @@ const LoginForm = () => {
         password: fields.password,
       };
 
-      try {
-        const responseData = await sendRequest(
-          `${import.meta.env.VITE_API_URL}/users/login`,
-          'POST',
-          JSON.stringify(userData),
-          {
-            'Content-Type': 'application/json',
-          }
-        );
+      const responseData = await sendRequest(
+        `${import.meta.env.VITE_API_URL}/users/login`,
+        'POST',
+        JSON.stringify(userData),
+        {
+          'Content-Type': 'application/json',
+        }
+      );
 
+      if (responseData) {
         login(responseData.token, null, responseData.username);
         navigate('/');
-      } catch (error) {
-        setErrorMessage(error.message);
       }
     }
   };
@@ -194,8 +189,8 @@ const LoginForm = () => {
             <Button type="submit">Submit</Button>
           </div>
         </form>
-        {!isLoading && errorMessage && (
-          <ErrorMessage errorMessage={errorMessage} />
+        {!isLoading && error && (
+          <ErrorMessage errorMessage={error.message} />
         )}
       </Card>
     </>

@@ -10,7 +10,7 @@ const MessagePage = ({ message, isError }: MessagePageProps) => {
     <section className={styles.container}>
       <div className={styles.text}>
         {isError && <h2 className={styles.problem}>Something went wrong...</h2>}
-        <p className={!isError && styles.message}>{message}</p>
+        <p className={!isError ? styles.message : undefined}>{message}</p>
       </div>
     </section>
   );
