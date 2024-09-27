@@ -1,11 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>(null);
-
-  // TODO: Try and remove useCallback if possible
-  const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
+  
+  const sendRequest = async (url, method = 'GET', body = null, headers = {}) => {
     setIsLoading(true);
 
     try {
@@ -28,7 +27,7 @@ const useHttp = () => {
       setIsLoading(false);
       setError(e);
     }
-  }, []);
+  };
 
   return { isLoading, error, setError, sendRequest };
 };
