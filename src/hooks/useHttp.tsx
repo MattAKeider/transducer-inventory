@@ -3,8 +3,8 @@ import { useState } from 'react';
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>(null);
-  
-  const sendRequest = async (url, method = 'GET', body = null, headers = {}) => {
+
+  const sendRequest = async (url: string, method = 'GET', body = null, headers = {}) => {
     setIsLoading(true);
 
     try {
