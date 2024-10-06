@@ -5,13 +5,13 @@ import { UserContext, UserContextType } from '../../context/UserContext';
 import { transducerFormValues } from '../../utils/utils';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import TransducerForm from '../TransducerForm/TransducerForm';
-import { Transducer } from '../../models/model';
+import { Condition, Transducer } from '../../models/model';
 import useHttp from '../../hooks/useHttp';
 import useForm from '../../hooks/useForm';
 
 type EditTransducerProps = {
   transducer: Transducer;
-  condition: string;
+  condition: Condition;
   onCloseModal: () => void;
 };
 

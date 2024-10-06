@@ -1,4 +1,4 @@
-import { Transducer, FormState } from "../models/model";
+import { Transducer, FormState, Condition } from "../models/model";
 
 export const formatDate = (date: string): string => {
   const shortDate = new Date(date.split('T', 1).toString());
@@ -42,7 +42,7 @@ export const setExpirationDate = (hoursTillExpiration: number) => {
 };
 
 // Extract already created transducer's data to populate edit form
-export const transducerFormValues = (transducer: Transducer, condition: string): FormState => {
+export const transducerFormValues = (transducer: Transducer, condition: Condition): FormState => {
   const newFormData: FormState = {
     name: transducer.name,
     location: transducer.location,
