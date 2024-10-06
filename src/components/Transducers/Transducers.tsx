@@ -5,7 +5,7 @@ import { UserContext, UserContextType } from '../../context/UserContext';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import { filterBySearch } from '../../utils/utils';
-import { Transducer } from '../../data/data';
+import { Transducer } from '../../models/model';
 import TransducerItem from '../TransducerItem/TransducerItem';
 import FullDetails from '../FullDetails/FullDetails';
 import Search from '../Search/Search';

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 
-import { Transducer, TransducerCondition } from '../../data/data';
+import { Transducer, TransducerCondition } from '../../models/model';
 import Modal, { ModalHandle } from '../../ui/Modal/Modal';
 import { formatDate } from '../../utils/utils';
 import EditTransducer from '../EditTransducer/EditTransducer';

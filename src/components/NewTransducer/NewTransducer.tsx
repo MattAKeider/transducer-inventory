@@ -1,11 +1,27 @@
-import { useContext, useReducer } from 'react';
+import { useContext } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../context/TransducerContext';
-import { initialState, reducer } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import { UserContext, UserContextType } from '../../context/UserContext';
+import { FormState } from '../../models/model';
 import useHttp from '../../hooks/useHttp';
+import useForm from '../../hooks/useForm';
+
+export const initialState: FormState = {
+  name: '',
+  location: '',
+  department: '',
+  room: '',
+  type: '',
+  serial: '',
+  internal: '',
+  control: '',
+  received: '',
+  condition: '',
+  notes: '',
+  service: false
+};
 
 type NewTransducerProps = {
   onCloseModal: () => void;
@@ -16,12 +32,9 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { token } = useContext<UserContextType>(UserContext);
   const { isLoading, error, sendRequest } = useHttp();
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { state, handleReset, handleEsc, handleChange, handleIsChecked } = useForm(initialState);
 
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>,
-    validDate: boolean
-  ) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();
 
     if (!validDate) {
@@ -65,40 +78,14 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
       );
   
       addTransducer(responseData.transducer);
-  
-      // Reset form
-      dispatch({
-        type: 'RESET',
-        payload: {
-          initialState,
-        },
-      });
-  
+      handleReset();
       onCloseModal();
     }
   };
 
   const handleCancel = () => {
-    dispatch({
-      type: 'RESET',
-      payload: {
-        initialState,
-      },
-    });
-
+    handleReset();
     onCloseModal();
-  };
-
-  // Reset form on escape key
-  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape') {
-      dispatch({
-        type: 'RESET',
-        payload: {
-          initialState,
-        },
-      });
-    }
   };
 
   return (
@@ -107,10 +94,11 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
       <TransducerForm
         isNew={true}
         formState={state}
-        dispatchAction={dispatch}
         onSubmitForm={handleSubmit}
         onCancelForm={handleCancel}
         onEscForm={handleEsc}
+        onChangeForm={handleChange}
+        onIsChecked={handleIsChecked}
         error={error}
       />
     </>

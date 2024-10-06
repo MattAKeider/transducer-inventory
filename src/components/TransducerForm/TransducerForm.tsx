@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
-import { Action, FormState } from '../../utils/formUtils';
+import { FormState } from '../../models/model';
 import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';
@@ -9,24 +9,23 @@ import styles from './TransducerForm.module.css';
 type TransducerFormProps = {
   isNew: boolean;
   formState: FormState;
-  dispatchAction: (value: Action) => void;
-  onSubmitForm: (
-    event: React.FormEvent<HTMLFormElement>,
-    validDate?: boolean
-  ) => void;
+  onSubmitForm: (event: React.FormEvent<HTMLFormElement>, validDate?: boolean) => void;
   onCancelForm: () => void;
   onEscForm: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+  onChangeForm: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  onIsChecked: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: Error;
 };
 
 const TransducerForm = ({
   isNew,
   formState,
-  dispatchAction,
   onSubmitForm,
   onCancelForm,
   onEscForm,
-  error,
+  onChangeForm,
+  onIsChecked,
+  error
 }: TransducerFormProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -39,34 +38,6 @@ const TransducerForm = ({
     }
   }, [formState.service]);
 
-  const handleChange = (
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = event.target;
-
-    dispatchAction({
-      type: 'CHANGE_INPUT',
-      payload: {
-        name,
-        value,
-      },
-    });
-  };
-
-  const handleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-
-    dispatchAction({
-      type: 'CHANGE_CHECKBOX',
-      payload: {
-        name,
-        checked,
-      },
-    });
-  };
-
   return (
     <div onKeyDown={onEscForm} className={styles.container}>
       <form onSubmit={(event) => onSubmitForm(event, validDate)}>
@@ -78,7 +49,7 @@ const TransducerForm = ({
             name="name"
             id="name"
             value={formState.name}
-            onChange={handleChange}
+            onChange={onChangeForm}
             autoFocus
             required
             disabled={isDisabled}
@@ -90,7 +61,7 @@ const TransducerForm = ({
             name="location"
             id="location"
             value={formState.location}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           >
@@ -109,7 +80,7 @@ const TransducerForm = ({
             name="department"
             id="department"
             value={formState.department}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           >
@@ -125,7 +96,7 @@ const TransducerForm = ({
             name="type"
             id="type"
             value={formState.type}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           >
@@ -141,7 +112,7 @@ const TransducerForm = ({
             name="room"
             id="room"
             value={formState.room}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           />
@@ -153,7 +124,7 @@ const TransducerForm = ({
             name="serial"
             id="serial"
             value={formState.serial}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           />
@@ -165,7 +136,7 @@ const TransducerForm = ({
             name="internal"
             id="internal"
             value={formState.internal}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           />
@@ -177,7 +148,7 @@ const TransducerForm = ({
             name="control"
             id="control"
             value={formState.control}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           />
@@ -190,7 +161,7 @@ const TransducerForm = ({
               name="received"
               id="received"
               value={formState.received}
-              onChange={handleChange}
+              onChange={onChangeForm}
               required
               disabled={isDisabled}
             />
@@ -207,7 +178,7 @@ const TransducerForm = ({
             name="condition"
             id="condition"
             value={formState.condition}
-            onChange={handleChange}
+            onChange={onChangeForm}
             required
             disabled={isDisabled}
           >
@@ -227,7 +198,7 @@ const TransducerForm = ({
               type="checkbox"
               name="service"
               checked={formState.service}
-              onChange={handleIsChecked}
+              onChange={onIsChecked}
               id="service"
             />
             Out of Service
@@ -240,7 +211,7 @@ const TransducerForm = ({
             name="notes"
             id="notes"
             value={formState.notes}
-            onChange={handleChange}
+            onChange={onChangeForm}
             rows={4}
           />
         </div>

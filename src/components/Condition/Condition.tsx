@@ -1,4 +1,4 @@
-import { TransducerCondition } from '../../data/data';
+import { TransducerCondition } from '../../models/model';
 import { formatDate } from '../../utils/utils';
 import styles from './Condition.module.css';
 
