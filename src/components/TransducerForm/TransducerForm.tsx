@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
-import { FormState } from '../../utils/formUtils';
+import { FormState } from '../../models/model';
 import { isValidDate } from '../../utils/validation';
 import Button from '../../ui/Button/Button';
 import styles from './TransducerForm.module.css';

@@ -3,7 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { useContext, useEffect } from 'react';
 
 import TransducerContextProvider, { TransducerContext } from '../../src/context/TransducerContext';
-import { Transducer, TRANSDUCERS } from '../../src/data/data';
+import { Transducer } from '../../src/models/model';
+import { TRANSDUCERS } from '../data/testData';
 
 const TestComponent = () => {
   const { 

@@ -1,7 +1,7 @@
 import { TiDelete } from 'react-icons/ti';
 
 import { UserContext, UserContextType } from '../../context/UserContext';
-import { Transducer } from '../../data/data';
+import { Transducer } from '../../models/model';
 import { useContext } from 'react';
 import styles from './TransducerItem.module.css';
 

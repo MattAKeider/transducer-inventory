@@ -1,12 +1,27 @@
 import { useContext } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../context/TransducerContext';
-import { initialState } from '../../utils/formUtils';
 import TransducerForm from '../TransducerForm/TransducerForm';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import { UserContext, UserContextType } from '../../context/UserContext';
+import { FormState } from '../../models/model';
 import useHttp from '../../hooks/useHttp';
 import useForm from '../../hooks/useForm';
+
+export const initialState: FormState = {
+  name: '',
+  location: '',
+  department: '',
+  room: '',
+  type: '',
+  serial: '',
+  internal: '',
+  control: '',
+  received: '',
+  condition: '',
+  notes: '',
+  service: false
+};
 
 type NewTransducerProps = {
   onCloseModal: () => void;

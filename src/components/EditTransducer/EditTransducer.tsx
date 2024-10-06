@@ -2,10 +2,10 @@ import { useContext, useEffect } from 'react';
 
 import { TransducerContext, TransducerContextType } from '../../context/TransducerContext';
 import { UserContext, UserContextType } from '../../context/UserContext';
-import { transducerFormValues } from '../../utils/formUtils';
+import { transducerFormValues } from '../../utils/utils';
 import LoadingSpinner from '../../ui/LoadingSpinner/LoadingSpinner';
 import TransducerForm from '../TransducerForm/TransducerForm';
-import { Transducer } from '../../data/data';
+import { Transducer } from '../../models/model';
 import useHttp from '../../hooks/useHttp';
 import useForm from '../../hooks/useForm';
 

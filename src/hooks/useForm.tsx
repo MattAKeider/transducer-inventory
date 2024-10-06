@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-import { FormState } from "../utils/formUtils";
+import { FormState } from "../models/model";
 
 type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
 
