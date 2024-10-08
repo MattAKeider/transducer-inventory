@@ -1,4 +1,4 @@
-import { Transducer } from "../../src/models/model";
+import { FormState, Transducer } from "../../src/models/model";
 
 export const TRANSDUCERS: Transducer[] = [
   {
@@ -119,3 +119,18 @@ export const TRANSDUCERS: Transducer[] = [
     ],
   },
 ];
+
+export const INITIAL_FORM_STATE: FormState = {
+  name: '',
+  location: '',
+  department: '',
+  room: '',
+  type: '',
+  serial: '',
+  internal: '',
+  control: '',
+  received: '',
+  condition: '',
+  notes: '',
+  service: false
+};
