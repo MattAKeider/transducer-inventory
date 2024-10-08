@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useContext, useEffect } from 'react';
@@ -63,7 +64,11 @@ describe('TransducerContextProvider', () => {
 
     const button = screen.getByRole('button', {name: 'Add'});
     const user = userEvent.setup();
-    await user.click(button);
+    
+    await act(async () => {
+      await user.click(button);
+    });
+
 
     const heading = screen.getAllByRole('heading');
     expect(heading.length).toBe(6);
@@ -78,7 +83,10 @@ describe('TransducerContextProvider', () => {
 
     const button = screen.getByRole('button', {name: 'Delete'});
     const user = userEvent.setup();
-    await user.click(button);
+
+    await act(async () => {
+      await user.click(button);
+    });
 
     const heading = screen.getAllByRole('heading');
     expect(heading.length).toBe(4);
@@ -93,13 +101,20 @@ describe('TransducerContextProvider', () => {
 
     const addButton = screen.getByRole('button', {name: 'Add'});
     const user = userEvent.setup();
-    await user.click(addButton);
+
+    await act(async () => {
+      await user.click(addButton);
+    });
+    
 
     let heading = screen.getByRole('heading', {name: 'New'});
     expect(heading).toBeInTheDocument();
 
     const editButton = screen.getByRole('button', {name: 'Edit'});
-    await user.click(editButton);
+
+    await act(async () => {
+      await user.click(editButton);
+    });
     
     heading = screen.getByRole('heading', {name: 'Edited'});
     expect(heading).toBeInTheDocument();
