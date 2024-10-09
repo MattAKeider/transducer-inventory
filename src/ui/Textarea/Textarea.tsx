@@ -5,7 +5,7 @@ interface Props extends React.ComponentPropsWithoutRef<"textarea">{
   className: string;
   rows?: number;
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
-};
+}
 
 const Textarea = ({ label, name, value, className, rows = 4, onChange, ...props }: Props) => {
   return (

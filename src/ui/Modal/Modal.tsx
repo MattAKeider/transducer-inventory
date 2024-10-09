@@ -10,7 +10,7 @@ export type ModalHandle = {
 
 interface Props {
   children: React.ReactNode;
-};
+}
 
 const Modal = forwardRef<ModalHandle, Props>(({ children }, ref) => {
   const dialogRef = useRef<HTMLDialogElement>();

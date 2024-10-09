@@ -6,7 +6,7 @@ interface Props extends React.ComponentPropsWithoutRef<"input">{
   type?: React.HTMLInputTypeAttribute;
   children?: React.ReactNode;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
+}
 
 const Input = ({ label, name, value, className, type = 'text', children, onChange, ...props }: Props) => {
   return (

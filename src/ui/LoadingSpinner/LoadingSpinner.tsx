@@ -4,7 +4,7 @@ import styles from './LoadingSpinner.module.css';
 
 interface Props {
   loading: boolean;
-};
+}
 
 const LoadingSpinner = ({ loading }: Props) => {
   return (

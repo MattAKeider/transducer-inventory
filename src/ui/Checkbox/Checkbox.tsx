@@ -4,7 +4,7 @@ interface Props extends React.ComponentPropsWithoutRef<"input">{
   checked: boolean;
   className: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
+}
 
 const Checkbox = ({ label, name, checked, className, onChange, ...props}: Props) => {
   return (

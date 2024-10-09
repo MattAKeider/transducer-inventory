@@ -10,7 +10,7 @@ import Checkbox from '../../ui/Checkbox/Checkbox';
 import Textarea from '../../ui/Textarea/Textarea';
 import styles from './TransducerForm.module.css';
 
-type TransducerFormProps = {
+interface Props {
   isNew: boolean;
   formState: FormState;
   onSubmitForm: (event: React.FormEvent<HTMLFormElement>, validDate?: boolean) => void;
@@ -19,7 +19,7 @@ type TransducerFormProps = {
   onChangeForm: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
   onIsChecked: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: Error;
-};
+}
 
 const TransducerForm = ({
   isNew,
@@ -30,7 +30,7 @@ const TransducerForm = ({
   onChangeForm,
   onIsChecked,
   error
-}: TransducerFormProps) => {
+}: Props) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const validDate = isValidDate(formState.received);

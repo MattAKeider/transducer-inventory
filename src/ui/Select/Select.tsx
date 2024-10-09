@@ -12,7 +12,7 @@ interface Props extends React.ComponentPropsWithoutRef<"select">{
   className: string;
   onChange: React.ChangeEventHandler<HTMLSelectElement>;
   options: Array<Location | Condition | Department | TransducerType>;
-};
+}
 
 const Select = ({ label, name, value, className, onChange, options = [], ...props }: Props) => {
   return (

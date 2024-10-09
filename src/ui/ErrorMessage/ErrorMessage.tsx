@@ -2,7 +2,7 @@ import styles from './ErrorMessage.module.css';
 
 interface Props {
   errorMessage: string;
-};
+}
 
 const ErrorMessage = ({errorMessage}: Props) => {
   return (

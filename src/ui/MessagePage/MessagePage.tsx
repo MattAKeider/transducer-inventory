@@ -3,7 +3,7 @@ import styles from './MessagePage.module.css';
 interface Props {
   message: string;
   isError?: boolean;
-};
+}
 
 const MessagePage = ({ message, isError }: Props) => {
   return (
