@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
 import { FormState } from '../../models/model';
 import { isValidDate } from '../../utils/validation';
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
 import Button from '../../ui/Button/Button';
+import Input from '../../ui/Input/Input';
+import Select from '../../ui/Select/Select';
+import Checkbox from '../../ui/Checkbox/Checkbox';
+import Textarea from '../../ui/Textarea/Textarea';
 import styles from './TransducerForm.module.css';
 
 type TransducerFormProps = {
@@ -42,179 +46,138 @@ const TransducerForm = ({
     <div onKeyDown={onEscForm} className={styles.container}>
       <form onSubmit={(event) => onSubmitForm(event, validDate)}>
         <h2 className={styles.title}>{isNew ? 'New' : 'Edit'} Transducer</h2>
-        <div className={styles.field}>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={formState.name}
-            onChange={onChangeForm}
-            autoFocus
-            required
-            disabled={isDisabled}
-          />
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="location">Location:</label>
-          <select
-            name="location"
-            id="location"
-            value={formState.location}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          >
-            <option value="">Select</option>
-            <option value="CMC">CMC</option>
-            <option value="MIDTOWN">MIDTOWN</option>
-            <option value="RISMAN">RISMAN</option>
-            <option value="CROCKER">CROCKER</option>
-            <option value="STREETSBORO">STREETSBORO</option>
-            <option value="BETTY THE BUS">BETTY THE BUS</option>
-          </select>
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="department">Department:</label>
-          <select
-            name="department"
-            id="department"
-            value={formState.department}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          >
-            <option value="">Select</option>
-            <option value="MFM">MFM</option>
-            <option value="L&D">L&D</option>
-            <option value="IVF">IVF</option>
-          </select>
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="type">Type:</label>
-          <select
-            name="type"
-            id="type"
-            value={formState.type}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          >
-            <option value="">Select</option>
-            <option value="TA">TA</option>
-            <option value="TV">TV</option>
-          </select>
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="room">Room:</label>
-          <input
-            type="text"
-            name="room"
-            id="room"
-            value={formState.room}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          />
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="serial">Serial #:</label>
-          <input
-            type="text"
-            name="serial"
-            id="serial"
-            value={formState.serial}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          />
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="internal">Internal Identifier:</label>
-          <input
-            type="text"
-            name="internal"
-            id="internal"
-            value={formState.internal}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          />
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="control">Control #:</label>
-          <input
-            type="text"
-            name="control"
-            id="control"
-            value={formState.control}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          />
-        </div>
+        <Input 
+          className={styles.field} 
+          label="Name:"
+          name="name"
+          value={formState.name} 
+          onChange={onChangeForm}
+          autoFocus
+          required
+          disabled={isDisabled}
+        />
+        <Select 
+          className={styles.field}
+          label="Location:" 
+          name="location" 
+          value={formState.location}
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+          options={[
+            "CMC", 
+            "MIDTOWN", 
+            "RISMAN", 
+            "CROCKER", 
+            "STREETSBORO", 
+            "BETTY THE BUS"
+          ]}
+        />
+        <Select 
+          className={styles.field}
+          label="Department:" 
+          name="department" 
+          value={formState.department}
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+          options={["MFM", "L&D", "IVF"]}
+        />
+        <Select 
+          className={styles.field}
+          label="Type:" 
+          name="type" 
+          value={formState.type}
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+          options={["TA", "TV"]}
+        />
+        <Input
+          className={styles.field} 
+          label="Room:"
+          name="room"
+          value={formState.room} 
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+        />
+        <Input
+          className={styles.field} 
+          label="Serial #:"
+          name="serial" 
+          value={formState.serial} 
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+        />
+        <Input
+          className={styles.field}
+          label="Internal Identifier:"
+          name="internal"
+          value={formState.internal}
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+        />
+        <Input
+          className={styles.field}
+          label="Control #:"
+          name="control"
+          value={formState.control}
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+        />
         {isNew && (
-          <div className={styles.field}>
-            <label htmlFor="received">Date Received:</label>
-            <input
-              type="date"
-              name="received"
-              id="received"
-              value={formState.received}
-              onChange={onChangeForm}
-              required
-              disabled={isDisabled}
-            />
+          <Input 
+            className={styles.field} 
+            type="date" 
+            label="Date Received:" 
+            name="received" 
+            value={formState.received} 
+            onChange={onChangeForm}
+            required
+            disabled={isDisabled}
+          >
             <div className={styles.error}>
               {!validDate && (
-                <ErrorMessage errorMessage="Please enter valid date." />
+                  <ErrorMessage errorMessage="Please enter valid date." />
               )}
             </div>
-          </div>
+          </Input>
         )}
-        <div className={styles.field}>
-          <label htmlFor="condition">Select Condition:</label>
-          <select
-            name="condition"
-            id="condition"
-            value={formState.condition}
-            onChange={onChangeForm}
-            required
-            disabled={isDisabled}
-          >
-            <option value="">Select</option>
-            <option value="New">New</option>
-            <option value="Working">Working</option>
-            <option value="Refurbished">Refurbished</option>
-            <option value="Loaner">Loaner</option>
-            <option value="Broken (Out of Service)">
-              Broken (Out of Service)
-            </option>
-          </select>
-        </div>
-        <div className={styles.checkbox_field}>
-          <label htmlFor="service">
-            <input
-              type="checkbox"
-              name="service"
-              checked={formState.service}
-              onChange={onIsChecked}
-              id="service"
-            />
-            Out of Service
-          </label>
-        </div>
+        <Select 
+          className={styles.field}
+          label="Select Condition:" 
+          name="condition" 
+          value={formState.condition}
+          onChange={onChangeForm}
+          required
+          disabled={isDisabled}
+          options={[
+            "New", 
+            "Working", 
+            "Refurbished", 
+            "Loaner", 
+            "Broken (Out of Service)"
+          ]}
+        />
+        <Checkbox 
+          className={styles.checkbox_field} 
+          label="Out of Service" 
+          name="service" 
+          checked={formState.service} 
+          onChange={onIsChecked} 
+        />
         <hr className={styles.line_break} />
-        <div className={styles.field}>
-          <label htmlFor="notes">Notes:</label>
-          <textarea
-            name="notes"
-            id="notes"
-            value={formState.notes}
-            onChange={onChangeForm}
-            rows={4}
-          />
-        </div>
+        <Textarea 
+          className={styles.field} 
+          label="Notes:" 
+          name="notes" 
+          value={formState.notes} 
+          onChange={onChangeForm} 
+        />
         {error && <ErrorMessage errorMessage={error.message} />}
         <div className={styles.form_actions}>
           <Button type="button" onClick={onCancelForm}>
