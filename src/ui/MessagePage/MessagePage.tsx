@@ -1,11 +1,11 @@
 import styles from './MessagePage.module.css';
 
-type MessagePageProps = {
+interface Props {
   message: string;
   isError?: boolean;
 };
 
-const MessagePage = ({ message, isError }: MessagePageProps) => {
+const MessagePage = ({ message, isError }: Props) => {
   return (
     <section className={styles.container}>
       <div className={styles.text}>

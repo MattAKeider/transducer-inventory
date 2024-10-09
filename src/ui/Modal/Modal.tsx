@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.css';
@@ -8,11 +8,11 @@ export type ModalHandle = {
   close: () => void;
 };
 
-type ModalProps = {
-  children: ReactNode;
+interface Props {
+  children: React.ReactNode;
 };
 
-const Modal = forwardRef<ModalHandle, ModalProps>(({ children }, ref) => {
+const Modal = forwardRef<ModalHandle, Props>(({ children }, ref) => {
   const dialogRef = useRef<HTMLDialogElement>();
 
   useImperativeHandle(ref, () => ({
