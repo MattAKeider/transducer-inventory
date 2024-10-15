@@ -4,7 +4,7 @@ import Input from '../../src/ui/Input/Input';
 
 describe('Input', () => {
   test('should render the Input component', () => {
-    render(<Input label='Name:' name='name' value='Tester' className='null' onChange={vi.fn()} />);
+    render(<Input label="Name:" name="name" value="Tester" className={null} onChange={vi.fn()} />);
 
     const input = screen.getByRole('textbox');
 
@@ -14,7 +14,7 @@ describe('Input', () => {
 
   test('should contain child element', () => {
     render(
-      <Input label='Name:' name='name' value='Tester' className='null' onChange={vi.fn()}>
+      <Input label="Name:" name="name" value="Tester" className={null} onChange={vi.fn()}>
         <p>This is a test error message!</p>
       </Input>);
 

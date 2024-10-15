@@ -4,7 +4,7 @@ import ErrorMessage from "../../src/ui/ErrorMessage/ErrorMessage";
 
 describe('ErrorMessage', () => {
   test('should render ErrorMessage component', () => {
-    render(<ErrorMessage errorMessage='Something went wrong' />);
+    render(<ErrorMessage errorMessage="Something went wrong" />);
 
     const paragraph = screen.getByText(/something/i);
 
