@@ -183,7 +183,7 @@ const LoginForm = () => {
             </p>
           )}
           <div className={styles.form_actions}>
-            <Button type="button" onClick={handleCancel}>
+            <Button onClick={handleCancel}>
               Cancel
             </Button>
             <Button type="submit">Submit</Button>
