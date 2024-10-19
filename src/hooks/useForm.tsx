@@ -1,21 +1,21 @@
-import { useReducer } from "react";
+import { useReducer } from 'react';
 
-import { FormState } from "../models/model";
+import { FormState } from '../models/model';
 
 type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
 
 export type Action = {
-  type: Type,
+  type: Type;
   payload: {
     name?: string;
     value?: string;
     checked?: boolean;
-    initialState?: FormState
+    initialState?: FormState;
   };
 };
 
 const reducer = (state: FormState, action: Action): FormState => {
-  switch(action.type) {
+  switch (action.type) {
     case 'CHANGE_INPUT': {
       if (action.payload.name === 'condition') {
         if (action.payload.value === 'Broken (Out of Service)') {
@@ -101,24 +101,11 @@ const useForm = (defaultFormState: FormState) => {
     });
   };
 
-  // Reset form on escape key
-  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape') {
-      dispatch({
-        type: 'RESET',
-        payload: {
-          initialState: defaultFormState,
-        },
-      });
-    }
-  };
-
-  return { 
-    state, 
-    handleChange, 
-    handleIsChecked, 
-    handleReset, 
-    handleEsc 
+  return {
+    state,
+    handleChange,
+    handleIsChecked,
+    handleReset,
   };
 };
 

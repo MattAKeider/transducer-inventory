@@ -32,7 +32,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
   const { token } = useContext<UserContextType>(UserContext);
   const { isLoading, error, sendRequest } = useHttp();
 
-  const { state, handleReset, handleEsc, handleChange, handleIsChecked } = useForm(initialState);
+  const { state, handleReset, handleChange, handleIsChecked } = useForm(initialState);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, validDate: boolean) => {
     event.preventDefault();
@@ -76,7 +76,7 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
           Authorization: `Bearer ${token}`,
         }
       );
-  
+
       addTransducer(responseData.transducer);
       handleReset();
       onCloseModal();
@@ -96,7 +96,6 @@ const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
         formState={state}
         onSubmitForm={handleSubmit}
         onCancelForm={handleCancel}
-        onEscForm={handleEsc}
         onChangeForm={handleChange}
         onIsChecked={handleIsChecked}
         error={error}

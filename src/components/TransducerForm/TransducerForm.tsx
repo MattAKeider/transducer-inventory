@@ -15,8 +15,9 @@ interface Props {
   formState: FormState;
   onSubmitForm: (event: React.FormEvent<HTMLFormElement>, validDate?: boolean) => void;
   onCancelForm: () => void;
-  onEscForm: (event: React.KeyboardEvent<HTMLDivElement>) => void;
-  onChangeForm: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  onChangeForm: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => void;
   onIsChecked: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: Error;
 }
@@ -26,7 +27,6 @@ const TransducerForm = ({
   formState,
   onSubmitForm,
   onCancelForm,
-  onEscForm,
   onChangeForm,
   onIsChecked,
   error
@@ -42,21 +42,27 @@ const TransducerForm = ({
     }
   }, [formState.service]);
 
+  const handleEsc = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      onCancelForm();
+    }
+  };
+
   return (
-    <div onKeyDown={onEscForm} className={styles.container}>
+    <div onKeyDown={handleEsc} className={styles.container}>
       <form onSubmit={(event) => onSubmitForm(event, validDate)}>
         <h2 className={styles.title}>{isNew ? 'New' : 'Edit'} Transducer</h2>
-        <Input 
-          className={styles.field} 
+        <Input
+          className={styles.field}
           label="Name:"
           name="name"
-          value={formState.name} 
+          value={formState.name}
           onChange={onChangeForm}
           autoFocus
           required
           disabled={isDisabled}
         />
-        <Select 
+        <Select
           className={styles.field}
           label="Location:" 
           name="location" 
@@ -73,7 +79,7 @@ const TransducerForm = ({
             "BETTY THE BUS"
           ]}
         />
-        <Select 
+        <Select
           className={styles.field}
           label="Department:" 
           name="department" 
@@ -83,7 +89,7 @@ const TransducerForm = ({
           disabled={isDisabled}
           options={["MFM", "L&D", "IVF"]}
         />
-        <Select 
+        <Select
           className={styles.field}
           label="Type:" 
           name="type" 
@@ -94,19 +100,19 @@ const TransducerForm = ({
           options={["TA", "TV"]}
         />
         <Input
-          className={styles.field} 
+          className={styles.field}
           label="Room:"
           name="room"
-          value={formState.room} 
+          value={formState.room}
           onChange={onChangeForm}
           required
           disabled={isDisabled}
         />
         <Input
-          className={styles.field} 
+          className={styles.field}
           label="Serial #:"
           name="serial" 
-          value={formState.serial} 
+          value={formState.serial}
           onChange={onChangeForm}
           required
           disabled={isDisabled}
@@ -130,12 +136,12 @@ const TransducerForm = ({
           disabled={isDisabled}
         />
         {isNew && (
-          <Input 
-            className={styles.field} 
+          <Input
+            className={styles.field}
             type="date" 
             label="Date Received:" 
             name="received" 
-            value={formState.received} 
+            value={formState.received}
             onChange={onChangeForm}
             required
             disabled={isDisabled}
@@ -147,7 +153,7 @@ const TransducerForm = ({
             </div>
           </Input>
         )}
-        <Select 
+        <Select
           className={styles.field}
           label="Select Condition:" 
           name="condition" 
@@ -163,20 +169,20 @@ const TransducerForm = ({
             "Broken (Out of Service)"
           ]}
         />
-        <Checkbox 
-          className={styles.checkbox_field} 
+        <Checkbox
+          className={styles.checkbox_field}
           label="Out of Service" 
           name="service" 
-          checked={formState.service} 
-          onChange={onIsChecked} 
+          checked={formState.service}
+          onChange={onIsChecked}
         />
         <hr className={styles.line_break} />
-        <Textarea 
-          className={styles.field} 
+        <Textarea
+          className={styles.field}
           label="Notes:" 
           name="notes" 
-          value={formState.notes} 
-          onChange={onChangeForm} 
+          value={formState.notes}
+          onChange={onChangeForm}
         />
         {error && <ErrorMessage errorMessage={error.message} />}
         <div className={styles.form_actions}>
