@@ -13,7 +13,6 @@ describe('TransducerForm', () => {
         onSubmitForm={vi.fn()} 
         onChangeForm={vi.fn()} 
         onCancelForm={vi.fn()}
-        onEscForm={vi.fn()}
         onIsChecked={vi.fn()}
         error={error}
       />
