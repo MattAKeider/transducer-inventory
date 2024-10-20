@@ -20,7 +20,7 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
   const { editTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
-  const { state, handleReset, handleEsc, handleChange, handleIsChecked } = useForm(originalState);
+  const { state, handleReset, handleChange, handleIsChecked } = useForm(originalState);
   const { isLoading, error, sendRequest } = useHttp();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
 
   const handleEdit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
     const id = transducer.id;
 
     // GET transducer that needs edited
@@ -87,7 +87,6 @@ const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerP
         formState={state}
         onSubmitForm={handleEdit}
         onCancelForm={handleCancel}
-        onEscForm={handleEsc}
         onChangeForm={handleChange}
         onIsChecked={handleIsChecked}
         error={error}

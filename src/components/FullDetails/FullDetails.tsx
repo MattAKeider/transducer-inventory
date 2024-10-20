@@ -49,6 +49,7 @@ const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
 
   const handleCloseEditTransducer = () => {
     modalRef.current.close();
+    setIsEdit(false);
   };
 
   return (

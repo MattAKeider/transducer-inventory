@@ -1,8 +1,8 @@
-import { act } from "react";
-import { renderHook } from "@testing-library/react";
+import { act } from 'react';
+import { renderHook } from '@testing-library/react';
 
-import { INITIAL_FORM_STATE } from "../data/testData";
-import useForm from "../../src/hooks/useForm";
+import { INITIAL_FORM_STATE } from '../data/testData';
+import useForm from '../../src/hooks/useForm';
 
 describe('useForm', () => {
   test('should return a default state', () => {
@@ -70,34 +70,6 @@ describe('useForm', () => {
     expect(result.current.state).toEqual(INITIAL_FORM_STATE);
   });
 
-  test('should reset form values to default on escape key', () => {
-    const event = {
-      target: {
-        name: 'name',
-        value: 'test'
-      }
-    } as React.ChangeEvent<HTMLInputElement>;
-
-    const escapeEvent = {
-      key: 'Escape'
-    } as React.KeyboardEvent<HTMLDivElement>;
-
-    const { result, rerender } = renderHook(() => useForm(INITIAL_FORM_STATE));
-    expect(result.current.state).toEqual(INITIAL_FORM_STATE);
-
-    const { handleChange, handleEsc } = result.current;
-    act(() => handleChange(event));
-    rerender();
-
-    expect(result.current.state.name).toBe('test');
-    expect(result.current.state).not.toEqual(INITIAL_FORM_STATE);
-
-    act(() => handleEsc(escapeEvent));
-    rerender();
-
-    expect(result.current.state).toEqual(INITIAL_FORM_STATE);
-  });
-
   test('should toggle out of service checkbox if condition is set to broken or not', () => {
     const event = {
       target: {
@@ -108,7 +80,7 @@ describe('useForm', () => {
 
     const { result, rerender } = renderHook(() => useForm(INITIAL_FORM_STATE));
     expect(result.current.state).toEqual(INITIAL_FORM_STATE);
-    
+
     const { handleChange } = result.current;
     act(() => handleChange(event));
     rerender();

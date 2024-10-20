@@ -12,6 +12,7 @@ const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
   const [isMobile, setIsMobile] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [showNew, setShowNew] = useState(false);
 
   const modalRef = useRef<ModalHandle>();
 
@@ -52,12 +53,14 @@ const Header = () => {
   };
 
   const handleOpenAddTransducer = () => {
+    setShowNew(true);
     modalRef.current.open();
     isMobile && handleClickMobileNav();
   };
 
   const handleCloseAddTransducer = () => {
     modalRef.current.close();
+    setShowNew(false);
   };
 
   const handleLogin = () => {
@@ -94,11 +97,10 @@ const Header = () => {
     </nav>
   );
 
-  // TODO: Show modal child conditionally to mitigate unneeded renders.
   return (
     <>
       <Modal ref={modalRef}>
-        {<NewTransducer onCloseModal={handleCloseAddTransducer} />}
+        {showNew && <NewTransducer onCloseModal={handleCloseAddTransducer} />}
       </Modal>
       <header className={styles.header}>
         <h1 className={styles.title}>Transducer Inventory</h1>
