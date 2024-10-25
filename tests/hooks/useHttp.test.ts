@@ -1,28 +1,18 @@
-import { act } from "react";
-import { renderHook } from "@testing-library/react";
-import { setupServer } from 'msw/node';
+import { act } from 'react';
+import { renderHook } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
-import useHttp from "../../src/hooks/useHttp";
+import { server } from '../data/server';
+import { TRANSDUCERS } from '../data/testData';
+import useHttp from '../../src/hooks/useHttp';
 
 describe('useHttp', () => {
-  const server = setupServer(
-    http.get('/transducers', () => {
-      return HttpResponse.json(TRANSDUCER);
-    })
-  );
-
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
-
   test('should render useHttp hook with default values', () => {
     const { result } = renderHook(useHttp);
     const {isLoading, error} = result.current;
     
     expect(isLoading).toBe(false);
     expect(error).toBe(null);
-    
   });
 
   test('should verify sendRequest makes http request', async () => {
@@ -36,7 +26,7 @@ describe('useHttp', () => {
 
     const { error } = result.current;
 
-    expect(dataResponse).toEqual(TRANSDUCER);
+    expect(dataResponse).toEqual(TRANSDUCERS);
     expect(error).toBe(null);
   });
 
@@ -77,25 +67,3 @@ describe('useHttp', () => {
     expect(reRenderedError).toEqual(Error('Passwords must match'));
   });
 });
-
-const TRANSDUCER = {
-  id: crypto.randomUUID(),
-  name: 'D1-4',
-  location: 'CMC',
-  department: 'MFM',
-  transducerType: 'TV',
-  room: '2',
-  serialNumber: 'F123300',
-  internalIdentifier: '7',
-  controlNumber: '00FB-12346',
-  dateReceived: "2024-02-15T03:50:45.695Z",
-  outOfService: false,
-  currentCondition: [
-    {
-      id: crypto.randomUUID(),
-      condition: 'Working',
-      conditionChangedDate: "2024-02-15T03:50:45.695Z",
-      note: 'New from GE',
-    },
-  ],
-};
