@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
 import { server } from '../data/server';
-import { TRANSDUCERS } from '../data/testData';
+import { TRANSDUCER_RESPONSE } from '../data/testData';
 import useHttp from '../../src/hooks/useHttp';
 
 describe('useHttp', () => {
@@ -26,7 +26,7 @@ describe('useHttp', () => {
 
     const { error } = result.current;
 
-    expect(dataResponse).toEqual(TRANSDUCERS);
+    expect(dataResponse).toEqual(TRANSDUCER_RESPONSE);
     expect(error).toBe(null);
   });
 

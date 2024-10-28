@@ -1,5 +1,137 @@
 import { FormState, Transducer } from "../../src/models/model";
 
+export const TRANSDUCER_RESPONSE = {
+  "transducers": [
+    {
+      "_id": "67019b7c70877aca6e9eefb1",
+      "name": "Test",
+      "location": "MIDTOWN",
+      "department": "MFM",
+      "transducerType": "TA",
+      "room": "1",
+      "serialNumber": "1",
+      "internalIdentifier": "1",
+      "controlNumber": "1",
+      "dateReceived": "2024-10-05T00:00:00.000Z",
+      "outOfService": false,
+      "currentCondition": [
+        "67042a6b74d217c9d143a3d8",
+        "6701d8ec70877aca6e9ef101",
+        "6701c8d870877aca6e9ef0b1",
+        "6701c5f570877aca6e9ef083",
+        "6701c5d970877aca6e9ef074",
+        "6701a91170877aca6e9ef025",
+        "6701a8f370877aca6e9ef01e",
+        "6701a8c470877aca6e9ef017",
+        "6701a8bb70877aca6e9ef010",
+        "6701a37f70877aca6e9ef003",
+        "6701a29470877aca6e9eeffb",
+        "6701a1c570877aca6e9eeff2",
+        "6701a19370877aca6e9eefea",
+        "67019e7570877aca6e9eefe2",
+        "67019e6370877aca6e9eefdb",
+        "67019df970877aca6e9eefd4",
+        "67019d0070877aca6e9eefc4",
+        "67019bf870877aca6e9eefbd",
+        "67019b7c70877aca6e9eefb4"
+      ],
+      "__v": 19,
+      "id": "67019b7c70877aca6e9eefb1"
+    },
+    {
+      "_id": "6701a94a70877aca6e9ef02a",
+      "name": "T",
+      "location": "MIDTOWN",
+      "department": "MFM",
+      "transducerType": "TA",
+      "room": "11",
+      "serialNumber": "0000-21234",
+      "internalIdentifier": "1",
+      "controlNumber": "1",
+      "dateReceived": "2024-10-05T00:00:00.000Z",
+      "outOfService": false,
+      "currentCondition": [
+        "670c6a9594e0f2d17d29e1b1",
+        "6705e493d2323c82e9be324a",
+        "6701cf8170877aca6e9ef0d8",
+        "6701cdf770877aca6e9ef0d1",
+        "6701cd7d70877aca6e9ef0c9",
+        "6701c8c070877aca6e9ef0a9",
+        "6701c8b170877aca6e9ef0a2",
+        "6701c88a70877aca6e9ef099",
+        "6701c60970877aca6e9ef08b",
+        "6701c5e770877aca6e9ef07c",
+        "6701c4d170877aca6e9ef06a",
+        "6701c4c270877aca6e9ef063",
+        "6701c41c70877aca6e9ef059",
+        "6701aab770877aca6e9ef03e",
+        "6701a94a70877aca6e9ef02d"
+      ],
+      "__v": 15,
+      "id": "6701a94a70877aca6e9ef02a"
+    },
+    {
+      "_id": "6701d86d70877aca6e9ef0e5",
+      "name": "TestOutzz",
+      "location": "CMC",
+      "department": "IVF",
+      "transducerType": "TV",
+      "room": "41",
+      "serialNumber": "9123-3211",
+      "internalIdentifier": "41",
+      "controlNumber": "671",
+      "dateReceived": "2024-10-05T00:00:00.000Z",
+      "outOfService": false,
+      "currentCondition": [
+        "6706bec1d2323c82e9be3268",
+        "6701e99321f6398dd0fcc40f",
+        "6701e97121f6398dd0fcc406",
+        "6701d8d170877aca6e9ef0f8",
+        "6701d8c270877aca6e9ef0f1",
+        "6701d86e70877aca6e9ef0e8"
+      ],
+      "__v": 6,
+      "id": "6701d86d70877aca6e9ef0e5"
+    },
+    {
+      "_id": "67042aaf74d217c9d143a3e1",
+      "name": "Blaze",
+      "location": "CROCKER",
+      "department": "MFM",
+      "transducerType": "TA",
+      "room": "23",
+      "serialNumber": "230122",
+      "internalIdentifier": "002115",
+      "controlNumber": "12",
+      "dateReceived": "2024-10-07T00:00:00.000Z",
+      "outOfService": false,
+      "currentCondition": [
+        "67042aaf74d217c9d143a3e4"
+      ],
+      "__v": 1,
+      "id": "67042aaf74d217c9d143a3e1"
+    },
+    {
+      "_id": "67070b30d2323c82e9be327c",
+      "name": "Test41",
+      "location": "MIDTOWN",
+      "department": "L&D",
+      "transducerType": "TA",
+      "room": "2",
+      "serialNumber": "0000-2123",
+      "internalIdentifier": "1",
+      "controlNumber": "321992",
+      "dateReceived": "2024-10-09T00:00:00.000Z",
+      "outOfService": false,
+      "currentCondition": [
+        "67070b30d2323c82e9be327f"
+      ],
+      "__v": 1,
+      "id": "67070b30d2323c82e9be327c"
+    }
+  ]
+};
+
 export const TRANSDUCERS: Transducer[] = [
   {
     id: crypto.randomUUID(),
