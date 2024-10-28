@@ -21,7 +21,7 @@ describe('useHttp', () => {
     const { sendRequest } = result.current;
 
     await act(async () => {
-      dataResponse = await sendRequest('/transducers');
+      dataResponse = await sendRequest('http://localhost:5000/api/transducers');
     });
 
     const { error } = result.current;
@@ -34,7 +34,7 @@ describe('useHttp', () => {
     let dataResponse: HttpResponse;
 
     server.use(
-      http.get('/transducers', () => {
+      http.get('http://localhost:5000/api/transducers', () => {
         return HttpResponse.json({message: 'Internal Server Error'}, {status: 500});
       })
     );
@@ -43,7 +43,7 @@ describe('useHttp', () => {
     const { sendRequest } = result.current;
 
     await act(async () => {
-      dataResponse = await sendRequest('/transducers');
+      dataResponse = await sendRequest('http://localhost:5000/api/transducers');
     });
 
     const { error } = result.current;
