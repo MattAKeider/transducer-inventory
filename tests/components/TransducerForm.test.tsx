@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 
-import TransducerForm from "../../src/components/TransducerForm/TransducerForm";
-import { initialState } from "../../src/components/NewTransducer/NewTransducer";
-import { FormState } from "../../src/models/model";
+import TransducerForm from '../../src/components/TransducerForm/TransducerForm';
+import { initialState } from '../../src/components/NewTransducer/NewTransducer';
+import { FormState } from '../../src/models/model';
 
 describe('TransducerForm', () => {
   function renderComponent(isNew: boolean, state: FormState, error: Error) {
