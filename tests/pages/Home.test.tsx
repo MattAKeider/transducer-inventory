@@ -13,7 +13,8 @@ describe('Home', () => {
       </TransducerContextProvider>
     );
 
-    expect(await screen.findByLabelText('circles-loading')).not.toBeVisible();
+    const spinner = await screen.findByTestId('circles-loading');
+    expect(spinner).not.toBeVisible();
     
     const list = screen.getByRole('list');
     const items = await screen.findAllByRole('listitem');
@@ -35,7 +36,8 @@ describe('Home', () => {
       </TransducerContextProvider>
     );
 
-    expect(await screen.findByLabelText('circles-loading')).not.toBeVisible();
+    const spinner = await screen.findByTestId('circles-loading');
+    expect(spinner).not.toBeVisible();
     expect(screen.getByRole('heading')).toHaveTextContent(/something went wrong/i);
   });
 });
