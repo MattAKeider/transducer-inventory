@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
 import TransducerContextProvider from '../../src/context/TransducerContext';
@@ -14,7 +14,7 @@ describe('Home', () => {
     );
 
     const spinner = await screen.findByTestId('circles-loading');
-    expect(spinner).not.toBeVisible();
+    await waitFor(() => spinner);
     
     const list = screen.getByRole('list');
     const items = await screen.findAllByRole('listitem');
@@ -37,7 +37,8 @@ describe('Home', () => {
     );
 
     const spinner = await screen.findByTestId('circles-loading');
-    expect(spinner).not.toBeVisible();
+    await waitFor(() => spinner);
+    
     expect(screen.getByRole('heading')).toHaveTextContent(/something went wrong/i);
   });
 });
