@@ -140,7 +140,7 @@ const LoginForm = () => {
           />
           <Input 
             className={styles.field} 
-            type={!showPassword && 'password'}
+            type={showPassword ? 'text' : 'password'}
             name='password' 
             value={fields.password} 
             onChange={handleChangeFields} 
@@ -153,7 +153,7 @@ const LoginForm = () => {
           {isNewUser && (
             <Input 
               className={styles.field} 
-              type={!showPassword && 'password'}
+              type={showPassword ? 'text' : 'password'}
               name='confirm' 
               value={fields.confirm} 
               onChange={handleChangeFields} 
