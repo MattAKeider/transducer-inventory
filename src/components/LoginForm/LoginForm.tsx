@@ -8,6 +8,7 @@ import Button from '../../ui/Button/Button';
 import Card from '../../ui/Card/Card';
 import useHttp from '../../hooks/useHttp';
 import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
+import Input from '../../ui/Input/Input';
 import styles from './LoginForm.module.css';
 
 interface User {
@@ -119,58 +120,49 @@ const LoginForm = () => {
         <h2 className={styles.title}>{isNewUser ? 'Create User' : 'Login'}</h2>
         <form onSubmit={handleSubmit}>
           {isNewUser && (
-            <div className={styles.field}>
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                required
-                value={fields.username}
-                onChange={handleChangeFields}
-              />
-            </div>
+            <Input 
+              className={styles.field} 
+              name='username' 
+              value={fields.username} 
+              onChange={handleChangeFields} 
+              label='Username:' 
+              required 
+            />
           )}
-          <div className={styles.field}>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              value={fields.email}
-              onChange={handleChangeFields}
-            />
-          </div>
-          <div className={styles.field}>
-            <label htmlFor="password">Password:</label>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              name="password"
-              required
-              pattern="(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-              value={fields.password}
-              onChange={handleChangeFields}
-              onDoubleClick={handleShowPassword}
-              title="Must contain an uppercase letter, number, and special character"
-            />
-          </div>
+          <Input 
+            className={styles.field} 
+            type='email'
+            name='email' 
+            value={fields.email} 
+            onChange={handleChangeFields} 
+            label='Email:' 
+            required 
+          />
+          <Input 
+            className={styles.field} 
+            type={showPassword ? 'text' : 'password'}
+            name='password' 
+            value={fields.password} 
+            onChange={handleChangeFields} 
+            onDoubleClick={handleShowPassword}
+            label='Password:' 
+            required 
+            pattern='(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
+            title='Must contain an uppercase letter, number, and special character'
+          />
           {isNewUser && (
-            <div className={styles.field}>
-              <label htmlFor="confirm">Confirm Password:</label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id="confirm"
-                name="confirm"
-                required
-                pattern="(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                value={fields.confirm}
-                onChange={handleChangeFields}
-                onDoubleClick={handleShowPassword}
-                title="Must contain an uppercase letter, number, and special character"
-              />
-            </div>
+            <Input 
+              className={styles.field} 
+              type={showPassword ? 'text' : 'password'}
+              name='confirm' 
+              value={fields.confirm} 
+              onChange={handleChangeFields} 
+              onDoubleClick={handleShowPassword}
+              label='Confirm Password:' 
+              required 
+              pattern='(?=.*?[#?!@$%^&*\-])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
+              title='Must contain an uppercase letter, number, and special character'
+            />
           )}
           {isNewUser && (
             <p className={styles.switch_text}>
