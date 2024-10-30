@@ -122,6 +122,13 @@ export const TRANSDUCERS: { transducers: Transducer[] } = {
   ]
 };
 
+export const USER = {
+  userId: '67219fbe7ae3454dd9affe51',
+  username: 'tester',
+  email: 'tester@test.com',
+  token: 'zzzzzzzzzzzzzzzzzzzzzzzzI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzIxOWZiZTdhZTM0NTRkZDlhZmZlNTEiLCJ1c2VybmFtZSI6InRlc3RlciIsImVtYWlsIjoidGVzdGVyQHRlc3QuY29tIiwiaWF0zzzzzzzzzzzzzz'
+};
+
 export const INITIAL_FORM_STATE: FormState = {
   name: '',
   location: '',
