@@ -17,7 +17,7 @@ const TestComponent = () => {
   } = useContext(TransducerContext);
 
   useEffect(() => {
-    fetchTransducers(TRANSDUCERS);
+    fetchTransducers(TRANSDUCERS.transducers);
   }, []);
 
   return (

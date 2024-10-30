@@ -14,12 +14,12 @@ describe('Utils', () => {
   });
 
   test('should filter search correctly', () => {
-    const results = filterBySearch('midtown', TRANSDUCERS);
+    const results = filterBySearch('midtown', TRANSDUCERS.transducers);
     expect(results.length).toEqual(2);
   });
 
   test('should not return any results', () => {
-    const results = filterBySearch('y', TRANSDUCERS);
+    const results = filterBySearch('y', TRANSDUCERS.transducers);
     expect(results.length).toEqual(0);
   });
 
