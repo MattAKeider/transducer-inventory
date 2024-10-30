@@ -10,14 +10,13 @@
 }
 
 .field label {
-  display: block;
   color: var(--brand-color);
   font-size: 0.8rem;
   font-weight: 700;
-  margin-bottom: 0.4rem;
 }
 
 .field input {
+  display: block;
   width: 25rem;
   padding: 0.2rem;
   border: none;
@@ -25,6 +24,7 @@
   background-color: var(--form-input-color);
   color: var(--light-color);
   font-size: 1.2rem;
+  margin-top: 0.2rem;
 }
 
 .field input:focus-visible {
