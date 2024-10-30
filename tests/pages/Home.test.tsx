@@ -38,6 +38,7 @@ describe('Home', () => {
 
     const spinner = await screen.findByTestId('circles-loading');
     await waitFor(() => expect(spinner).not.toBeVisible());
+    
     expect(screen.getByRole('heading')).toHaveTextContent(/something went wrong/i);
   });
 });
