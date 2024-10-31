@@ -12,4 +12,7 @@ export const handlers = [
   http.post('http://localhost:5000/api/users/login', () => {
     return HttpResponse.json(USER);
   }),
+  http.delete('http://localhost:5000/api/transducers/*', () => {
+    return HttpResponse.json({ message: "Deleted!" });
+  })
 ];
