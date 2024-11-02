@@ -21,7 +21,7 @@ const TransducerItem = ({
   return (
     <li className={styles.transducer} onClick={onClickTransducer}>
       {isLoggedIn && (
-        <TiDelete className={styles.delete} onClick={onClickDelete} />
+        <TiDelete className={styles.delete} onClick={onClickDelete} data-testid='delete' />
       )}
       <h3 className={styles.item_title}>{transducerData.name}</h3>
       <p className={styles.item_info}>

@@ -1,7 +1,6 @@
-import { act } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, act } from 'react';
 
 import TransducerContextProvider, { TransducerContext } from '../../src/context/TransducerContext';
 import { Transducer } from '../../src/models/model';
