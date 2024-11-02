@@ -129,6 +129,29 @@ export const USER = {
   token: 'zzzzzzzzzzzzzzzzzzzzzzzzI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzIxOWZiZTdhZTM0NTRkZDlhZmZlNTEiLCJ1c2VybmFtZSI6InRlc3RlciIsImVtYWlsIjoidGVzdGVyQHRlc3QuY29tIiwiaWF0zzzzzzzzzzzzzz'
 };
 
+export const CONDITIONS = {
+  conditions: [
+    {
+      id: crypto.randomUUID(),
+      condition: 'Broken (Out of Service)',
+      conditionChangedDate: "2024-02-15T03:50:45.695Z",
+      note: 'Broke now',
+    },
+    {
+      id: crypto.randomUUID(),
+      condition: 'Refurbished',
+      conditionChangedDate: "2024-02-15T03:50:45.695Z",
+      note: 'Refurbished item',
+    },
+    {
+      id: crypto.randomUUID(),
+      condition: 'Working',
+      conditionChangedDate: "2024-02-15T03:50:45.695Z",
+      note: 'New from GE',
+    }
+  ]
+};
+
 export const INITIAL_FORM_STATE: FormState = {
   name: '',
   location: '',

@@ -19,9 +19,9 @@ const Transducers = () => {
   const { isLoading, error, sendRequest } = useHttp();
   const modalRef = useRef<ModalHandle>();
 
-  const [selectedTransducer, setSelectedTransducer] = useState<Transducer | undefined>();
+  const [selectedTransducer, setSelectedTransducer] = useState<Transducer>(null);
   const [searchValue, setSearchValue] = useState<string>('');
-  const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>([]);
+  const [filteredTransducers, setFilteredTransducers] = useState<Transducer[]>(transducers);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,11 +39,7 @@ const Transducers = () => {
     modalRef.current.open();
   };
 
-  const handleDeleteTransducer = async (
-    id: string,
-    name: string,
-    event: React.MouseEvent<SVGAElement>
-  ) => {
+  const handleDeleteTransducer = async (id: string, name: string, event: React.MouseEvent<SVGAElement>) => {
     event.stopPropagation();
 
     if (confirm(`Are you sure you would like to delete ${name}?`)) {
@@ -80,9 +76,7 @@ const Transducers = () => {
             key={transducer.id}
             transducerData={transducer}
             onClickTransducer={() => handleClickedTransducer(transducer)}
-            onClickDelete={(event) =>
-              handleDeleteTransducer(transducer.id, transducer.name, event)
-            }
+            onClickDelete={(event) => handleDeleteTransducer(transducer.id, transducer.name, event)}
           />
         ))}
       </ul>
