@@ -77,20 +77,20 @@ const Header = () => {
       {isMobile && (
         <MdClose className={styles.close} onClick={handleClickMobileNav} />
       )}
-      {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
       {isLoggedIn && (
-        <Button className={styles.button} onClick={handleOpenAddTransducer}>
-          <MdAddHome /> Add
-        </Button>
+        <>
+          <p className={styles.welcome}>Welcome, {username}!</p>
+          <Button className={styles.button} onClick={handleOpenAddTransducer}>
+            <MdAddHome /> Add
+          </Button>
+          <Button className={styles.button} onClick={handleLogout}>
+            <MdLogout /> Logout
+          </Button>
+        </>
       )}
       {!isLoggedIn && (
         <Button className={styles.button} onClick={handleLogin}>
           <MdLogin /> Login
-        </Button>
-      )}
-      {isLoggedIn && (
-        <Button className={styles.button} onClick={handleLogout}>
-          <MdLogout /> Logout
         </Button>
       )}
     </nav>
@@ -104,9 +104,12 @@ const Header = () => {
       <header className={styles.header}>
         <h1 className={styles.title}>Transducer Inventory</h1>
         {isMobile && (
-          <MdMenu className={styles.menu} onClick={handleClickMobileNav} />
+          <>
+            <MdMenu className={styles.menu} onClick={handleClickMobileNav} />
+            {showMobileNav && navigation}
+          </>
         )}
-        {(!isMobile || showMobileNav) && navigation}
+        {!isMobile && navigation}
       </header>
     </>
   );
