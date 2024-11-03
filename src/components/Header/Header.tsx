@@ -10,10 +10,10 @@ import styles from './Header.module.css';
 
 const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
-  const [isMobile, setIsMobile] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
-  const [showNew, setShowNew] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+  const showNew = useRef<boolean>(false);
   const modalRef = useRef<ModalHandle>();
 
   const navigate = useNavigate();
@@ -23,8 +23,7 @@ const Header = () => {
     const storedUsername = JSON.parse(localStorage.getItem('username'));
 
     if (
-      storedToken &&
-      storedToken.token &&
+      storedToken?.token &&
       new Date(storedToken.expiration) > new Date()
     ) {
       login(
@@ -53,14 +52,14 @@ const Header = () => {
   };
 
   const handleOpenAddTransducer = () => {
-    setShowNew(true);
+    showNew.current = true;
     modalRef.current.open();
     isMobile && handleClickMobileNav();
   };
 
   const handleCloseAddTransducer = () => {
     modalRef.current.close();
-    setShowNew(false);
+    showNew.current = false;
   };
 
   const handleLogin = () => {
