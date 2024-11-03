@@ -8,6 +8,8 @@ import NewTransducer from '../NewTransducer/NewTransducer';
 import Button from '../../ui/Button/Button';
 import styles from './Header.module.css';
 
+type Token = { token: string, expiration: string };
+
 const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
   const [showMobileNav, setShowMobileNav] = useState(false);
@@ -19,12 +21,12 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedToken = JSON.parse(localStorage.getItem('token'));
-    const storedUsername = JSON.parse(localStorage.getItem('username'));
+    const storedToken: Token = JSON.parse(localStorage.getItem('token'));
+    const storedUsername: string = JSON.parse(localStorage.getItem('username'));
 
     if (
       storedToken?.token &&
-      new Date(storedToken.expiration) > new Date()
+      new Date(storedToken?.expiration) > new Date()
     ) {
       login(
         storedToken.token,
