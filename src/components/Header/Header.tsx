@@ -8,24 +8,25 @@ import NewTransducer from '../NewTransducer/NewTransducer';
 import Button from '../../ui/Button/Button';
 import styles from './Header.module.css';
 
+type Token = { token: string, expiration: string };
+
 const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
-  const [isMobile, setIsMobile] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
-  const [showNew, setShowNew] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+  const showNew = useRef<boolean>(false);
   const modalRef = useRef<ModalHandle>();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedToken = JSON.parse(localStorage.getItem('token'));
-    const storedUsername = JSON.parse(localStorage.getItem('username'));
+    const storedToken: Token = JSON.parse(localStorage.getItem('token'));
+    const storedUsername: string = JSON.parse(localStorage.getItem('username'));
 
     if (
-      storedToken &&
-      storedToken.token &&
-      new Date(storedToken.expiration) > new Date()
+      storedToken?.token &&
+      new Date(storedToken?.expiration) > new Date()
     ) {
       login(
         storedToken.token,
@@ -53,14 +54,14 @@ const Header = () => {
   };
 
   const handleOpenAddTransducer = () => {
-    setShowNew(true);
+    showNew.current = true;
     modalRef.current.open();
     isMobile && handleClickMobileNav();
   };
 
   const handleCloseAddTransducer = () => {
     modalRef.current.close();
-    setShowNew(false);
+    showNew.current = false;
   };
 
   const handleLogin = () => {
@@ -78,20 +79,20 @@ const Header = () => {
       {isMobile && (
         <MdClose className={styles.close} onClick={handleClickMobileNav} />
       )}
-      {isLoggedIn && <p className={styles.welcome}>Welcome, {username}!</p>}
       {isLoggedIn && (
-        <Button className={styles.button} onClick={handleOpenAddTransducer}>
-          <MdAddHome /> Add
-        </Button>
+        <>
+          <p className={styles.welcome}>Welcome, {username}!</p>
+          <Button className={styles.button} onClick={handleOpenAddTransducer}>
+            <MdAddHome /> Add
+          </Button>
+          <Button className={styles.button} onClick={handleLogout}>
+            <MdLogout /> Logout
+          </Button>
+        </>
       )}
       {!isLoggedIn && (
         <Button className={styles.button} onClick={handleLogin}>
           <MdLogin /> Login
-        </Button>
-      )}
-      {isLoggedIn && (
-        <Button className={styles.button} onClick={handleLogout}>
-          <MdLogout /> Logout
         </Button>
       )}
     </nav>
@@ -100,14 +101,17 @@ const Header = () => {
   return (
     <>
       <Modal ref={modalRef}>
-        {showNew && <NewTransducer onCloseModal={handleCloseAddTransducer} />}
+        {showNew.current && <NewTransducer onCloseModal={handleCloseAddTransducer} />}
       </Modal>
       <header className={styles.header}>
         <h1 className={styles.title}>Transducer Inventory</h1>
         {isMobile && (
-          <MdMenu className={styles.menu} onClick={handleClickMobileNav} />
+          <>
+            <MdMenu className={styles.menu} onClick={handleClickMobileNav} data-testid='menu' />
+            {showMobileNav && navigation}
+          </>
         )}
-        {(!isMobile || showMobileNav) && navigation}
+        {!isMobile && navigation}
       </header>
     </>
   );
