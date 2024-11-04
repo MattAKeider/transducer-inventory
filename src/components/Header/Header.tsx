@@ -101,7 +101,7 @@ const Header = () => {
   return (
     <>
       <Modal ref={modalRef}>
-        {showNew && <NewTransducer onCloseModal={handleCloseAddTransducer} />}
+        {showNew.current && <NewTransducer onCloseModal={handleCloseAddTransducer} />}
       </Modal>
       <header className={styles.header}>
         <h1 className={styles.title}>Transducer Inventory</h1>
