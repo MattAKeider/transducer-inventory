@@ -107,7 +107,7 @@ const Header = () => {
         <h1 className={styles.title}>Transducer Inventory</h1>
         {isMobile && (
           <>
-            <MdMenu className={styles.menu} onClick={handleClickMobileNav} />
+            <MdMenu className={styles.menu} onClick={handleClickMobileNav} data-testid='menu' />
             {showMobileNav && navigation}
           </>
         )}
