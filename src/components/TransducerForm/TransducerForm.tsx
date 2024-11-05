@@ -50,7 +50,7 @@ const TransducerForm = ({
 
   return (
     <div onKeyDown={handleEsc} className={styles.container}>
-      <form onSubmit={(event) => onSubmitForm(event, validDate)}>
+      <form data-testid='form' onSubmit={(event) => onSubmitForm(event, validDate)}>
         <h2 className={styles.title}>{isNew ? 'New' : 'Edit'} Transducer</h2>
         <Input
           className={styles.field}

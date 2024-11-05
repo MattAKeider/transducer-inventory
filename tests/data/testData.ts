@@ -122,6 +122,33 @@ export const TRANSDUCERS: { transducers: Transducer[] } = {
   ]
 };
 
+export const CREATED_TRANSDUCER = {
+  transducer: {
+    name: 'Test21',
+    location: 'MIDTOWN',
+    department: 'MFM',
+    transducerType: 'TA',
+    room: '1',
+    serialNumber: '1',
+    internalIdentifier: '1',
+    controlNumber: '1',
+    dateReceived: '2024-11-02T00:00:00.000Z',
+    outOfService: false,
+    currentCondition: [],
+    id: '672a4e6fa985878c1f52c68b'
+  }
+};
+
+export const CREATED_CONDITION = {
+  condition: {
+    condition: 'Working',
+    conditionChangedDate: '2024-11-01T23:20:34.289Z',
+    note: 'Still working',
+    transducer: '672a4e6fa985878c1f52c68b',
+    _id: '672a4e70a985878c1f52c68e'
+  }
+};
+
 export const USER = {
   userId: '67219fbe7ae3454dd9affe51',
   username: 'tester',
