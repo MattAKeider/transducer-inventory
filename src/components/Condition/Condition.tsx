@@ -2,11 +2,11 @@ import { TransducerCondition } from '../../models/model';
 import { formatDate } from '../../utils/utils';
 import styles from './Condition.module.css';
 
-type ConditionProps = {
+interface Props {
   transducerCondition: TransducerCondition;
 };
 
-const Condition = ({ transducerCondition }: ConditionProps) => {
+const Condition = ({ transducerCondition }: Props) => {
   return (
     <div className={styles.condition_container}>
       <p className={styles.info} data-testid="condition">

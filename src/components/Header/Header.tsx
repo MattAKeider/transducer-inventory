@@ -8,7 +8,10 @@ import NewTransducer from '../NewTransducer/NewTransducer';
 import Button from '../../ui/Button/Button';
 import styles from './Header.module.css';
 
-type Token = { token: string, expiration: string };
+interface Token { 
+  token: string, 
+  expiration: string 
+};
 
 const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);

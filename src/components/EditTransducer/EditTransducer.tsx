@@ -9,13 +9,13 @@ import { Condition, Transducer } from '../../models/model';
 import useHttp from '../../hooks/useHttp';
 import useForm from '../../hooks/useForm';
 
-type EditTransducerProps = {
+interface Props {
   transducer: Transducer;
   condition: Condition;
   onCloseModal: () => void;
 };
 
-const EditTransducer = ({ transducer, condition, onCloseModal }: EditTransducerProps) => {
+const EditTransducer = ({ transducer, condition, onCloseModal }: Props) => {
   const originalState = transducerFormValues(transducer, condition);
 
   const { editTransducer } = useContext<TransducerContextType>(TransducerContext);

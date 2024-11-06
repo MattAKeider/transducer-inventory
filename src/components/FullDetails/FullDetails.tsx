@@ -12,12 +12,12 @@ import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage';
 import { UserContext } from '../../context/UserContext';
 import styles from './FullDetails.module.css';
 
-type FullDetailsProps = {
+interface Props {
   transducer: Transducer;
   onCloseModal: () => void;
 };
 
-const FullDetails = ({ transducer, onCloseModal }: FullDetailsProps) => {
+const FullDetails = ({ transducer, onCloseModal }: Props) => {
   const [conditions, setConditions] = useState<TransducerCondition[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 

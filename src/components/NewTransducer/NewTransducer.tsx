@@ -23,11 +23,11 @@ export const initialState: FormState = {
   service: false
 };
 
-type NewTransducerProps = {
+interface Props {
   onCloseModal: () => void;
 };
 
-const NewTransducer = ({ onCloseModal }: NewTransducerProps) => {
+const NewTransducer = ({ onCloseModal }: Props) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);
   const { token } = useContext<UserContextType>(UserContext);
   const { isLoading, error, sendRequest } = useHttp();

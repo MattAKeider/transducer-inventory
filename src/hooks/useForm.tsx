@@ -4,7 +4,7 @@ import { FormState } from '../models/model';
 
 type Type = 'CHANGE_INPUT' | 'CHANGE_CHECKBOX' | 'RESET';
 
-export type Action = {
+export interface Action {
   type: Type;
   payload: {
     name?: string;
