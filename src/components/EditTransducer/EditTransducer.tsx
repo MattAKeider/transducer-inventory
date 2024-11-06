@@ -13,7 +13,7 @@ interface Props {
   transducer: Transducer;
   condition: Condition;
   onCloseModal: () => void;
-};
+}
 
 const EditTransducer = ({ transducer, condition, onCloseModal }: Props) => {
   const originalState = transducerFormValues(transducer, condition);

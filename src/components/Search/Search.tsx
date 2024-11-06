@@ -5,7 +5,7 @@ import styles from './Search.module.css';
 interface Props {
   searchValue: string;
   onChangeSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 const Search = ({ searchValue, onChangeSearch }: Props) => {
   return (

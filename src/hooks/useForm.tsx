@@ -12,7 +12,7 @@ export interface Action {
     checked?: boolean;
     initialState?: FormState;
   };
-};
+}
 
 const reducer = (state: FormState, action: Action): FormState => {
   switch (action.type) {

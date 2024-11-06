@@ -25,7 +25,7 @@ export const initialState: FormState = {
 
 interface Props {
   onCloseModal: () => void;
-};
+}
 
 const NewTransducer = ({ onCloseModal }: Props) => {
   const { addTransducer } = useContext<TransducerContextType>(TransducerContext);

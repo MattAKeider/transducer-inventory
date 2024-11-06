@@ -4,7 +4,7 @@ import styles from './Condition.module.css';
 
 interface Props {
   transducerCondition: TransducerCondition;
-};
+}
 
 const Condition = ({ transducerCondition }: Props) => {
   return (

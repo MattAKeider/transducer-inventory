@@ -6,7 +6,7 @@ import styles from './Modal.module.css';
 export interface ModalHandle {
   open: () => void;
   close: () => void;
-};
+}
 
 interface Props {
   children: React.ReactNode;

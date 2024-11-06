@@ -11,7 +11,7 @@ import styles from './Header.module.css';
 interface Token { 
   token: string, 
   expiration: string 
-};
+}
 
 const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);

@@ -9,7 +9,7 @@ interface Props {
   transducerData: Transducer;
   onClickTransducer: () => void;
   onClickDelete: (event: React.MouseEvent<SVGAElement>) => void;
-};
+}
 
 const TransducerItem = ({
   transducerData,

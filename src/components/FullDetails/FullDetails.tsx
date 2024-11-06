@@ -15,7 +15,7 @@ import styles from './FullDetails.module.css';
 interface Props {
   transducer: Transducer;
   onCloseModal: () => void;
-};
+}
 
 const FullDetails = ({ transducer, onCloseModal }: Props) => {
   const [conditions, setConditions] = useState<TransducerCondition[]>([]);
