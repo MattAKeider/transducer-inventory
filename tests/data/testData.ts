@@ -139,6 +139,23 @@ export const CREATED_TRANSDUCER = {
   }
 };
 
+export const EDITED_TRANSDUCER = {
+  transducer: {
+    name: 'Edited',
+    location: 'CMC',
+    department: 'MFM',
+    transducerType: 'TA',
+    room: '1',
+    serialNumber: '1',
+    internalIdentifier: '1',
+    controlNumber: '1',
+    dateReceived: '2024-11-02T00:00:00.000Z',
+    outOfService: false,
+    currentCondition: [],
+    id: '672a4e6fa985878c1f52c68b'
+  }
+};
+
 export const CREATED_CONDITION = {
   condition: {
     condition: 'Working',

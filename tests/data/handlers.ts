@@ -4,6 +4,7 @@ import {
   CONDITIONS, 
   CREATED_CONDITION, 
   CREATED_TRANSDUCER, 
+  EDITED_TRANSDUCER, 
   TRANSDUCERS, 
   USER 
 } from './testData';
@@ -14,6 +15,9 @@ export const handlers = [
   }),
   http.post('http://localhost:5000/api/transducers', () => {
     return HttpResponse.json(CREATED_TRANSDUCER);
+  }),
+  http.patch('http://localhost:5000/api/transducers/*', () => {
+    return HttpResponse.json(EDITED_TRANSDUCER);
   }),
   http.delete('http://localhost:5000/api/transducers/*', () => {
     return HttpResponse.json({ message: "Deleted!" });

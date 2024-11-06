@@ -46,5 +46,14 @@ describe('NewTransducer', () => {
     expect(onCloseModal).toHaveBeenCalledOnce();
   });
 
-  
+  test('should cancel creating a new transducer', async () => {
+    const onCloseModal = vi.fn();
+
+    render(<NewTransducer onCloseModal={onCloseModal} />);
+
+    const user = userEvent.setup();
+    await act(() => user.click(screen.getByRole('button', { name: 'Cancel'})));
+
+    expect(onCloseModal).toHaveBeenCalledOnce();
+  });
 });
