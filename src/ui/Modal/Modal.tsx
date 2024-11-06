@@ -3,10 +3,10 @@ import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.css';
 
-export type ModalHandle = {
+export interface ModalHandle {
   open: () => void;
   close: () => void;
-};
+}
 
 interface Props {
   children: React.ReactNode;

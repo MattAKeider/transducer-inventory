@@ -5,17 +5,17 @@ import { UserContext, UserContextType } from '../../context/UserContext';
 import { Transducer } from '../../models/model';
 import styles from './TransducerItem.module.css';
 
-type TransducerItemProps = {
+interface Props {
   transducerData: Transducer;
   onClickTransducer: () => void;
   onClickDelete: (event: React.MouseEvent<SVGAElement>) => void;
-};
+}
 
 const TransducerItem = ({
   transducerData,
   onClickTransducer,
   onClickDelete,
-}: TransducerItemProps) => {
+}: Props) => {
   const { isLoggedIn } = useContext<UserContextType>(UserContext);
 
   return (

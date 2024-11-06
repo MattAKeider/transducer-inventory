@@ -2,12 +2,12 @@ import { FaSearch } from 'react-icons/fa';
 
 import styles from './Search.module.css';
 
-type SearchProps = {
+interface Props {
   searchValue: string;
   onChangeSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
-const Search = ({ searchValue, onChangeSearch }: SearchProps) => {
+const Search = ({ searchValue, onChangeSearch }: Props) => {
   return (
     <div className={styles.container}>
       <FaSearch className={styles.icon} />
