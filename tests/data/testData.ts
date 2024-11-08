@@ -1,4 +1,4 @@
-import { FormState, Transducer } from "../../src/models/model";
+import { FormState, Transducer, TransducerCondition } from "../../src/models/model";
 
 export const TRANSDUCERS: { transducers: Transducer[] } = {
   transducers: [
@@ -122,7 +122,7 @@ export const TRANSDUCERS: { transducers: Transducer[] } = {
   ]
 };
 
-export const CREATED_TRANSDUCER = {
+export const CREATED_TRANSDUCER: { transducer: Transducer } = {
   transducer: {
     name: 'Test21',
     location: 'MIDTOWN',
@@ -139,7 +139,7 @@ export const CREATED_TRANSDUCER = {
   }
 };
 
-export const EDITED_TRANSDUCER = {
+export const EDITED_TRANSDUCER: { transducer: Transducer } = {
   transducer: {
     name: 'Edited',
     location: 'CMC',
@@ -173,7 +173,7 @@ export const USER = {
   token: 'zzzzzzzzzzzzzzzzzzzzzzzzI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzIxOWZiZTdhZTM0NTRkZDlhZmZlNTEiLCJ1c2VybmFtZSI6InRlc3RlciIsImVtYWlsIjoidGVzdGVyQHRlc3QuY29tIiwiaWF0zzzzzzzzzzzzzz'
 };
 
-export const CONDITIONS = {
+export const CONDITIONS: { conditions: TransducerCondition[] } = {
   conditions: [
     {
       id: crypto.randomUUID(),
