@@ -17,8 +17,8 @@ const Header = () => {
   const { isLoggedIn, username, logout, login } = useContext(UserContext);
   const [showMobileNav, setShowMobileNav] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showNew, setShowNew] = useState(false);
 
-  const showNew = useRef<boolean>(false);
   const modalRef = useRef<ModalHandle>();
 
   const navigate = useNavigate();
@@ -57,14 +57,14 @@ const Header = () => {
   };
 
   const handleOpenAddTransducer = () => {
-    showNew.current = true;
+    setShowNew(true);
     modalRef.current.open();
     isMobile && handleClickMobileNav();
   };
 
   const handleCloseAddTransducer = () => {
     modalRef.current.close();
-    showNew.current = false;
+    setShowNew(false);
   };
 
   const handleLogin = () => {
@@ -104,7 +104,7 @@ const Header = () => {
   return (
     <>
       <Modal ref={modalRef}>
-        {showNew.current && <NewTransducer onCloseModal={handleCloseAddTransducer} />}
+        {showNew && <NewTransducer onCloseModal={handleCloseAddTransducer} />}
       </Modal>
       <header className={styles.header}>
         <h1 className={styles.title}>Transducer Inventory</h1>
