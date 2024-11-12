@@ -29,3 +29,6 @@ cypress.env.json
 
 # coverage
 coverage
+
+# cypress downloads directory
+cypress/downloads
