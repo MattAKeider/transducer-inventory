@@ -1,4 +1,4 @@
-Cypress.Commands.add('login', (email, password) => { 
+Cypress.Commands.add('login', (email: string, password: string) => { 
   cy.session([email, password], () => {
     cy.visit('/');
     cy.get('button').contains('Login').click();
@@ -7,4 +7,12 @@ Cypress.Commands.add('login', (email, password) => {
     cy.get('button').contains('Submit').click();
     cy.location('pathname').should('eq', '/');
   });
+});
+
+Cypress.Commands.add('getFormInput', (name: string) => {
+  return cy.get(`input[name=${name}]`);
+});
+
+Cypress.Commands.add('getFormSelect', (name: string) => {
+  return cy.get(`select[name=${name}]`);
 });
