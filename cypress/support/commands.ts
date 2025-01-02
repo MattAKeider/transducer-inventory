@@ -16,3 +16,7 @@ Cypress.Commands.add('getFormInput', (name: string) => {
 Cypress.Commands.add('getFormSelect', (name: string) => {
   return cy.get(`select[name=${name}]`);
 });
+
+Cypress.Commands.add('getByTestId', (testId: string) => {
+  return cy.get(`[data-testid=${testId}]`);
+});
