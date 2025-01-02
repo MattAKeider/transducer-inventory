@@ -19,7 +19,7 @@ const TransducerItem = ({
   const { isLoggedIn } = useContext<UserContextType>(UserContext);
 
   return (
-    <li className={styles.transducer} onClick={onClickTransducer}>
+    <li className={styles.transducer} onClick={onClickTransducer} data-testid={transducerData.name}>
       {isLoggedIn && (
         <TiDelete className={styles.delete} onClick={onClickDelete} data-testid='delete' />
       )}

@@ -1,0 +1,22 @@
+{
+  "transducers": [
+    {
+      "_id": "6774374a3766f741a2c328a7",
+      "name": "CYPRESS",
+      "location": "CROCKER",
+      "department": "MFM",
+      "transducerType": "TV",
+      "room": "201",
+      "serialNumber": "212",
+      "internalIdentifier": "41",
+      "controlNumber": "00FB-12346",
+      "dateReceived": "2024-01-22T00:00:00.000Z",
+      "outOfService": false,
+      "currentCondition": [
+        "672561ff5e1df7de9341a84z"
+      ],
+      "__v": 0,
+      "id": "6774374a3766f741a2c328a7"
+    }
+  ]
+}

@@ -3,5 +3,6 @@ declare namespace Cypress {
     login(username: string, password: string): Chainable<void>;
     getFormInput(name: string): Chainable<JQuery<HTMLInputElement>>;
     getFormSelect(name: string): Chainable<JQuery<HTMLSelectElement>>;
+    getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
   }
 }
